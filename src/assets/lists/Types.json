@@ -1,0 +1,60 @@
+[
+    {
+      "groupName": "North America",
+      "options": [
+        "United States",
+        "Canada",
+        "Mexico"
+      ]
+    },
+    {
+      "groupName": "South America",
+      "options": [
+        "Brazil",
+        "Argentina",
+        "Chile",
+        "Peru",
+        "Colombia"
+      ]
+    },
+    {
+      "groupName": "Europe",
+      "options": [
+        "France",
+        "Italy",
+        "Germany",
+        "Spain",
+        "United Kingdom",
+        "Greece"
+      ]
+    },
+    {
+      "groupName": "Asia",
+      "options": [
+        "China",
+        "India",
+        "Japan",
+        "South Korea",
+        "Thailand"
+      ]
+    },
+    {
+      "groupName": "Africa",
+      "options": [
+        "Nigeria",
+        "South Africa",
+        "Egypt",
+        "Kenya",
+        "Morocco"
+      ]
+    },
+    {
+      "groupName": "Oceania",
+      "options": [
+        "Australia",
+        "New Zealand",
+        "Fiji",
+        "Papua New Guinea"
+      ]
+    }
+  ]

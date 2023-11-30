@@ -1,0 +1,15 @@
+[
+    {
+      "groupName": "Quick Meals",
+      "options": [15,30,45]
+    },
+    {
+      "groupName": "Regular Meals",
+      "options": [60,90]
+    },
+    {
+      "groupName": "Special Occasions",
+      "options": [120,180]
+    }
+]
+

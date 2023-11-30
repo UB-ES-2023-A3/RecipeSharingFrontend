@@ -1,0 +1,213 @@
+/* styles.css */
+
+/* Main Styles */
+/* html, body style for each page */
+html, body {
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+/* Main Background */
+.main-background {
+    /*background-color: #ffddb3;*/
+    color: white;
+}
+
+/* Containers */
+/* Main Container - Full page */
+.mainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    padding-top: 120px;
+    /*background-color: #ffddb3;*/
+}
+
+/* Secondary Container - Containers inside de Main Container */
+.secondaryContainer {
+    background-color: #ffddb3;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+}
+
+/* Title Container for Home Page */
+.titleContainerHP {
+    background-color: #ff5733;
+    border: 1px solid #b69b70;
+    border-radius: 10px;
+    width: 98%;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
+/* Main Title for Home Page */
+.mainTitleHP {
+    font-size: 10px;
+    color: #fff;
+    margin-left: 5px;
+    display: flex;
+    justify-content: left;
+}
+
+/* Title Container for other pages */
+.titleContainer {
+    background-color: #ff5733;
+    padding: 4px;
+    border: 1px solid #b69b70;
+    border-radius: 10px;
+    width: 98%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Main Title for other pages */
+.mainTitle {
+    font-size: 10px;
+    color: #fff;
+    margin: 0;
+    padding-bottom: 2px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Subtitle Container */
+.subtitleContainer {
+    background-color: #613131;
+    padding: 1px;
+    border: 1px solid #b69b70;
+    border-radius: 8px;
+    opacity: 0.9;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 10px;
+}
+
+/* Subtitle */
+.subtitle {
+    font-size: 12px;
+    color: #fff;
+    margin: 0;
+    padding-bottom: 2px;
+    display: flex;
+    justify-content: center;
+}
+
+/* Button */
+.my-button {
+    background-color: #2c3e50;
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 10px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+/* Rounded Button with image */
+.button-image {
+    position: absolute;
+    top: 0;
+    right: 0;
+    width: 70px;
+    margin-top: 12px;
+    margin-right: 20px;
+    border-radius: 50%;
+}
+
+/* Floating Button */
+.add-button {
+    bottom: 20px;
+    right: 20px;
+    z-index: 999;
+    cursor: pointer;
+    background-color: red;
+    border: none;
+    color: white;
+    padding: 12px 17px;
+    border-radius: 50%;
+    font-size: 18px;
+}
+
+/* Submit Button */
+.submit-button {
+    background-color: #FF5733;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+/* Submit Button Hover */
+.submit-button:hover {
+    background-color: #E84A29;
+}
+
+/* Form Background */
+.form-background {
+    background-color: #FCE4A4;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 0 auto 20px;
+}
+
+/* Form */
+.form {
+    width: 400px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
+/* Form Group */
+.form-group {
+    margin-bottom: 20px;
+}
+
+/* Form Label */
+label {
+    display: block;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+/* Input */
+.input {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 16px;
+}
+
+/* Error */
+.error {
+    color: red;
+    margin-top: 5px;
+}
+
+/* Notes */
+.note {
+    color: gray;
+    font-size: 12px;
+}
