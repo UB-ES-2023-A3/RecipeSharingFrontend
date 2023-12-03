@@ -2,7 +2,6 @@
   <div class="mainContainer">
     <h1>Ingredients List A-Z</h1>
 
-    <!-- Botones de letras -->
     <div class="letrasButtons">
       <a
         v-for="letra in letras"
