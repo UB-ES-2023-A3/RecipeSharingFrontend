@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import ingredientsData from "@/assets/lists/Ingredients.json";
+import ingredientsData from "@/assets/lists/IngredientsABC.json";
 
 export default {
   data() {
