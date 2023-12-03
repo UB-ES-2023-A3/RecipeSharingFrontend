@@ -63,7 +63,7 @@ export default {
             this.$router.push('/loginRegister'); // Navigate to the login page
         },
         goToProfile() {
-            this.$router.push('/profile');
+            this.$router.push(`/profiles/${this.username}`);
         },
         async logout() {
             try {

@@ -8,6 +8,7 @@ import AddRecipePage from "./pages/AddRecipePage.vue";
 import ProfilePage from "./pages/ProfilePage.vue"
 import RecipePage from "./pages/RecipePage.vue"
 import RecipePageRework from "./pages/RecipePageRework.vue"
+import ProfilePageRework from "./pages/ProfilePageRework.vue"
 import AllergensFilterPage from "./pages/AllergensFilterPage.vue"
 import IngredientsFilterPage from "./pages/IngredientsFilterPage.vue"
 
@@ -63,6 +64,12 @@ const routes = [
     component: IngredientsFilterPage,
     name: "ingredientsFilterPage",
   },
+  {
+    path: "/profiles/:id",
+    component: ProfilePageRework,
+    name: "profilesPageRework",
+    props: true,
+  }
 ];
 
 const router = createRouter({

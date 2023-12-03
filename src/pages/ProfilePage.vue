@@ -49,6 +49,7 @@
 
 
 <script>
+
 import '../assets/styles/appStyles.css';
 import axios from 'axios';
 import AppCardCarousel from '@/components/AppCardCarousel.vue';
