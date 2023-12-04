@@ -24,11 +24,15 @@
             </div>
             <div class="profileRecipesContainer">
                 <div class="profileOwnRecipesContainer">
+                    <div class="profileOwnRecipesTitleContainer">
+                        <h3>OWN RECIPES ({{ this.ownRecipes.length }})</h3>
+                    </div>
                     <div class="profileCardRow">
-                        <div
+                        <router-link
                                 class="profileCard"
-                                v-for="(recipe, index) in chunkArray(ownRecipes, 4)"
+                                v-for="(recipe, index) in ownRecipes.slice(0, 4)"
                                 :key="index"
+                                :to="'/recipes/' + recipe.id"
                         >
                             <div class="profileCardImage">
                                 <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
@@ -36,18 +40,22 @@
                             <div class="profileCardTitle">
                                 <h4>{{ recipe.title }}</h4>
                             </div>
-                        </div>
+                        </router-link>
                     </div>
-                    <div class="seeMore" v-if="ownRecipes.length > 8">
+                    <div class="seeMore" v-if="ownRecipes.length > 4">
                         <a href="#">See more</a>
                     </div>
                 </div>
                 <div class="profileLikedRecipesContainer">
+                    <div class="profileLikedRecipesTitleContainer">
+                        <h3>FAVORITE RECIPES ({{ this.favoriteRecipes.length }})</h3>
+                    </div>
                     <div class="profileCardRow">
-                        <div
+                        <router-link
                                 class="profileCard"
-                                v-for="(recipe, index) in chunkArray(favoriteRecipes, 4)"
+                                v-for="(recipe, index) in favoriteRecipes.slice(0, 4)"
                                 :key="index"
+                                :to="'/recipes/' + recipe.id"
                         >
                             <div class="profileCardImage">
                                 <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
@@ -55,9 +63,9 @@
                             <div class="profileCardTitle">
                                 <h4>{{ recipe.title }}</h4>
                             </div>
-                        </div>
+                        </router-link>
                     </div>
-                    <div class="seeMore" v-if="favoriteRecipes.length > 8">
+                    <div class="seeMore" v-if="favoriteRecipes.length > 4">
                         <a href="#">See more</a>
                     </div>
                 </div>
@@ -90,15 +98,6 @@ export default {
         };
     },
     methods: {
-        chunkArray(array, size) {
-            // Función para dividir el array en sub-arrays de tamaño específico
-            const chunkedArray = [];
-            let i, j;
-            for (i = 0, j = array.length; i < j; i += size) {
-                chunkedArray.push(array.slice(i, i + size));
-            }
-            return chunkedArray;
-        },
         getUserInformation() {
             // Axios para recibir lla información del usuario
             axios
@@ -139,7 +138,7 @@ export default {
 }
 
 .profileImageInfoContainer {
-    height: 30%;
+    height: 20%;
     border-radius: 2%;
     margin-top: 5%;
     margin-left: 10%;
@@ -165,6 +164,9 @@ export default {
 .profileInfoContainer {
     width: 70%;
     padding-left: 2%;
+    display: flex;
+    flex-direction: column;
+    height: 100%;
 }
 
 .profileUsernameContainer {
@@ -172,33 +174,47 @@ export default {
     font-size: xx-large;
     font-family: sans-serif;
     margin-left: 0;
+    height: 50%;
+    margin-bottom: 10px;
 }
 
 .profileEmailContainer {
     width: 100%;
     font-size: medium;
+    margin-left: 0;
+    height: 50%;
+    position: relative;
+    bottom: 0;
 }
 
 .profileRecipesContainer {
     width: 100%;
-    height: 70%;
-    padding: 5%;
+    height: 80%;
+    margin-top: 2%;
 }
 
-.profileOwnRecipesContainer {
-    display: flex;
+.profileOwnRecipesContainer, .profileLikedRecipesContainer {
     flex-wrap: wrap;
     justify-content: space-between;
 }
 
-.profileLikedRecipesContainer {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-between;
+.profileOwnRecipesTitleContainer, .profileLikedRecipesTitleContainer {
+    text-align: center;
+    color: #000000;
+    border-bottom: 2px solid #000000;
+    width: 100%;
+    margin-top: 2%;
+}
+
+.profileOwnRecipesTitleContainer h3, .profileLikedRecipesTitleContainer h3 {
+    margin: 0%;
 }
 
 .profileCardRow {
     display: flex;
+    flex-wrap: wrap;
+    justify-content: center; /* Centrado de los elementos */
+    margin: 0 -10px; /* Ajuste para compensar los márgenes negativos */
 }
 
 .profileCard {
@@ -206,24 +222,92 @@ export default {
     border-radius: 8px;
     padding: 10px;
     margin: 10px;
-    width: calc(25% - 20px);
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    width: calc(25% - 50px); /* Reducido el ancho y ajustado el margen */
+    box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.2), -1px -1px 4px rgba(0, 0, 0, 0.2);
+    position: relative;
+    transition: box-shadow 130ms ease-in-out;
+    height: 130px;
+    color: black;
+}
+
+.profileCard:hover {
+    box-shadow: 2px 6px 6px rgba(0, 0, 0, 0.2),
+    -1px -1px 7px rgba(0, 0, 0, 0.2);
 }
 
 .profileCardImage img {
+    height: 100%;
     width: 100%;
-    height: auto;
-    border-radius: 6px;
 }
 
 .profileCardTitle {
-    padding: 10px;
-    background-color: #f5f5f5; /* Background color for the title section */
+    background-color: white;
+    bottom: 0;
+    left: 0;
+    text-align: center;
+    position: absolute;
+    right: 0;
+}
+
+.profileCardTitle p {
+    margin: 0;
+}
+
+.seeMore {
+    text-align: end;
+    margin-right: 3%;
 }
 
 .seeMore a {
     color: #007bff;
     text-decoration: none;
     font-weight: bold;
+}
+
+@media (max-width: 768px) {
+    .profileContainer {
+        width: 80%; /* Reducir el ancho del contenedor principal */
+        margin: 2% auto; /* Ajustar los márgenes */
+    }
+
+    .profileImageInfoContainer {
+        flex-direction: column; /* Cambiar la dirección de los elementos */
+        height: auto; /* Altura automática */
+        margin: 5% 0; /* Ajustar los márgenes */
+    }
+
+    .profileImageContainer {
+        width: 100%;
+        margin-bottom: 5%; /* Espaciado inferior */
+    }
+
+    .profileInfoContainer {
+        width: 100%;
+        padding: 0 5%; /* Ajustar el relleno */
+    }
+
+    .profileUsernameContainer {
+        font-size: large; /* Reducir el tamaño de la fuente */
+        margin-bottom: 5px; /* Espaciado inferior */
+    }
+
+    .profileEmailContainer {
+        font-size: small; /* Reducir el tamaño de la fuente */
+        margin-bottom: 5px; /* Espaciado inferior */
+    }
+
+    .profileRecipesContainer {
+        margin-top: 5%;
+    }
+
+    .profileCard {
+        width: calc(50% - 20px); /* Reducir el ancho de las tarjetas */
+        margin: 10px 5px; /* Ajustar los márgenes */
+    }
+
+    .profileOwnRecipesTitleContainer,
+    .profileLikedRecipesTitleContainer {
+        margin-top: 5%;
+    }
 }
 </style>

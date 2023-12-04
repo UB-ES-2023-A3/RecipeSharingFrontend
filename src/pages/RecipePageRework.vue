@@ -140,12 +140,13 @@ export default {
             recipeId: 0,
 
             newComment: '',
-            comments_updated: this.comments
+            comments_updated: this.comments,
+            previousRoute: "",
         };
     },
     methods: {
         closeRecipe() {
-            this.$router.push('/');
+            this.$router.push(`${this.previousRoute}`);
         },
         goToLogin() {
             alert('Log in to see the recipe!');
@@ -310,6 +311,8 @@ export default {
         this.getRecipeInformation();
         this.username = localStorage.getItem('username');
         this.getUserInformation();
+        this.previousRoute =this.$router.options.history.state.back
+        alert(this.$router.options.history.state.back);
     }
 }
 </script>
