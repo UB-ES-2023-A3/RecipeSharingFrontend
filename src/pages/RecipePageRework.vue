@@ -523,6 +523,7 @@ export default {
 .recipeInfoRightContainer {
     width: 50%;
     text-align: center;
+    margin-right: 4%;
 }
 
 .recipeInstructionsContainer {
