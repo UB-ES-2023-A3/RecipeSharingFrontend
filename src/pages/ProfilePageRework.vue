@@ -29,9 +29,7 @@
                 </div>
             </div>
             <div class="profileRecipesUsersContainer">
-                <div class="profileUsersContainer">
 
-                </div>
                 <div class="profileRecipesContainer">
                     <div class="profileOwnRecipesContainer">
                         <div class="profileOwnRecipesTitleContainer">
@@ -63,7 +61,7 @@
                         <div class="profileCardRow">
                             <router-link
                                     class="profileCard"
-                                    v-for="(recipe, index) in favoriteRecipes.slice(0, 4)"
+                                    v-for="(recipe, index) in favoriteRecipes.slice(0, 8)"
                                     :key="index"
                                     :to="'/recipes/' + recipe.id"
                             >
@@ -75,7 +73,7 @@
                                 </div>
                             </router-link>
                         </div>
-                        <div class="seeMore" v-if="favoriteRecipes.length > 4">
+                        <div class="seeMore" v-if="favoriteRecipes.length > 8">
                             <a href="#">See more</a>
                         </div>
                     </div>
@@ -228,9 +226,8 @@ export default {
 }
 
 .profileRecipesContainer {
-    width: 70%;
+    width: 100%;
     height: 80%;
-    padding-left: 2%;
 }
 
 .profileOwnRecipesContainer, .profileLikedRecipesContainer {
@@ -263,7 +260,7 @@ export default {
     border-radius: 8px;
     padding: 10px;
     margin: 10px;
-    width: calc(25% - 50px); /* Reducido el ancho y ajustado el margen */
+    width: calc(20% - 6.7%);
     box-shadow: 1px 3px 3px rgba(0, 0, 0, 0.2), -1px -1px 4px rgba(0, 0, 0, 0.2);
     position: relative;
     transition: box-shadow 130ms ease-in-out;
