@@ -24,7 +24,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="profileFollowButtonContainer">
+                <div class="profileFollowButtonContainer" v-if="this.username !== this.username_id">
                     <button class="followButton">Follow</button>
                 </div>
             </div>
@@ -50,8 +50,12 @@
                                 </div>
                             </router-link>
                         </div>
-                        <div class="seeMore" v-if="ownRecipes.length > 4">
-                            <a href="#">See more</a>
+                        <div class="recipeLikedButton">
+                            <div v-if="ownRecipes.length > 8" class="seeMore">
+                                <a href="#" @click="toggleOwnRecipesView">{{
+                                    showAllOwnRecipes ? "See less" : "See more"
+                                    }}</a>
+                            </div>
                         </div>
                     </div>
                     <div class="profileLikedRecipesContainer">
@@ -61,7 +65,7 @@
                         <div class="profileCardRow">
                             <router-link
                                     class="profileCard"
-                                    v-for="(recipe, index) in favoriteRecipes.slice(0, 8)"
+                                    v-for="(recipe, index) in displayedLikedRecipes"
                                     :key="index"
                                     :to="'/recipes/' + recipe.id"
                             >
@@ -73,8 +77,12 @@
                                 </div>
                             </router-link>
                         </div>
-                        <div class="seeMore" v-if="favoriteRecipes.length > 8">
-                            <a href="#">See more</a>
+                        <div class="recipeLikedButton">
+                            <div v-if="favoriteRecipes.length > 8" class="seeMore">
+                                <a href="#" @click="toggleLikedRecipesView">{{
+                                    showAllLikedRecipes ? "See less" : "See more"
+                                    }}</a>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -104,7 +112,21 @@ export default {
             recent: "recent",
             profileInfo: {},
             username_id: "",
+            showAllLikedRecipes: false,
+            showAllOwnRecipes: false,
         };
+    },
+    computed: {
+        displayedLikedRecipes() {
+            return this.showAllLikedRecipes
+                ? this.favoriteRecipes
+                : this.favoriteRecipes.slice(0, 8); // Muestra solo las dos primeras filas
+        },
+        displayedOwnRecipes() {
+            return this.showAllOwnRecipes
+                ? this.ownRecipes
+                : this.ownRecipes.slice(0, 8); // Muestra solo las dos primeras filas
+        },
     },
     methods: {
         getUserInformation() {
@@ -124,6 +146,14 @@ export default {
                 .catch((error) => {
                     console.error("Error al obtener las información del usuario:", error);
                 });
+        },
+        toggleLikedRecipesView(event) {
+            event.preventDefault();
+            this.showAllLikedRecipes = !this.showAllLikedRecipes;
+        },
+        toggleOwnRecipesView(event) {
+            event.preventDefault();
+            this.showAllOwnRecipes = !this.showAllOwnRecipes;
         },
     },
     created() {
@@ -316,6 +346,11 @@ export default {
     background-color: #2e80ce;
 }
 
+.recipeLikedButton {
+    width: 100%;
+    text-align: end;
+}
+
 @media (max-width: 768px) {
     .profileImageInfoContainer {
         flex-direction: column; /* Cambiar la dirección de los elementos */
@@ -356,6 +391,20 @@ export default {
     .profileLikedRecipesTitleContainer {
         margin-top: 5%;
     }
+}
+
+.view-more-button {
+    background-color: #83d3fc !important;
+    color: white !important;
+    border: none !important;
+    padding: 5px !important;
+    cursor: pointer !important;
+    font-size: 12px !important;
+    transition: background-color 0.3s ease !important;
+}
+
+.view-more-button:hover {
+    background-color: #6db8f8;
 }
 
 </style>
