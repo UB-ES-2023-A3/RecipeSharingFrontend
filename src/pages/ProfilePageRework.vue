@@ -1,9 +1,12 @@
 <template>
     <div class="profileMainContainer" v-if="username_id">
-        <div class="profileContainer">
+        <div class="profileRecipeContainer">
             <div class="profileImageInfoContainer">
                 <div class="profileImageContainer">
-                    <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
+                    <div class="squareImageWrapper">
+
+                        <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
+                    </div>
                 </div>
                 <div class="profileInfoContainer">
                     <div class="profileUsernameContainer">
@@ -12,61 +15,69 @@
                     <div class="profileEmailContainer" v-if="this.username === this.username_id">
                         <h3> {{ this.profileInfo.email }}</h3>
                     </div>
+                    <div class="profileFollowingFollowersContainer">
+                        <div class="profileFollowingContainer">
+                            <h3> Following: </h3>
+                        </div>
+                        <div class="profileFollowersContainer">
+                            <h3> Followers: </h3>
+                        </div>
+                    </div>
                 </div>
-                <div class="profileFollowersFollowingContainer">
-                    <div class="profileFollowingContainer">
-
-                    </div>
-                    <div class="profileFollowersContainer">
-
-                    </div>
+                <div class="profileFollowButtonContainer">
+                    <button class="followButton">Follow</button>
                 </div>
             </div>
-            <div class="profileRecipesContainer">
-                <div class="profileOwnRecipesContainer">
-                    <div class="profileOwnRecipesTitleContainer">
-                        <h3>OWN RECIPES ({{ this.ownRecipes.length }})</h3>
-                    </div>
-                    <div class="profileCardRow">
-                        <router-link
-                                class="profileCard"
-                                v-for="(recipe, index) in ownRecipes.slice(0, 4)"
-                                :key="index"
-                                :to="'/recipes/' + recipe.id"
-                        >
-                            <div class="profileCardImage">
-                                <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
-                            </div>
-                            <div class="profileCardTitle">
-                                <h4>{{ recipe.title }}</h4>
-                            </div>
-                        </router-link>
-                    </div>
-                    <div class="seeMore" v-if="ownRecipes.length > 4">
-                        <a href="#">See more</a>
-                    </div>
+            <div class="profileRecipesUsersContainer">
+                <div class="profileUsersContainer">
+
                 </div>
-                <div class="profileLikedRecipesContainer">
-                    <div class="profileLikedRecipesTitleContainer">
-                        <h3>FAVORITE RECIPES ({{ this.favoriteRecipes.length }})</h3>
+                <div class="profileRecipesContainer">
+                    <div class="profileOwnRecipesContainer">
+                        <div class="profileOwnRecipesTitleContainer">
+                            <h3>OWN RECIPES ({{ this.ownRecipes.length }})</h3>
+                        </div>
+                        <div class="profileCardRow">
+                            <router-link
+                                    class="profileCard"
+                                    v-for="(recipe, index) in ownRecipes.slice(0, 4)"
+                                    :key="index"
+                                    :to="'/recipes/' + recipe.id"
+                            >
+                                <div class="profileCardImage">
+                                    <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
+                                </div>
+                                <div class="profileCardTitle">
+                                    <h4>{{ recipe.title }}</h4>
+                                </div>
+                            </router-link>
+                        </div>
+                        <div class="seeMore" v-if="ownRecipes.length > 4">
+                            <a href="#">See more</a>
+                        </div>
                     </div>
-                    <div class="profileCardRow">
-                        <router-link
-                                class="profileCard"
-                                v-for="(recipe, index) in favoriteRecipes.slice(0, 4)"
-                                :key="index"
-                                :to="'/recipes/' + recipe.id"
-                        >
-                            <div class="profileCardImage">
-                                <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
-                            </div>
-                            <div class="profileCardTitle">
-                                <h4>{{ recipe.title }}</h4>
-                            </div>
-                        </router-link>
-                    </div>
-                    <div class="seeMore" v-if="favoriteRecipes.length > 4">
-                        <a href="#">See more</a>
+                    <div class="profileLikedRecipesContainer">
+                        <div class="profileLikedRecipesTitleContainer">
+                            <h3>FAVORITE RECIPES ({{ this.favoriteRecipes.length }})</h3>
+                        </div>
+                        <div class="profileCardRow">
+                            <router-link
+                                    class="profileCard"
+                                    v-for="(recipe, index) in favoriteRecipes.slice(0, 4)"
+                                    :key="index"
+                                    :to="'/recipes/' + recipe.id"
+                            >
+                                <div class="profileCardImage">
+                                    <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
+                                </div>
+                                <div class="profileCardTitle">
+                                    <h4>{{ recipe.title }}</h4>
+                                </div>
+                            </router-link>
+                        </div>
+                        <div class="seeMore" v-if="favoriteRecipes.length > 4">
+                            <a href="#">See more</a>
+                        </div>
                     </div>
                 </div>
             </div>
@@ -126,43 +137,41 @@ export default {
 
 <style scoped>
 .profileMainContainer {
+    height: 100%; /* Utilizar vh (viewport height) para ocupar toda la altura visible */
+    width: 100%;
     display: flex;
+    flex-direction: column; /* Asegurarse de que sea un contenedor de columna */
+    justify-content: space-between; /* Ajustar el espacio entre elementos si es necesario */
 }
 
-.profileContainer {
-    width: 50%;
-    background-color: gainsboro;
-    border-radius: 2%;
-    border: 2px solid gray;
-    margin: 2% auto 1vh;
+.profileRecipeContainer {
+    margin: 2%;
+    width: 96%;
+    height: 100%;
 }
 
 .profileImageInfoContainer {
-    height: 20%;
-    border-radius: 2%;
-    margin-top: 5%;
-    margin-left: 10%;
-    margin-right: 10%;
-    background-color: white;
     display: flex;
+    height: 30%;
+    width: 100%;
 }
 
 .profileImageContainer {
-    width: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    width: 30%;
+    height: 100%;
 }
 
-.profileImageContainer img {
+.squareImageWrapper {
     width: 100%;
-    border-radius: 5%;
-    border: 2px solid gray;
+}
+
+.squareImageWrapper img {
+    width: 100%;
     height: 100%;
 }
 
 .profileInfoContainer {
-    width: 70%;
+    width: 40%;
     padding-left: 2%;
     display: flex;
     flex-direction: column;
@@ -173,29 +182,61 @@ export default {
     width: 100%;
     font-size: xx-large;
     font-family: sans-serif;
-    margin-left: 0;
-    height: 50%;
-    margin-bottom: 10px;
+    height: 30%;
+}
+
+.profileUsernameContainer h3 {
+    position: absolute;
+    top: 0%;
 }
 
 .profileEmailContainer {
     width: 100%;
     font-size: medium;
-    margin-left: 0;
-    height: 50%;
-    position: relative;
-    bottom: 0;
+    height: 25%;
+}
+
+.profileEmailContainer h3 {
+
+}
+
+.profileFollowingFollowersContainer {
+    width: 100%;
+    height: 40%;
+    justify-content: space-between;
+
+}
+
+.profileFollowButtonContainer {
+    width: 30%;
+    height: 100%;
+    text-align: end;
+}
+
+.profileRecipesUsersContainer {
+    width: 100%;
+    height: 70%;
+    display: flex;
+    margin-top: 2%;
+}
+
+.profileUsersContainer {
+    height: 100%;
+    width: 30%;
+    border-radius: 2%;
+    border: 2px solid gray;
 }
 
 .profileRecipesContainer {
-    width: 100%;
+    width: 70%;
     height: 80%;
-    margin-top: 2%;
+    padding-left: 2%;
 }
 
 .profileOwnRecipesContainer, .profileLikedRecipesContainer {
     flex-wrap: wrap;
     justify-content: space-between;
+    width: 100%;
 }
 
 .profileOwnRecipesTitleContainer, .profileLikedRecipesTitleContainer {
@@ -207,14 +248,14 @@ export default {
 }
 
 .profileOwnRecipesTitleContainer h3, .profileLikedRecipesTitleContainer h3 {
-    margin: 0%;
+    width: 100%;
 }
 
 .profileCardRow {
     display: flex;
     flex-wrap: wrap;
     justify-content: center; /* Centrado de los elementos */
-    margin: 0 -10px; /* Ajuste para compensar los márgenes negativos */
+    width: 100%;
 }
 
 .profileCard {
@@ -255,21 +296,30 @@ export default {
 
 .seeMore {
     text-align: end;
-    margin-right: 3%;
 }
 
 .seeMore a {
     color: #007bff;
-    text-decoration: none;
+    text-decoration: underline;
     font-weight: bold;
+    padding-bottom: 2%;
+}
+
+.followButton {
+    background-color: #12afdc;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+}
+
+.followButton:hover {
+    background-color: #2e80ce;
 }
 
 @media (max-width: 768px) {
-    .profileContainer {
-        width: 80%; /* Reducir el ancho del contenedor principal */
-        margin: 2% auto; /* Ajustar los márgenes */
-    }
-
     .profileImageInfoContainer {
         flex-direction: column; /* Cambiar la dirección de los elementos */
         height: auto; /* Altura automática */
@@ -310,4 +360,5 @@ export default {
         margin-top: 5%;
     }
 }
+
 </style>

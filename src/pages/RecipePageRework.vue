@@ -312,7 +312,6 @@ export default {
         this.username = localStorage.getItem('username');
         this.getUserInformation();
         this.previousRoute =this.$router.options.history.state.back
-        alert(this.$router.options.history.state.back);
     }
 }
 </script>
