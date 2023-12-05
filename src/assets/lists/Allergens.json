@@ -1,205 +1,127 @@
-{
-  "A": [
-    "Almond Allergy",
-    "Anchovies Allergy",
-    "Apple Allergy",
-    "Apricot Allergy",
-    "Artichoke Allergy",
-    "Asparagus Allergy",
-    "Avocado Allergy"
-  ],
-  "B": [
-    "Bacon Allergy",
-    "Banana Allergy",
-    "Barley Allergy",
-    "Basil Allergy",
-    "Beef Allergy",
-    "Beetroot Allergy",
-    "Biscuit Allergy",
-    "Blueberries Allergy",
-    "Bok Choy Allergy",
-    "Bread Allergy",
-    "Brie Cheese Allergy",
-    "Broccoli Allergy",
-    "Brown Rice Allergy",
-    "Butter Allergy",
-    "Blackberries Allergy",
-    "Brussels Sprouts Allergy",
-    "Buttermilk Allergy"
-  ],
-  "C": [
-    "Cabbage Allergy",
-    "Cantaloupe Allergy",
-    "Carrot Allergy",
-    "Cauliflower Allergy",
-    "Celery Allergy",
-    "Cheese Allergy",
-    "Chicken Allergy",
-    "Chickpea Allergy",
-    "Chives Allergy",
-    "Chocolate Allergy",
-    "Cilantro Allergy",
-    "Cinnamon Allergy",
-    "Coconut Allergy",
-    "Coffee Allergy",
-    "Corn Allergy",
-    "Corn Flakes Allergy",
-    "Cottage Cheese Allergy",
-    "Cranberry Allergy",
-    "Cream Allergy",
-    "Cucumber Allergy",
-    "Cayenne Pepper Allergy",
-    "Cashew Allergy",
-    "Cheddar Cheese Allergy"
-  ],
-  "D": [
-    "Date Allergy",
-    "Dill Allergy",
-    "Dragon Fruit Allergy"
-  ],
-  "E": [
-    "Eggplant Allergy",
-    "Egg Allergy",
-    "Endive Allergy",
-    "Edamame Allergy",
-    "Escarole Allergy"
-  ],
-  "F": [
-    "Fennel Allergy",
-    "Feta Cheese Allergy",
-    "Fish Allergy",
-    "Flour Allergy",
-    "Fig Allergy"
-  ],
-  "G": [
-    "Garlic Allergy",
-    "Ginger Allergy",
-    "Goat Cheese Allergy",
-    "Grapes Allergy",
-    "Green Beans Allergy",
-    "Green Bell Pepper Allergy",
-    "Green Onions Allergy",
-    "Ground Beef Allergy",
-    "Gouda Cheese Allergy",
-    "Guava Allergy"
-  ],
-  "H": [
-    "Ham Allergy",
-    "Honey Allergy",
-    "Hazelnut Allergy",
-    "Heavy Cream Allergy"
-  ],
-  "I": [
-    "Ice Cream Allergy",
-    "Icing Sugar Allergy",
-    "Italian Herbs Allergy"
-  ],
-  "J": [
-    "Jalapeño Allergy",
-    "Jackfruit Allergy"
-  ],
-  "K": [
-    "Kale Allergy",
-    "Kiwi Allergy",
-    "Ketchup Allergy"
-  ],
-  "L": [
-    "Lamb Allergy",
-    "Lemon Allergy",
-    "Lettuce Allergy",
-    "Lime Allergy",
-    "Lentil Allergy",
-    "Lobster Allergy"
-  ],
-  "M": [
-    "Mango Allergy",
-    "Maple Syrup Allergy",
-    "Mushroom Allergy",
-    "Mint Allergy",
-    "Mozzarella Cheese Allergy"
-  ],
-  "N": [
-    "Nectarine Allergy",
-    "Noodle Allergy",
-    "Nutmeg Allergy"
-  ],
-  "O": [
-    "Oat Allergy",
-    "Olive Oil Allergy",
-    "Onion Allergy",
-    "Orange Allergy",
-    "Oregano Allergy"
-  ],
-  "P": [
-    "Papaya Allergy",
-    "Parmesan Cheese Allergy",
-    "Pasta Allergy",
-    "Peach Allergy",
-    "Peanut Butter Allergy",
-    "Peanut Allergy",
-    "Pear Allergy",
-    "Pea Allergy",
-    "Pecan Allergy",
-    "Pineapple Allergy",
-    "Pizza Dough Allergy",
-    "Plum Allergy",
-    "Pork Allergy",
-    "Potato Allergy",
-    "Pumpkin Allergy",
-    "Quinoa Allergy",
-    "Paprika Allergy",
-    "Pinto Bean Allergy",
-    "Provolone Cheese Allergy"
-  ],
-  "R": [
-    "Raspberry Allergy",
-    "Red Bell Pepper Allergy",
-    "Rice Allergy",
-    "Rosemary Allergy",
-    "Ricotta Cheese Allergy"
-  ],
-  "S": [
-    "Salmon Allergy",
-    "Salt Allergy",
-    "Sausage Allergy",
-    "Shrimp Allergy",
-    "Sour Cream Allergy",
-    "Soy Sauce Allergy",
-    "Spinach Allergy",
-    "Strawberry Allergy",
-    "Sugar Allergy",
-    "Sweet Potato Allergy",
-    "Swiss Cheese Allergy"
-  ],
-  "T": [
-    "Thyme Allergy",
-    "Tomato Allergy",
-    "Turkey Allergy",
-    "Tofu Allergy",
-    "Tomatillo Allergy"
-  ],
-  "V": [
-    "Vanilla Allergy",
-    "Veal Allergy",
-    "Vegetable Broth Allergy",
-    "Vinegar Allergy",
-    "Vermicelli Allergy"
-  ],
-  "W": [
-    "Walnut Allergy",
-    "Watermelon Allergy",
-    "White Bread Allergy",
-    "White Rice Allergy",
-    "Wine Allergy",
-    "Watercress Allergy"
-  ],
-  "Y": [
-    "Yogurt Allergy",
-    "Yam Allergy",
-    "Yeast Allergy"
-  ],
-  "Z": [
-    "Zucchini Allergy",
-    "Ziti Allergy"
+[
+  {
+    "groupName": "None Allergens",
+    "options": [
+      "None"
+    ]
+  },
+  {
+    "groupName": "Common Allergens",
+    "options": [
+      "Cereals containing gluten - ",
+      "Crustaceans",
+      "Eggs",
+      "Fish",
+      "Peanuts",
+      "Soybeans",
+      "Milk",
+      "Nuts",
+      "Celery",
+      "Mustard",
+      "Sesame seeds",
+      "Sulphur dioxide and sulphites",
+      "Lupin",
+      "Molluscs"
+    ]
+  },
+  {
+    "groupName": "Fruits",
+    "options": [
+      "Apples",
+      "Bananas",
+      "Kiwis",
+      "Mangos",
+      "Peaches",
+      "Plums",
+      "Grapes",
+      "Cherries",
+      "Strawberries",
+      "Oranges",
+      "Lemons",
+      "Raspberries",
+      "Blackberries",
+      "Papayas",
+      "Watermelons",
+      "Pineapples"
   ]
-}
+  },
+  {
+    "groupName": "Vegetables",
+    "options": [
+      "Tomatoes",
+      "Peppers (e.g., bell peppers, chili peppers)",
+      "Potatoes",
+      "Carrots",
+      "Cucumbers",
+      "Celery",
+      "Onions",
+      "Garlic",
+      "Spinach",
+      "Lettuce",
+      "Zucchini",
+      "Broccoli",
+      "Cauliflower",
+      "Asparagus",
+      "Radishes",
+      "Eggplants (aubergines)",
+      "Peas",
+      "Corn",
+      "Beets",
+      "Sweet potatoes"
+  ]
+  },
+  {
+    "groupName": "Meat",
+    "options": [
+      "Beef",
+      "Pork",
+      "Chicken",
+      "Turkey",
+      "Lamb",
+      "Duck",
+      "Goose",
+      "Venison (deer meat)",
+      "Rabbit",
+      "Bison",
+      "Horse meat",
+      "Kangaroo",
+      "Alligator",
+      "Ostrich",
+      "Wild boar",
+      "Bear meat",
+      "Elk",
+      "Emu",
+      "Turtle",
+      "Snake"
+  ]
+  },
+  {
+    "groupName": "Dairy Alternatives",
+    "options": [
+      "Almond milk",
+      "Soy milk",
+      "Oat milk",
+      "Coconut milk",
+      "Rice milk",
+      "Cashew milk",
+      "Hemp milk",
+      "Macadamia milk",
+      "Hazelnut milk",
+      "Pea milk",
+      "Flax milk",
+      "Quinoa milk",
+      "Walnut milk",
+      "Sunflower milk",
+      "Tiger nut milk",
+      "Chia milk",
+      "Potato milk",
+      "Sesame milk",
+      "Banana milk",
+      "Spelt milk",
+      "Kamut milk",
+      "Barley milk",
+      "Teff milk",
+      "Amaranth milk"
+  ]
+  }
+]
