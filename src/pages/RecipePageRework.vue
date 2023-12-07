@@ -41,11 +41,16 @@
                             </div>
                         </div>
                         <div class="recipeNumCommentsContainer">
-                            <p>{{ this.recipe.comments_amount }} comments</p>
+                            <p class="clickable-comments" @click="goToComments">{{ this.recipe.comments_amount }}
+                                comments</p>
                         </div>
                     </div>
                     <div class="recipeUserDateContainer">
-                        <p>Made by: {{ this.recipe.username_id }}. Creation Date: {{ this.recipe.creation_date }}</p>
+                        <p>
+                            Made by:
+                            <span class="clickable-username" @click="goToProfile">{{ this.recipe.username_id }}</span>.
+                            Creation Date: {{ this.recipe.creation_date }}.
+                        </p>
                     </div>
                 </div>
             </div>
@@ -100,7 +105,7 @@
                     </li>
                 </ol>
             </div>
-            <div class="recipeCommentsSectionContainer">
+            <div class="recipeCommentsSectionContainer" id="recipeCommentsSectionContainer">
                 <div class="recipeCommentsContainer">
                     <div class="recipeCommentTitleContainer">
                         <h3>COMMENTS</h3>
@@ -174,6 +179,15 @@ export default {
             alert('Log in to see the recipe!');
             this.$router.push('/login');
         },
+        goToComments() {
+            const element = document.getElementById('recipeCommentsSectionContainer');
+            if (element) {
+                element.scrollIntoView({behavior: 'smooth'});
+            }
+        },
+        goToProfile() {
+
+        },
         parseText(listString) {
             const sinCorchetes = listString.replace(/\[|\]/g, '');
             const sinComillasSimples = sinCorchetes.replace(/'/g, '');
@@ -236,6 +250,7 @@ export default {
                     }
                 })
                 .catch((error) => {
+                    this.$router.push('/');
                     console.error("Error al obtener la información de la receta:", error);
                 });
         },
@@ -274,6 +289,7 @@ export default {
                     }
                 })
                 .catch((error) => {
+                    this.$router.push('/');
                     console.error("Error al obtener las información del usuario:", error);
                 });
         },
@@ -333,19 +349,20 @@ export default {
         this.getRecipeInformation();
         this.username = localStorage.getItem('username');
         this.getUserInformation();
-        this.getUserInformation();
         this.previousRoute = this.$router.options.history.state.back
+        if (this.previousRoute === null) {
+            this.previousRoute = "/";
+        }
     }
 }
 </script>
 
 <style scoped>
 
-/* Mantener la estructura base */
-
 .recipeMainContainer {
     display: flex;
     justify-content: center;
+    align-items: flex-start;
     padding: 1em;
     width: 100%;
     height: 100%;
@@ -353,8 +370,10 @@ export default {
 
 .recipeContainer {
     max-width: 100%;
-    margin: 0 auto;
+    margin: 0 0 0 300px;
     padding: 0 15px;
+    width: 100%;
+    height: 100%;
 }
 
 .recipeFavContainer {
@@ -452,6 +471,7 @@ export default {
     font-size: 0.8em;
     font-weight: 300;
     font-family: Catamaran, sans-serif;
+    display: flex;
 }
 
 .recipeImageContainer img {
@@ -494,13 +514,14 @@ export default {
     border-bottom: 2px solid #83d3fc;
     display: flex;
     flex-wrap: wrap;
-    padding: 5px; /* Reducir el padding para hacer la tabla más compacta */
+    padding: 5px 5px 20px 20px;
 }
 
 .recipeTableForthRowContainer {
     display: flex;
     flex-wrap: wrap;
-    padding: 5px; /* Reducir el padding para hacer la tabla más compacta */
+    padding: 5px 5px 20px 20px;
+
 }
 
 .ingredientItems,
@@ -515,13 +536,13 @@ export default {
 }
 
 .ingredientItems li {
-    width: calc(33.33% - 10px); /* Reducir el ancho a la mitad para hacerlos más pequeños */
+    width: calc(33.33% - 10px);
     box-sizing: border-box;
 }
 
 .allergenItems li,
 .typeItems li {
-    width: calc(33.33% - 10px); /* Reducir el ancho a la mitad para hacerlos más pequeños */
+    width: calc(33.33% - 10px);
     box-sizing: border-box;
     list-style: inside;
 }
@@ -546,7 +567,7 @@ export default {
 }
 
 .label {
-    display: block; /* Hace que la etiqueta sea un bloque, lo que permite centrar el texto */
+    display: block;
     color: #000000;
 }
 
@@ -582,7 +603,7 @@ export default {
     width: 100%;
     box-sizing: border-box;
     resize: vertical;
-    min-height: 5vh; /* Medida inicial del cuadro de comentarios */
+    min-height: 5vh;
 }
 
 .submit-button {
@@ -626,8 +647,7 @@ export default {
 }
 
 .recipeCommentContentContainer {
-    /* Estilos adicionales para la sección de revisión */
-    color: #333; /* Cambia el color del texto según tus preferencias */
+    color: #333;
 }
 
 .recipeButtonContainer {
@@ -652,14 +672,81 @@ export default {
 }
 
 .active-heart {
-    /* Estilos para el corazón relleno */
-    color: #9b0000; /* Color del corazón relleno */
+    color: #9b0000;
 }
 
 .close-button {
-  position: fixed;
-  top: 100px; /* Ajusta la distancia desde la parte superior según sea necesario */
-  right: 10px; /* Ajusta la distancia desde la derecha según sea necesario */
-  z-index: 1000; /* Asegúrate de que el botón esté en la parte superior */
+    position: fixed;
+    top: 100px;
+    right: 10px;
+    z-index: 1000;
 }
+
+.clickable-comments {
+    color: #000000;
+    cursor: pointer;
+}
+
+.clickable-comments:hover {
+    text-decoration: underline;
+}
+
+.clickable-username {
+    color: blue;
+    cursor: pointer;
+}
+
+.clickable-username:hover {
+    color: darkblue;
+    text-decoration: underline;
+}
+
+.instructionItems {
+    margin-left: -25px;
+}
+
+@media (max-width: 1200px) {
+  .recipeContainer {
+    margin: 0;
+  }
+
+  .recipeTableContainer {
+    width: 80%;
+  }
+}
+
+@media (max-width: 992px) {
+  .recipeMainContainer {
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .recipeContainer {
+    margin: 0;
+    width: 100%;
+    padding: 0;
+  }
+
+  .recipeTableContainer {
+    width: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .recipeTableServings,
+  .recipeTablePrepTime,
+  .recipeTableKCal,
+  .ingredientItems li,
+  .allergenItems li,
+  .typeItems li {
+    width: 100%;
+  }
+}
+
+@media (max-width: 576px) {
+  .recipeTitleContainer h1 {
+    font-size: 1.5em;
+  }
+}
+
 </style>
