@@ -1,10 +1,9 @@
 <template>
-    <div class="profileMainContainer" v-if="username_id">
+    <div class="profileMainContainer" v-if="this.profileInfo">
         <div class="profileRecipeContainer">
             <div class="profileImageInfoContainer">
                 <div class="profileImageContainer">
                     <div class="squareImageWrapper">
-
                         <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
                     </div>
                 </div>
@@ -16,16 +15,46 @@
                         <h3> {{ this.profileInfo.email }}</h3>
                     </div>
                     <div class="profileFollowingFollowersContainer">
-                        <div class="profileFollowingContainer">
-                            <h3> Following: </h3>
+                        <div class="profileFollowingContainer" @click="showFollowingPopup">
+                            <h3> Following: {{ Object.keys(this.profileInfo.list_following_users).length }} </h3>
                         </div>
-                        <div class="profileFollowersContainer">
-                            <h3> Followers: </h3>
+                        <div v-if="showPopupFollowing" class="overlay" @click="closeFollowingPopup">
+                            <div class="followingPopup">
+                                <div class="users">
+                                    <ul>
+                                        <li v-for="(follower, index) in profileInfo.list_following_users" :key="index">
+                                            <a :href="`/profiles/${follower}`">{{ follower }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="buttonClose">
+                                    <button class="closeButton" @click="showFollowingPopup">Close</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="profileFollowersContainer" @click="showFollowersPopup">
+                            <h3> Followers: {{ Object.keys(this.profileInfo.list_follower_users).length }}</h3>
+                        </div>
+                        <div v-if="showPopupFollower" class="overlay" @click="closeFollowersPopup">
+                            <div class="followersPopup">
+                                <div class="users">
+                                    <ul>
+                                        <li v-for="(follower, index) in profileInfo.list_follower_users" :key="index">
+                                            <a :href="`/profiles/${follower}`">{{ follower }}</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="buttonClose">
+                                    <button class="closeButton" @click="showFollowersPopup">Close</button>
+                                </div>
+                            </div>
                         </div>
                     </div>
                 </div>
                 <div class="profileFollowButtonContainer" v-if="this.username !== this.username_id">
-                    <button class="followButton">Follow</button>
+                    <button class="followButton" @click="follow">
+                        {{ isFollowing ? 'Unfollow' : 'Follow' }}
+                    </button>
                 </div>
             </div>
             <div class="profileRecipesUsersContainer">
@@ -33,12 +62,12 @@
                 <div class="profileRecipesContainer">
                     <div class="profileOwnRecipesContainer">
                         <div class="profileOwnRecipesTitleContainer">
-                            <h3>OWN RECIPES ({{ this.ownRecipes.length }})</h3>
+                            <h3>Own Recipes ({{ this.ownRecipes.length }})</h3>
                         </div>
                         <div class="profileCardRow">
                             <router-link
                                     class="profileCard"
-                                    v-for="(recipe, index) in ownRecipes.slice(0, 4)"
+                                    v-for="(recipe, index) in displayedOwnRecipes"
                                     :key="index"
                                     :to="'/recipes/' + recipe.id"
                             >
@@ -60,7 +89,7 @@
                     </div>
                     <div class="profileLikedRecipesContainer">
                         <div class="profileLikedRecipesTitleContainer">
-                            <h3>FAVORITE RECIPES ({{ this.favoriteRecipes.length }})</h3>
+                            <h3>Favorite Recipes ({{ this.favoriteRecipes.length }})</h3>
                         </div>
                         <div class="profileCardRow">
                             <router-link
@@ -86,6 +115,9 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div class="profileButtonContainer">
+                <button @click="closeProfile" class="submit-button close-button">Close</button>
             </div>
         </div>
     </div>
@@ -114,6 +146,9 @@ export default {
             username_id: "",
             showAllLikedRecipes: false,
             showAllOwnRecipes: false,
+            isFollowing: false,
+            showPopupFollower: false,
+            showPopupFollowing: false,
         };
     },
     computed: {
@@ -129,6 +164,30 @@ export default {
         },
     },
     methods: {
+        closeProfile() {
+            this.$router.push(`/`);
+        },
+        showFollowersPopup() {
+            this.showPopupFollower = !this.showPopupFollower;
+        },
+        showFollowingPopup() {
+            this.showPopupFollowing = !this.showPopupFollowing;
+        },
+        follow() {
+            axios
+                .post(`/profile/${this.username_id}/`, {
+                    user: this.username
+                }).then((response) => {
+                if (response.status === 200) {
+                    console.log("Followed");
+                    this.getUserInformation()
+                }
+            })
+                .catch((error) => {
+                    console.log(error.response)
+                    alert(error.response);
+                });
+        },
         getUserInformation() {
             // Axios para recibir lla información del usuario
             axios
@@ -137,13 +196,20 @@ export default {
                     if (response.status === 200) {
                         const info = response.data.user;
                         this.profileInfo = info;
-                        this.favoriteRecipes = Object.values(this.profileInfo.list_favorite_recipes)
-                        this.ownRecipes = Object.values(this.profileInfo.list_own_recipes)
+                        this.favoriteRecipes = Object.values(this.profileInfo.list_favorite_recipes);
+                        this.ownRecipes = Object.values(this.profileInfo.list_own_recipes);
+                        let following = Object.values(this.profileInfo.list_follower_users);
+                        if (following.indexOf(this.username) != -1) {
+                            this.isFollowing = true;
+                        } else {
+                            this.isFollowing = false;
+                        }
                         console.log(response.data.user)
 
                     }
                 })
                 .catch((error) => {
+                    this.$router.push('/');
                     console.error("Error al obtener las información del usuario:", error);
                 });
         },
@@ -158,6 +224,9 @@ export default {
     },
     created() {
         this.username_id = this.$route.params.id;
+        if (this.username === "null") {
+            this.$router.push('/');
+        }
         this.getUserInformation();
     }
 };
@@ -185,8 +254,8 @@ export default {
 }
 
 .profileImageContainer {
-    width: 30%;
-    height: 100%;
+    width: 300px;
+    height: 300px;
 }
 
 .squareImageWrapper {
@@ -194,8 +263,8 @@ export default {
 }
 
 .squareImageWrapper img {
-    width: 100%;
-    height: 100%;
+    width: 300px;
+    height: 300px;
 }
 
 .profileInfoContainer {
@@ -407,4 +476,187 @@ export default {
     background-color: #6db8f8;
 }
 
+.followersPopup {
+position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    max-height: 80%;
+    z-index: 999;
+    width: 30%;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.followersPopup ul {
+    list-style: none;
+    padding: 0;
+}
+
+.followersPopup ul li {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc; /* Añade una línea divisoria entre los usuarios */
+    padding-bottom: 5px; /* Espaciado entre los usuarios */
+}
+
+
+.followingPopup {
+position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    padding: 20px;
+    max-height: 80%;
+    z-index: 999;
+    width: 30%;
+    max-width: 600px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    border-radius: 10px;
+}
+
+.followingPopup ul {
+    list-style: none;
+    padding: 0;
+}
+
+.followingPopup ul li {
+    margin-bottom: 10px;
+    border-bottom: 1px solid #ccc; /* Añade una línea divisoria entre los usuarios */
+    padding-bottom: 5px; /* Espaciado entre los usuarios */
+}
+
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Ajusta el valor alfa para oscurecer */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 999; /* Asegúrate de que esté por encima de otros elementos */
+}
+
+.users {
+    height: 90%;
+    width: 100%;
+    overflow-y: auto; /* Agregamos scroll si el contenido excede el tamaño del popup */
+}
+
+.users a {
+    color: black;
+    cursor: pointer;
+    text-decoration: none;
+    font-family: sans-serif;
+    font-size: larger;
+}
+
+.users a:hover {
+    text-decoration: underline;
+}
+
+.buttonClose {
+    height: 10%;
+    width: 100%;
+    text-align: center;
+}
+
+.profileFollowingContainer h3, .profileFollowersContainer h3 {
+    color: black;
+    cursor: pointer;
+}
+
+.submit-button {
+    background-color: #41c6ff;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-bottom: 3vh;
+}
+
+.submit-button:hover {
+    background-color: #41a0ff;
+}
+
+.close-button {
+    position: fixed;
+    top: 100px;
+    right: 10px;
+    z-index: 1000;
+}
+
+.profileButtonContainer {
+    text-align: center;
+}
+
+@media (max-width: 768px) {
+    .profileMainContainer {
+        padding: 2%; /* Agregar relleno al contenedor principal */
+    }
+
+    .profileImageInfoContainer {
+        flex-direction: column; /* Cambiar la dirección de los elementos */
+        height: auto; /* Altura automática */
+        margin: 5% 0; /* Ajustar los márgenes */
+    }
+
+    .profileImageContainer {
+        width: 100%;
+        margin-bottom: 5%; /* Espaciado inferior */
+    }
+
+    .profileInfoContainer {
+        width: 100%;
+        padding: 0 5%; /* Ajustar el relleno */
+    }
+
+    .profileUsernameContainer {
+        font-size: large; /* Reducir el tamaño de la fuente */
+        margin-bottom: 5px; /* Espaciado inferior */
+    }
+
+    .profileEmailContainer {
+        font-size: small; /* Reducir el tamaño de la fuente */
+        margin-bottom: 5px; /* Espaciado inferior */
+    }
+
+    .profileRecipesContainer {
+        margin-top: 5%;
+    }
+
+    .profileCard {
+        width: calc(50% - 20px); /* Reducir el ancho de las tarjetas */
+        margin: 10px 5px; /* Ajustar los márgenes */
+    }
+
+    .profileOwnRecipesTitleContainer,
+    .profileLikedRecipesTitleContainer {
+        margin-top: 5%;
+    }
+
+    /* Nuevos estilos para los pop-ups */
+    .followersPopup,
+    .followingPopup {
+        width: 90%; /* Modificar el ancho */
+        max-width: 100%; /* Ajustar el ancho máximo */
+        padding: 10px; /* Modificar el relleno */
+    }
+
+    .followersPopup ul li,
+    .followingPopup ul li {
+        margin-bottom: 5px; /* Reducir el espaciado entre los usuarios */
+        padding-bottom: 3px; /* Reducir el espaciado inferior */
+        border-bottom: none; /* Eliminar la línea divisoria entre los usuarios */
+    }
+}
 </style>

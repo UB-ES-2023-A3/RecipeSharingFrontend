@@ -61,9 +61,11 @@ export default {
         },
         goToLogin() {
             this.$router.push('/loginRegister'); // Navigate to the login page
+            this.closeMenu();
         },
         goToProfile() {
             this.$router.push(`/profiles/${this.username}`);
+            this.closeMenu();
         },
         async logout() {
             try {
@@ -79,6 +81,7 @@ export default {
 
                 if (response.status === 200) {
                     // Successful login, redirect the user or perform other necessary actions
+                    this.closeMenu();
                 }
             } catch (error) {
                 if (error.response) {
@@ -125,7 +128,7 @@ export default {
 }
 
 .user-menu {
-    position: absolute;
+    position: fixed;
     top: 60px;
     right: 0;
     background-color: #fff;
@@ -133,6 +136,7 @@ export default {
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100px;
+    z-index: 9999; /* Ajusta el z-index para que esté por encima de todo */
 }
 
 ul {
