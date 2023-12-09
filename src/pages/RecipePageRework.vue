@@ -705,6 +705,10 @@ export default {
     margin-left: -25px;
 }
 
+.recipeInstructionsContainer {
+    width: 60%;
+}
+
 @media (max-width: 1200px) {
     .recipeContainer {
         margin: 0;
