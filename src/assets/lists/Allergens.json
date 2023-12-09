@@ -1,127 +1,180 @@
 [
   {
-    "groupName": "None Allergens",
+    "groupName": "Tree Nuts",
     "options": [
-      "None"
+      "Almond",
+      "Hazelnut",
+      "Cashew",
+      "Pecan",
+      "Walnut"
     ]
   },
   {
-    "groupName": "Common Allergens",
+    "groupName": "Fish and Seafood",
     "options": [
-      "Cereals containing gluten - ",
-      "Crustaceans",
-      "Eggs",
+      "Anchovies",
       "Fish",
-      "Peanuts",
-      "Soybeans",
-      "Milk",
-      "Nuts",
-      "Celery",
-      "Mustard",
-      "Sesame seeds",
-      "Sulphur dioxide and sulphites",
-      "Lupin",
-      "Molluscs"
+      "Shrimp",
+      "Lobster",
+      "Salmon",
+      "Sausage"
+    ]
+  },
+  {
+    "groupName": "Dairy and Eggs",
+    "options": [
+      "Brie Cheese",
+      "Butter",
+      "Cheese",
+      "Cottage Cheese",
+      "Cream",
+      "Egg",
+      "Goat Cheese",
+      "Gouda Cheese",
+      "Mozzarella Cheese",
+      "Parmesan Cheese",
+      "Provolone Cheese",
+      "Ricotta Cheese",
+      "Swiss Cheese",
+      "Yogurt"
+    ]
+  },
+  {
+    "groupName": "Grains and Cereals",
+    "options": [
+      "Barley",
+      "Biscuit",
+      "Brown Rice",
+      "Corn",
+      "Oat",
+      "Pizza Dough",
+      "Quinoa",
+      "White Bread",
+      "White Rice"
+    ]
+  },
+  {
+    "groupName": "Meat",
+    "options": [
+      "Bacon",
+      "Beef",
+      "Chicken",
+      "Ground Beef",
+      "Ham",
+      "Lamb",
+      "Pork",
+      "Sausage",
+      "Turkey",
+      "Veal"
     ]
   },
   {
     "groupName": "Fruits",
     "options": [
-      "Apples",
-      "Bananas",
-      "Kiwis",
-      "Mangos",
-      "Peaches",
-      "Plums",
+      "Apple",
+      "Apricot",
+      "Avocado",
+      "Banana",
+      "Cantaloupe",
+      "Date",
+      "Dragon Fruit",
+      "Fig",
       "Grapes",
-      "Cherries",
-      "Strawberries",
-      "Oranges",
-      "Lemons",
-      "Raspberries",
-      "Blackberries",
-      "Papayas",
-      "Watermelons",
-      "Pineapples"
-  ]
+      "Kiwi",
+      "Lemon",
+      "Lime",
+      "Mango",
+      "Nectarine",
+      "Papaya",
+      "Peach",
+      "Pear",
+      "Pineapple",
+      "Plum",
+      "Raspberry",
+      "Strawberry",
+      "Watermelon"
+    ]
   },
   {
     "groupName": "Vegetables",
     "options": [
-      "Tomatoes",
-      "Peppers (e.g., bell peppers, chili peppers)",
-      "Potatoes",
-      "Carrots",
-      "Cucumbers",
-      "Celery",
-      "Onions",
-      "Garlic",
-      "Spinach",
-      "Lettuce",
-      "Zucchini",
-      "Broccoli",
-      "Cauliflower",
+      "Artichoke",
       "Asparagus",
-      "Radishes",
-      "Eggplants (aubergines)",
-      "Peas",
+      "Beetroot",
+      "Bok Choy",
+      "Broccoli",
+      "Brussels Sprouts",
+      "Cabbage",
+      "Carrot",
+      "Cauliflower",
+      "Celery",
+      "Cucumber",
+      "Endive",
+      "Edamame",
+      "Escarole",
+      "Fennel",
+      "Green Beans",
+      "Green Bell Pepper",
+      "Green Onions",
+      "Guava",
+      "Kale",
+      "Spinach",
+      "Sweet Potato",
+      "Tomato",
+      "Tomatillo",
+      "Watercress",
+      "Zucchini"
+    ]
+  },
+  {
+    "groupName": "Herbs and Spices",
+    "options": [
+      "Basil",
+      "Cayenne Pepper",
+      "Cilantro",
+      "Cinnamon",
+      "Italian Herbs",
+      "Dill",
+      "Garlic",
+      "Ginger",
+      "Jalapeño",
+      "Mint",
+      "Oregano",
+      "Paprika",
+      "Rosemary",
+      "Soy Sauce",
+      "Thyme",
+      "Vanilla",
+      "Vinegar"
+    ]
+  },
+  {
+    "groupName": "Nuts and Seeds",
+    "options": [
+      "Peanut"
+    ]
+  },
+  {
+    "groupName": "Sweets and Snacks",
+    "options": [
+      "Chocolate",
+      "Coffee",
       "Corn",
-      "Beets",
-      "Sweet potatoes"
-  ]
+      "Corn Flakes",
+      "Ice Cream",
+      "Icing Sugar",
+      "Maple Syrup",
+      "Nutmeg",
+      "Peanut Butter",
+      "Sugar"
+    ]
   },
   {
-    "groupName": "Meat",
+    "groupName": "Miscellaneous",
     "options": [
-      "Beef",
-      "Pork",
-      "Chicken",
-      "Turkey",
-      "Lamb",
-      "Duck",
-      "Goose",
-      "Venison (deer meat)",
-      "Rabbit",
-      "Bison",
-      "Horse meat",
-      "Kangaroo",
-      "Alligator",
-      "Ostrich",
-      "Wild boar",
-      "Bear meat",
-      "Elk",
-      "Emu",
-      "Turtle",
-      "Snake"
-  ]
-  },
-  {
-    "groupName": "Dairy Alternatives",
-    "options": [
-      "Almond milk",
-      "Soy milk",
-      "Oat milk",
-      "Coconut milk",
-      "Rice milk",
-      "Cashew milk",
-      "Hemp milk",
-      "Macadamia milk",
-      "Hazelnut milk",
-      "Pea milk",
-      "Flax milk",
-      "Quinoa milk",
-      "Walnut milk",
-      "Sunflower milk",
-      "Tiger nut milk",
-      "Chia milk",
-      "Potato milk",
-      "Sesame milk",
-      "Banana milk",
-      "Spelt milk",
-      "Kamut milk",
-      "Barley milk",
-      "Teff milk",
-      "Amaranth milk"
-  ]
+      "Honey",
+      "Wine",
+      "Yeast"
+    ]
   }
 ]
