@@ -1,24 +1,26 @@
 <template>
-  <div class="servings-dropdown">
-    <button class="servings-dropdown-button" @mouseenter="openServingsDropdown" @mouseleave="closeServingsDropdown">
-        <span class="servings-button-text">Servings</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          class="servings-dropdown-icon"
-        >
-          <path d="M19 9l-7 7-7-7"></path>
-        </svg>
+  <div class="dropdown" @mouseenter="openDropdown" @mouseleave="closeDropdown">
+    <button class="dropdown-button" @click="toggleDropdown">
+      <span class="button-text">Servings</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        class="dropdown-icon"
+      >
+        <path d="M19 9l-7 7-7-7"></path>
+      </svg>
     </button>
-    <div v-if="isOpen" class="servings-options-container" @mouseenter="openServingsDropdown" @mouseleave="closeServingsDropdown">
-      <div class="servings-option" @click="selectServingsOption1">Meat</div>
-      <div class="servings-option" @click="selectServingsOption2">Pasta</div>
-      <div class="servings-option" @click="selectServingsOption3">More Options</div>
+    <div v-if="isOpen" class="options-container" @mouseenter="openDropdown" @mouseleave="closeDropdown">
+      <div class="option" @click="selectOption1">1</div>
+      <div class="option" @click="selectOption2">2</div>
+      <div class="option" @click="selectOption3">4</div>
+      <div class="option" @click="selectOption4">6</div>
+      <div class="option" @click="selectOption5">12</div>
       <!-- Agrega más opciones según sea necesario -->
     </div>
   </div>
@@ -32,46 +34,49 @@ export default {
     };
   },
   methods: {
-    openServingsDropdown() {
+    toggleDropdown() {
+      this.isOpen = !this.isOpen;
+    },
+    openDropdown() {
       this.isOpen = true;
     },
-    closeServingsDropdown() {
+    closeDropdown() {
       this.isOpen = false;
     },
-    selectServingsOption1() {
-      this.selectedOption = 'Opción 1';
-      this.isOpen = false;
-      this.$emit('select', 'Opción 1');
+    selectOption1() {
+      this.$emit('optionSelected', 1);
     },
-    selectServingsOption2() {
-      this.selectedOption = 'Opción 2';
-      this.isOpen = false;
-      this.$emit('select', 'Opción 2');
+    selectOption2() {
+      this.$emit('optionSelected', 2);
     },
-    selectServingsOption3() {
-      this.selectedOption = 'Opción 3';
-      this.isOpen = false;
-      this.$emit('select', 'Opción 3');
+    selectOption3() {
+      this.$emit('optionSelected', 4);
     },
-    // Agrega más métodos según sea necesario para otras opciones
+    selectOption4() {
+       this.$emit('optionSelected', 6);
+    },
+    selectOption5() {
+       this.$emit('optionSelected', 12);
+    },
   },
 };
 </script>
 
 <style scoped>
-.servings-dropdown {
+.dropdown {
   position: relative;
   display: inline-block;
   width: 100%;
+  z-index: 1;
 }
-.servings-option {
-  height: 10%;
+.option {
+  height: 100%;
   width: 100%;
   border: none;
   cursor: pointer;
   transition: background-color 0s; /* Cambiado a 0s para hacer el hover instantáneo */
   background-color: white;
-  margin-bottom: 1px;
+  margin-bottom:0;
   display: flex; /* Hacer que el contenedor sea flexible */
   align-items: center; /* Centrar verticalmente el contenido */
   justify-content: center;
@@ -79,12 +84,13 @@ export default {
   font-size: 14px; /* Tamaño de la letra */
 }
 
-.servings-option:hover {
+
+.option:hover {
   background-color: #83d3fc;
 }
 
-.servings-dropdown-button {
-  height: 10%;
+.dropdown-button {
+  height: 100%;
   width: 100%;
   border: none;
   cursor: pointer;
@@ -97,15 +103,15 @@ export default {
   font-size: 14px; /* Tamaño de la letra */
 }
 
-.servings-dropdown-button:hover {
+.dropdown-button:hover {
   background-color: #2980b9;
 }
 
-.servings-button-text {
+.button-text {
   margin-right: 5px; /* Espacio entre el texto y el ícono */
 }
 
-.servings-dropdown-icon {
+.dropdown-icon {
   width: 1em; /* Ajusta el tamaño del ícono */
   height: 1em;
   vertical-align: middle; /* Alinea verticalmente con el texto del botón */

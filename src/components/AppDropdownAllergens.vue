@@ -1,24 +1,24 @@
 <template>
-  <div class="allergens-dropdown">
-    <button class="allergens-dropdown-button" @mouseenter="openAllergensDropdown" @mouseleave="closeAllergensDropdown">
-        <span class="allergens-button-text">Allergens</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          class="allergens-dropdown-icon"
-        >
-          <path d="M19 9l-7 7-7-7"></path>
-        </svg>
+  <div class="dropdown" @mouseenter="openDropdown" @mouseleave="closeDropdown">
+    <button class="dropdown-button" @click="toggleDropdown">
+      <span class="button-text">Allergens</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        class="dropdown-icon"
+      >
+        <path d="M19 9l-7 7-7-7"></path>
+      </svg>
     </button>
-    <div v-if="isOpen" class="allergens-options-container" @mouseenter="openAllergensDropdown" @mouseleave="closeAllergensDropdown">
-      <div class="allergens-option" @click="selectAllergensOption1">Meat</div>
-      <div class="allergens-option" @click="selectAllergensOption2">Pasta</div>
-      <div class="allergens-option" @click="selectAllergensOption3">More Options</div>
+    <div v-if="isOpen" class="options-container" @mouseenter="openDropdown" @mouseleave="closeDropdown">
+      <div class="option" @click="selectOption1">Almond</div>
+      <div class="option" @click="selectOption2">Fish</div>
+      <div class="option" @click="selectOption3">More Options</div>
       <!-- Agrega más opciones según sea necesario -->
     </div>
   </div>
@@ -32,40 +32,41 @@ export default {
     };
   },
   methods: {
-    openAllergensDropdown() {
+    toggleDropdown() {
+      this.isOpen = !this.isOpen;
+    },
+    openDropdown() {
       this.isOpen = true;
     },
-    closeAllergensDropdown() {
+    closeDropdown() {
       this.isOpen = false;
     },
-    selectAllergensOption1() {
-      this.selectedOption = 'Allergens Option 1';
-      this.isOpen = false;
-      this.$emit('select', 'Allergens Option 1');
+    selectOption1() {
+      this.$emit('optionSelected', 'Almond');
     },
-    selectAllergensOption2() {
-      this.selectedOption = 'Allergens Option 2';
-      this.isOpen = false;
-      this.$emit('select', 'Allergens Option 2');
+    selectOption2() {
+      this.$emit('optionSelected', 'Fish');
     },
-    selectAllergensOption3() {
-      this.selectedOption = 'Allergens Option 3';
-      this.isOpen = false;
-      this.$emit('select', 'Allergens Option 3');
+    selectOption3() {
+      this.redirectToFilterPage();
     },
-    // Agrega más métodos según sea necesario para otras opciones
+    redirectToFilterPage() {
+        this.$router.push('/recipe/filters/allergens');
+
+    },
   },
 };
 </script>
 
 <style scoped>
-.allergens-dropdown {
+.dropdown {
   position: relative;
   display: inline-block;
   width: 100%;
+  z-index: 1;
 }
-.allergens-option {
-  height: 10%;
+.option {
+  height: 100%;
   width: 100%;
   border: none;
   cursor: pointer;
@@ -79,12 +80,13 @@ export default {
   font-size: 14px; /* Tamaño de la letra */
 }
 
-.allergens-option:hover {
+
+.option:hover {
   background-color: #83d3fc;
 }
 
-.allergens-dropdown-button {
-  height: 10%;
+.dropdown-button {
+  height: 100%;
   width: 100%;
   border: none;
   cursor: pointer;
@@ -97,15 +99,15 @@ export default {
   font-size: 14px; /* Tamaño de la letra */
 }
 
-.allergens-dropdown-button:hover {
+.dropdown-button:hover {
   background-color: #2980b9;
 }
 
-.allergens-button-text {
+.button-text {
   margin-right: 5px; /* Espacio entre el texto y el ícono */
 }
 
-.allergens-dropdown-icon {
+.dropdown-icon {
   width: 1em; /* Ajusta el tamaño del ícono */
   height: 1em;
   vertical-align: middle; /* Alinea verticalmente con el texto del botón */

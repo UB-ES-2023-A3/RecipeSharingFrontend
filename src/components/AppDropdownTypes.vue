@@ -1,24 +1,25 @@
 <template>
-  <div class="types-dropdown">
-    <button class="types-dropdown-button" @mouseenter="openTypesDropdown" @mouseleave="closeTypesDropdown">
-        <span class="types-button-text">Types</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          class="types-dropdown-icon"
-        >
-          <path d="M19 9l-7 7-7-7"></path>
-        </svg>
+  <div class="dropdown" @mouseenter="openDropdown" @mouseleave="closeDropdown">
+    <button class="dropdown-button" @click="toggleDropdown">
+      <span class="button-text">Types</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        class="dropdown-icon"
+      >
+        <path d="M19 9l-7 7-7-7"></path>
+      </svg>
     </button>
-    <div v-if="isOpen" class="types-options-container" @mouseenter="openTypesDropdown" @mouseleave="closeTypesDropdown">
-      <div class="types-option" @click="selectOption1">Meat</div>
-      <div class="types-option" @click="selectOption2">Pasta</div>
-      <div class="types-option" @click="selectOption3">More Options</div>
+    <div v-if="isOpen" class="options-container" @mouseenter="openDropdown" @mouseleave="closeDropdown">
+      <div class="option" @click="selectOption1">Italy</div>
+      <div class="option" @click="selectOption2">Spain</div>
+      <div class="option" @click="selectOption3">United States</div>
+      <div class="option" @click="selectOption4">More Options</div>
       <!-- Agrega más opciones según sea necesario -->
     </div>
   </div>
@@ -32,46 +33,50 @@ export default {
     };
   },
   methods: {
-    openTypesDropdown() {
+    toggleDropdown() {
+      this.isOpen = !this.isOpen;
+    },
+    openDropdown() {
       this.isOpen = true;
     },
-    closeTypesDropdown() {
+    closeDropdown() {
       this.isOpen = false;
     },
     selectOption1() {
-      this.selectedOption = 'Opción 1';
-      this.isOpen = false;
-      this.$emit('select', 'Opción 1');
+      this.$emit('optionSelected', 'Italy');
     },
     selectOption2() {
-      this.selectedOption = 'Opción 2';
-      this.isOpen = false;
-      this.$emit('select', 'Opción 2');
+      this.$emit('optionSelected', 'Spain');
     },
     selectOption3() {
-      this.selectedOption = 'Opción 3';
-      this.isOpen = false;
-      this.$emit('select', 'Opción 3');
+      this.$emit('optionSelected', 'United States');
     },
-    // Agrega más métodos según sea necesario para otras opciones
+    selectOption4() {
+      this.redirectToFilterPage();
+    },
+    redirectToFilterPage() {
+        this.$router.push('/recipe/filters/types');
+
+    },
   },
 };
 </script>
 
 <style scoped>
-.types-dropdown {
+.dropdown {
   position: relative;
   display: inline-block;
   width: 100%;
+  z-index: 1;
 }
-.types-option {
-  height: 10%;
+.option {
+  height: 100%;
   width: 100%;
   border: none;
   cursor: pointer;
   transition: background-color 0s; /* Cambiado a 0s para hacer el hover instantáneo */
   background-color: white;
-  margin-bottom: 1px;
+  margin-bottom:0;
   display: flex; /* Hacer que el contenedor sea flexible */
   align-items: center; /* Centrar verticalmente el contenido */
   justify-content: center;
@@ -79,12 +84,13 @@ export default {
   font-size: 14px; /* Tamaño de la letra */
 }
 
-.types-option:hover {
+
+.option:hover {
   background-color: #83d3fc;
 }
 
-.types-dropdown-button {
-  height: 10%;
+.dropdown-button {
+  height: 100%;
   width: 100%;
   border: none;
   cursor: pointer;
@@ -97,15 +103,15 @@ export default {
   font-size: 14px; /* Tamaño de la letra */
 }
 
-.types-dropdown-button:hover {
+.dropdown-button:hover {
   background-color: #2980b9;
 }
 
-.types-button-text {
+.button-text {
   margin-right: 5px; /* Espacio entre el texto y el ícono */
 }
 
-.types-dropdown-icon {
+.dropdown-icon {
   width: 1em; /* Ajusta el tamaño del ícono */
   height: 1em;
   vertical-align: middle; /* Alinea verticalmente con el texto del botón */

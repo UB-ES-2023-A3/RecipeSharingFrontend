@@ -1,23 +1,23 @@
 <template>
-  <div class="dropdown">
-    <button class="dropdown-button" @mouseenter="openDropdown" @mouseleave="closeDropdown">
-        <span class="button-text">Ingredients</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          class="dropdown-icon"
-        >
-          <path d="M19 9l-7 7-7-7"></path>
-        </svg>
+  <div class="dropdown" @mouseenter="openDropdown" @mouseleave="closeDropdown">
+    <button class="dropdown-button" @click="toggleDropdown">
+      <span class="button-text">Ingredients</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        class="dropdown-icon"
+      >
+        <path d="M19 9l-7 7-7-7"></path>
+      </svg>
     </button>
     <div v-if="isOpen" class="options-container" @mouseenter="openDropdown" @mouseleave="closeDropdown">
-      <div class="option" @click="selectOption1">Meat</div>
-      <div class="option" @click="selectOption2">Pasta</div>
+      <div class="option" @click="selectOption1">Chicken</div>
+      <div class="option" @click="selectOption2">Fish</div>
       <div class="option" @click="selectOption3">More Options</div>
       <!-- Agrega más opciones según sea necesario -->
     </div>
@@ -32,6 +32,9 @@ export default {
     };
   },
   methods: {
+    toggleDropdown() {
+      this.isOpen = !this.isOpen;
+    },
     openDropdown() {
       this.isOpen = true;
     },
@@ -39,21 +42,18 @@ export default {
       this.isOpen = false;
     },
     selectOption1() {
-      this.selectedOption = 'Opción 1';
-      this.isOpen = false;
-      this.$emit('select', 'Opción 1');
+      this.$emit('optionSelected', 'Chicken');
     },
     selectOption2() {
-      this.selectedOption = 'Opción 2';
-      this.isOpen = false;
-      this.$emit('select', 'Opción 2');
+      this.$emit('optionSelected', 'Fish');
     },
     selectOption3() {
-      this.selectedOption = 'Opción 3';
-      this.isOpen = false;
-      this.$emit('select', 'Opción 3');
+      this.redirectToFilterPage();
     },
-    // Agrega más métodos según sea necesario para otras opciones
+    redirectToFilterPage() {
+        this.$router.push('/recipe/filters/ingredients');
+
+    },
   },
 };
 </script>
@@ -63,9 +63,10 @@ export default {
   position: relative;
   display: inline-block;
   width: 100%;
+  z-index: 1;
 }
 .option {
-  height: 10%;
+  height: 100%;
   width: 100%;
   border: none;
   cursor: pointer;
@@ -85,7 +86,7 @@ export default {
 }
 
 .dropdown-button {
-  height: 10%;
+  height: 100%;
   width: 100%;
   border: none;
   cursor: pointer;

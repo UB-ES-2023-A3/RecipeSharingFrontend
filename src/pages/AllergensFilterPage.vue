@@ -1,57 +1,100 @@
 <template>
-  <div class="mainContainer">
-    <h1>Ingredients List A-Z</h1>
+  <div>
+    <!-- Verifica si recipesToShow está vacío -->
+    <div v-if="recipesToShow.length === 0">
+      <div class="mainContainerIngredients">
+        <h1 class="title-heading">Allergens List A-Z</h1>
+        <div class="letrasButtons">
+          <a
+            v-for="letra in letras"
+            :key="letra"
+            :href="letra"
+            @click.prevent="scrollToSection(letra)"
+            :class="{ 'letraNoDisponible': !letraDisponible(letra), 'letraSeleccionada': letra === letraSeleccionada }"
+          >
+            {{ letra }}
+          </a>
+        </div>
 
-    <!-- Botones de letras -->
-    <div class="letrasButtons">
-      <a
-        v-for="letra in letras"
-        :key="letra"
-        :href="letra"
-        @click.prevent="scrollToSection(letra)"
-        :class="{ 'letraNoDisponible': !letraDisponible(letra), 'letraSeleccionada': letra === letraSeleccionada }"
-      >
-        {{ letra }}
-      </a>
-    </div>
-
-    <div v-if="Object.keys(ingredientsData).length">
-      <div v-for="(ingredientes, letra) in ingredientsData" :key="letra">
-        <div class="IngredientsSection" :id="letra" :class="{ 'resaltado': letra === letraSeleccionada }">
-          <div class="tituloSeccion centrado">{{ letra }}</div>
-          <div class="ingredientesList">
-            <button
-              v-for="ingrediente in ingredientes"
-              :key="ingrediente"
-              @click="handleButtonClick(ingrediente)"
-              :class="{ 'botonIngrediente': true, 'seleccionado': selectedIngredients.includes(ingrediente) }"
-            >
-              {{ ingrediente }}
-            </button>
+        <div v-if="Object.keys(ingredientsData).length">
+          <div v-for="(ingredientes, letra) in ingredientsData" :key="letra">
+            <div class="IngredientsSection" :id="letra" :class="{ 'resaltado': letra === letraSeleccionada }">
+              <div class="tituloSeccion centrado">{{ letra }}</div>
+              <div class="ingredientesList">
+                <button
+                  v-for="ingrediente in ingredientes"
+                  :key="ingrediente"
+                  @click="handleButtonClick(ingrediente)"
+                  :class="{ 'botonIngrediente': true, 'seleccionado': selectedIngredients.includes(ingrediente) }"
+                >
+                  {{ ingrediente }}
+                </button>
+              </div>
+            </div>
+          </div>
+          <div class="floatingContainer" v-if="selectedIngredients.length > 0">
+            <h2>Selected Ingredients</h2>
+            <div class="selected-ingredients-list">
+              <div v-for="selectedIngrediente in selectedIngredients" :key="selectedIngrediente">
+                <span class="selected-item">
+                  <span class="ingredient-text">{{ selectedIngrediente }}</span>
+                  <span @click="removeIngredient(selectedIngrediente)" class="remove-icon">❌</span>
+                </span>
+              </div>
+            </div>
+            <div class="submit-button" @click="submitSelection">Search</div>
           </div>
         </div>
-      </div>
-      <div class="floatingContainer" v-if="selectedIngredients.length > 0">
-        <h2>Selected Ingredients</h2>
-        <div class="selected-ingredients-list">
-          <div v-for="selectedIngrediente in selectedIngredients" :key="selectedIngrediente">
-            <span class="selected-item">
-              <span class="ingredient-text">{{ selectedIngrediente }}</span>
-              <span @click="removeIngredient(selectedIngrediente)" class="remove-icon">❌</span>
-            </span>
-          </div>
+        <div v-else>
+          <p>No hay ingredientes disponibles.</p>
         </div>
-        <div class="submit-button" @click="submitSelection">Search</div>
       </div>
     </div>
+    <!-- Si recipesToShow no está vacío, muestra otro contenedor -->
     <div v-else>
-      <p>No hay ingredientes disponibles.</p>
+        <div class="mainContainerIngredients">
+          <div class="nav-container">
+            <router-link to="/" class="nav-link">Homepage</router-link>
+            <span style="margin-top: 10px"> >> </span>
+            <router-link to="/recipe/filters/ingredients" class="nav-link" @click="refreshPage">Allergens Filter</router-link>
+            <span style="margin-top: 10px"> >> </span>
+            <router-link to="/recipe/filters/allergens" class="nav-link">Search Results</router-link>
+          </div>
+          <h2 class="section-title">Recipes not containing: {{ selectedIngredients.join(', ') }}</h2>
+          <div class="card-container">
+            <div
+              v-for="(recipe, index) in recipesToShow"
+              :key="index"
+              class="card"
+            >
+              <img
+                img src="@/assets/images/prueba.jpg"
+                alt="Recipe Image"
+                class="card-image"
+              />
+              <div class="rating-container">
+                <span class="date-label">{{recipe.creation_date }}</span>
+                <span
+                  v-for="star in [1, 2, 3, 4, 5]"
+                  :key="star"
+                  :class="{ 'filled': star <= recipe.rating_average ,'star' : star > recipe.rating_average }"
+                >
+                  ★
+                </span>
+                <span class="rating-label">({{ recipe.rating_amount }})</span>
+              </div>
+              <h3 class="card-title">{{ recipe.title }}</h3>
+            </div>
+          </div>
+      </div>
     </div>
   </div>
 </template>
 
+
 <script>
-import ingredientsData from "@/assets/lists/Allergens.json";
+import ingredientsData from "@/assets/lists/AllergensFilter.json";
+import axios from "axios";
 
 export default {
   data() {
@@ -60,7 +103,10 @@ export default {
       letras: "ABCDEFGHIJKLMNOPQRSTUVWXYZ".split(''),
       letraSeleccionada: null,
       selectedIngredients: [], // New array to store selected ingredients
+      recipesToShow: [],
     };
+  },
+  computed: {
   },
   methods: {
     handleButtonClick(ingrediente) {
@@ -88,7 +134,7 @@ export default {
     },
     submitSelection() {
       // Handle the submission of selected ingredients
-      alert('Submitted Ingredients: ' + this.selectedIngredients.join(', '));
+      this.applyFilters();
     },
     removeIngredient(ingredient) {
       const index = this.selectedIngredients.indexOf(ingredient);
@@ -96,30 +142,65 @@ export default {
         this.selectedIngredients.splice(index, 1);
       }
     },
+    async applyFilters() {
+        try {
+            let endpoint = '/recipes/filters/';
+                    if (this.selectedIngredients.length > 1) {
+                        for (let i = 0; i < this.selectedIngredients.length; i++) {
+                            if (i == 0) {
+                                endpoint += `allergens=${this.selectedIngredients[i]}+`
+                            } else if (i == this.selectedIngredients.length - 1) {
+                                endpoint += `${this.selectedIngredients[i]}`
+                            } else {
+                                endpoint += `${this.selectedIngredients[i]}+`
+                            }
+                        }
+                    } else {
+                        endpoint += `allergens=${this.selectedIngredients[0]}`
+                    }
+            const response = await axios.get(endpoint);
+            console.log(response)
+            if (response.status === 200) {
+                const recipes = response.data.recipes;
+                if(recipes.length == 0){
+                    alert('No matching recipes were found')
+                    this.refreshPage();
+                }
+                this.recipesToShow = recipes
+            }
+        } catch (error) {
+            if (error.response) {
+                // Handle login failure (e.g., display an error message).
+                if (error.response.status === 400) {
+                    console.error(error.response.data.error);
+                } else if (error.response.status === 500) {
+                    console.error("An error occurred while registering.");
+                } else {
+                    // Handle other status codes
+                    console.error("Unexpected error");
+                }
+            } else {
+                // Handle other errors.
+                console.error("An error occurred while logging in.");
+            }
+        }
+    },
+    refreshPage() {
+    this.$router.go(0);
+  }
   },
 };
 </script>
 
 <style scoped>
-body, html {
-  margin: 0;
-  padding: 0;
-}
-
-.mainContainer {
+.mainContainerIngredients {
   flex: 1;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
   align-items: center;
-  padding-top: 120px;
   color: black;
-  background: white;
-}
-
-h1 {
-  text-align: center;
-  margin-bottom: 20px;
+  margin-top: 0px;
 }
 
 .letrasButtons a {
@@ -261,6 +342,120 @@ h1 {
   cursor: pointer;
   color: #ff5733; /* Color para el icono de cruz */
 }
+.title-heading {
+  margin-top: 30px;
+  text-align: center;
+  margin-bottom: 40px;
+
+}
+.section-title {
+    font-size: 24px;
+    color: #333;
+    margin-bottom: 25px;
+    text-align: center;
+    margin-top: 15px;
+    position: relative;
+    background-color:  #83d3fc;
+    margin-left: 20px;
+    margin-right: 20px;
+    width: 97%
+
+}
+
+
+.card-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  margin-left: 20px;
+  margin-right: 20px;
+
+}
+
+.card {
+  min-width: 300px; /* Ancho mínimo de la tarjeta */
+  min-height: 250px; /* Ancho mínimo de la tarjeta */
+  width: calc(33.33% - 16px);
+  margin-bottom: 10px;
+  box-sizing: border-box
+}
+
+.card-image {
+  width: 100%;
+  height: auto;
+}
+
+.card-title {
+  font-size: 18px;
+  color: #333;
+  padding: 8px;
+  text-align: center;
+  margin-top: 0;
+  border-bottom: solid #83d3fc  2px ;
+}
+
+.rating-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 5px;
+}
+
+.rating-container span {
+  display: inline-block;
+}
+
+.rating-label {
+  margin-left: 5px; /* Espacio entre las estrellas y la etiqueta */
+  margin-top: 5px;
+}
+
+.date-label {
+  margin-right: auto;
+  align-self: flex-start;
+
+}
+
+.star {
+  font-size: 18px;
+  color: #a19999; /* Color de estrella no rellena */
+  margin: 0 2px;
+}
+
+.filled {
+  color: #f0c30f; /* Color de estrella rellena */
+}
+
+.card:hover {
+  transform: scale(1.05); /* Escala la tarjeta al 105% en hover */
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Sombra en hover */
+  transition: transform 0.3s ease, box-shadow 0.3s ease; /* Transición suave */
+  background-color: #83d3fc ;
+}
+
+.nav-container {
+  display: flex;
+  justify-content: space-around;
+  background-color: #fff; /* Puedes cambiar el color de fondo según tus preferencias */
+  padding: 15px;
+  margin-top: 20px;
+
+}
+
+.nav-link {
+  text-decoration: none;
+  padding: 10px;
+  background-color: white;
+  color: black;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.nav-link:hover {
+  background-color: #83d3fc
+}
+
+
+
 
 
 </style>

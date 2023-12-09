@@ -1,24 +1,28 @@
 <template>
-  <div class="prepTime-dropdown">
-    <button class="prepTime-dropdown-button" @mouseenter="openPrepTimeDropdown" @mouseleave="closePrepTimeDropdown">
-        <span class="prepTime-button-text">Preparation Time</span>
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          stroke="currentColor"
-          stroke-linecap="round"
-          stroke-linejoin="round"
-          stroke-width="2"
-          viewBox="0 0 24 24"
-          class="prepTime-dropdown-icon"
-        >
-          <path d="M19 9l-7 7-7-7"></path>
-        </svg>
+  <div class="dropdown" @mouseenter="openDropdown" @mouseleave="closeDropdown">
+    <button class="dropdown-button" @click="toggleDropdown">
+      <span class="button-text">Preparation Time</span>
+      <svg
+        xmlns="http://www.w3.org/2000/svg"
+        fill="none"
+        stroke="currentColor"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        stroke-width="2"
+        viewBox="0 0 24 24"
+        class="dropdown-icon"
+      >
+        <path d="M19 9l-7 7-7-7"></path>
+      </svg>
     </button>
-    <div v-if="isOpen" class="prepTime-options-container" @mouseenter="openPrepTimeDropdown" @mouseleave="closePrepTimeDropdown">
-      <div class="prepTime-option" @click="selectPrepTimeOption1">5-30 min</div>
-      <div class="prepTime-option" @click="selectPrepTimeOption2">30-1:30 min</div>
-      <div class="prepTime-option" @click="selectPrepTimeOption3">+ 1:30 min</div>
+    <div v-if="isOpen" class="options-container" @mouseenter="openDropdown" @mouseleave="closeDropdown">
+      <div class="option" @click="selectOption1">15 min</div>
+      <div class="option" @click="selectOption2">30 min </div>
+      <div class="option" @click="selectOption3">45 min</div>
+      <div class="option" @click="selectOption4">60 min</div>
+      <div class="option" @click="selectOption5">90 min</div>
+      <div class="option" @click="selectOption6">120 min</div>
+      <div class="option" @click="selectOption7">180 min</div>
       <!-- Agrega más opciones según sea necesario -->
     </div>
   </div>
@@ -32,46 +36,55 @@ export default {
     };
   },
   methods: {
-    openPrepTimeDropdown() {
+    toggleDropdown() {
+      this.isOpen = !this.isOpen;
+    },
+    openDropdown() {
       this.isOpen = true;
     },
-    closePrepTimeDropdown() {
+    closeDropdown() {
       this.isOpen = false;
     },
-    selectPrepTimeOption1() {
-      this.selectedOption = 'PrepTime Option 1';
-      this.isOpen = false;
-      this.$emit('select', 'PrepTime Option 1');
+    selectOption1() {
+      this.$emit('optionSelected', 15);
     },
-    selectPrepTimeOption2() {
-      this.selectedOption = 'PrepTime Option 2';
-      this.isOpen = false;
-      this.$emit('select', 'PrepTime Option 2');
+    selectOption2() {
+      this.$emit('optionSelected', 30);
     },
-    selectPrepTimeOption3() {
-      this.selectedOption = 'PrepTime Option 3';
-      this.isOpen = false;
-      this.$emit('select', 'PrepTime Option 3');
+    selectOption3() {
+      this.$emit('optionSelected', 45);
     },
-    // Agrega más métodos según sea necesario para otras opciones
+    selectOption4() {
+       this.$emit('optionSelected', 60);
+    },
+    selectOption5() {
+       this.$emit('optionSelected', 90);
+    },
+    selectOption6() {
+       this.$emit('optionSelected', 120);
+    },
+    selectOption7() {
+       this.$emit('optionSelected', 180);
+    },
   },
 };
 </script>
 
 <style scoped>
-.prepTime-dropdown {
+.dropdown {
   position: relative;
   display: inline-block;
   width: 100%;
+  z-index: 1;
 }
-.prepTime-option {
-  height: 10%;
+.option {
+  height: 100%;
   width: 100%;
   border: none;
   cursor: pointer;
   transition: background-color 0s; /* Cambiado a 0s para hacer el hover instantáneo */
   background-color: white;
-  margin-bottom: 1px;
+  margin-bottom:0;
   display: flex; /* Hacer que el contenedor sea flexible */
   align-items: center; /* Centrar verticalmente el contenido */
   justify-content: center;
@@ -79,12 +92,13 @@ export default {
   font-size: 14px; /* Tamaño de la letra */
 }
 
-.prepTime-option:hover {
+
+.option:hover {
   background-color: #83d3fc;
 }
 
-.prepTime-dropdown-button {
-  height: 10%;
+.dropdown-button {
+  height: 100%;
   width: 100%;
   border: none;
   cursor: pointer;
@@ -95,19 +109,17 @@ export default {
   outline: none; /* Evitar el contorno al hacer clic */
   text-align: center; /* Alineación horizontal del texto */
   font-size: 14px; /* Tamaño de la letra */
-  white-space: nowrap; /* Evita el salto de línea */
-
 }
 
-.prepTime-dropdown-button:hover {
+.dropdown-button:hover {
   background-color: #2980b9;
 }
 
-.prepTime-button-text {
+.button-text {
   margin-right: 5px; /* Espacio entre el texto y el ícono */
 }
 
-.prepTime-dropdown-icon {
+.dropdown-icon {
   width: 1em; /* Ajusta el tamaño del ícono */
   height: 1em;
   vertical-align: middle; /* Alinea verticalmente con el texto del botón */
