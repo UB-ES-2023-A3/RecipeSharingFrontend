@@ -3,7 +3,7 @@
     <!-- Verifica si recipesToShow está vacío -->
     <div v-if="recipesToShow.length === 0">
       <div class="mainContainerIngredients">
-        <h1 class="title-heading">Ingredients List A-Z</h1>
+        <h1 class="title-heading">Types List A-Z</h1>
         <div class="letrasButtons">
           <a
             v-for="letra in letras"
@@ -56,9 +56,9 @@
           <div class="nav-container">
             <router-link to="/" class="nav-link">Homepage</router-link>
             <span style="margin-top: 10px"> >> </span>
-            <router-link to="/recipe/filters/ingredients" class="nav-link" @click="refreshPage">Ingredients Filter</router-link>
+            <router-link to="/recipe/filters/ingredients" class="nav-link" @click="refreshPage">Types Filter</router-link>
             <span style="margin-top: 10px"> >> </span>
-            <router-link to="/recipe/filters/ingredients" class="nav-link">Search Results</router-link>
+            <router-link to="/recipe/filters/types" class="nav-link">Search Results</router-link>
           </div>
           <h2 class="section-title">{{ selectedIngredients.join(', ') }}</h2>
           <div class="card-container">
@@ -93,7 +93,7 @@
 
 
 <script>
-import ingredientsData from "@/assets/lists/IngredientsFilter.json";
+import ingredientsData from "@/assets/lists/TypesFilter.json";
 import axios from "axios";
 
 export default {
@@ -148,7 +148,7 @@ export default {
                     if (this.selectedIngredients.length > 1) {
                         for (let i = 0; i < this.selectedIngredients.length; i++) {
                             if (i == 0) {
-                                endpoint += `ingredients=${this.selectedIngredients[i]}+`
+                                endpoint += `recipe_type=${this.selectedIngredients[i]}+`
                             } else if (i == this.selectedIngredients.length - 1) {
                                 endpoint += `${this.selectedIngredients[i]}`
                             } else {
@@ -156,7 +156,7 @@ export default {
                             }
                         }
                     } else {
-                        endpoint += `ingredients=${this.selectedIngredients[0]}`
+                        endpoint += `recipe_type=${this.selectedIngredients[0]}`
                     }
             const response = await axios.get(endpoint);
             console.log(response)
@@ -453,9 +453,5 @@ export default {
 .nav-link:hover {
   background-color: #83d3fc ;
 }
-
-
-
-
 
 </style>

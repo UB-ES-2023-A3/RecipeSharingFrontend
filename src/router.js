@@ -11,65 +11,74 @@ import RecipePageRework from "./pages/RecipePageRework.vue"
 import ProfilePageRework from "./pages/ProfilePageRework.vue"
 import AllergensFilterPage from "./pages/AllergensFilterPage.vue"
 import IngredientsFilterPage from "./pages/IngredientsFilterPage.vue"
+import TypesFilterPage from "./pages/TypesFilterPage.vue"
 
 const routes = [
-  {
-    path: "",
-    component: HomePage,
-    name: "home",
-  },
-  {
-    path: "/register",
-    component: RegisterPage,
-    name: "register",
-  },
-  {
-    path: "/login",
-    component: LoginPage,
-    name: "login",
-  },
-  {
-    path: "/addRecipe",
-    component: AddRecipePage,
-    name: "addRecipe",
-  },
-  {
-    path: "/profile",
-    component: ProfilePage,
-    name: "profile",
-  },
-  {
-    path: "/recipePage",
-    component: RecipePage,
-    name: "recipePage",
-  },
-  {
-    path: "/loginRegister",
-    component: LoginRegisterPage,
-    name: "loginRegisterPage",
-  },
-  {
-    path: "/recipes/:id",
-    component: RecipePageRework,
-    name: "recipesPageRework",
-    props: true,
-  },
-  {
-    path: "/recipe/filters/allergens",
-    component: AllergensFilterPage,
-    name: "allergensFilterPage",
-  },
-  {
-    path: "/recipe/filters/ingredients",
-    component: IngredientsFilterPage,
-    name: "ingredientsFilterPage",
-  },
-  {
-    path: "/profiles/:id",
-    component: ProfilePageRework,
-    name: "profilesPageRework",
-    props: true,
-  }
+    {
+        path: "",
+        component: HomePage,
+        name: "home",
+    },
+    {
+        path: "/register",
+        component: RegisterPage,
+        name: "register",
+    },
+    {
+        path: "/login",
+        component: LoginPage,
+        name: "login",
+    },
+    {
+        path: "/addRecipe",
+        component: AddRecipePage,
+        name: "addRecipe",
+    },
+    {
+        path: "/profile",
+        component: ProfilePage,
+        name: "profile",
+    },
+    {
+        path: "/recipePage",
+        component: RecipePage,
+        name: "recipePage",
+    },
+    {
+        path: "/loginRegister",
+        component: LoginRegisterPage,
+        name: "loginRegisterPage",
+    },
+    {
+        path: "/recipes/:id",
+        component: RecipePageRework,
+        name: "recipesPageRework",
+        props: true,
+    },
+    {
+        path: "/recipe/filters/allergens",
+        component: AllergensFilterPage,
+        name: "allergensFilterPage",
+    },
+    {
+        path: "/recipe/filters/ingredients",
+        component: IngredientsFilterPage,
+        name: "ingredientsFilterPage",
+    },
+
+    {
+        path: "/profiles/:id",
+        component: ProfilePageRework,
+        name: "profilesPageRework",
+        props: true,
+    },
+
+    {
+        path: "/recipe/filters/types",
+        component: TypesFilterPage,
+        name: "typesFilterPage",
+    },
+
 ];
 
 const router = createRouter({
