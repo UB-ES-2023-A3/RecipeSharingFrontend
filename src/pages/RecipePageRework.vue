@@ -60,13 +60,13 @@
             <div class="recipeTableContainer">
                 <div class="recipeTableFirstRowContainer">
                     <div class="recipeTableServings">
-                        <p>{{ this.recipe.servings }} servings</p>
+                        <p><i class="fas fa-users">  </i>    {{ this.recipe.servings }} servings</p>
                     </div>
                     <div class="recipeTablePrepTime">
-                        <p>{{ this.recipe.preparation_time }}m</p>
+                        <p><i class="fas fa-clock">  </i>    {{ this.recipe.preparation_time }}m</p>
                     </div>
                     <div class="recipeTableKCal">
-                        <p>{{ this.recipe.kcal }}kcal</p>
+                        <p><i class="fas fa-fire">  </i>     {{ this.recipe.kcal }}kcal</p>
                     </div>
                 </div>
                 <div class="recipeTableSecondRowContainer">
@@ -186,7 +186,7 @@ export default {
             }
         },
         goToProfile() {
-
+            this.$router.push(`/profiles/${this.recipe.username_id}`);
         },
         parseText(listString) {
             const sinCorchetes = listString.replace(/\[|\]/g, '');
@@ -279,7 +279,7 @@ export default {
         getUserInformation() {
             // Axios para recibir lla información del usuario
             axios
-                .get(`/user/${this.username}/`)
+                .get(`/profile/${this.username}/`)
                 .then((response) => {
                     if (response.status === 200) {
                         const info = response.data.user;
@@ -705,48 +705,52 @@ export default {
     margin-left: -25px;
 }
 
-@media (max-width: 1200px) {
-  .recipeContainer {
-    margin: 0;
-  }
+.recipeInstructionsContainer {
+    width: 60%;
+}
 
-  .recipeTableContainer {
-    width: 80%;
-  }
+@media (max-width: 1200px) {
+    .recipeContainer {
+        margin: 0;
+    }
+
+    .recipeTableContainer {
+        width: 80%;
+    }
 }
 
 @media (max-width: 992px) {
-  .recipeMainContainer {
-    flex-direction: column;
-    align-items: center;
-  }
+    .recipeMainContainer {
+        flex-direction: column;
+        align-items: center;
+    }
 
-  .recipeContainer {
-    margin: 0;
-    width: 100%;
-    padding: 0;
-  }
+    .recipeContainer {
+        margin: 0;
+        width: 100%;
+        padding: 0;
+    }
 
-  .recipeTableContainer {
-    width: 100%;
-  }
+    .recipeTableContainer {
+        width: 100%;
+    }
 }
 
 @media (max-width: 768px) {
-  .recipeTableServings,
-  .recipeTablePrepTime,
-  .recipeTableKCal,
-  .ingredientItems li,
-  .allergenItems li,
-  .typeItems li {
-    width: 100%;
-  }
+    .recipeTableServings,
+    .recipeTablePrepTime,
+    .recipeTableKCal,
+    .ingredientItems li,
+    .allergenItems li,
+    .typeItems li {
+        width: 100%;
+    }
 }
 
 @media (max-width: 576px) {
-  .recipeTitleContainer h1 {
-    font-size: 1.5em;
-  }
+    .recipeTitleContainer h1 {
+        font-size: 1.5em;
+    }
 }
 
 </style>

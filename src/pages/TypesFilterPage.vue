@@ -66,6 +66,7 @@
               v-for="(recipe, index) in recipesToShow"
               :key="index"
               class="card"
+              @click="handleCardClick(recipe)"
             >
               <img
                 img src="@/assets/images/prueba.jpg"
@@ -186,8 +187,11 @@ export default {
         }
     },
     refreshPage() {
-    this.$router.go(0);
-  }
+      this.$router.go(0);
+    },
+    handleCardClick(recipe) {
+      this.$router.push(`/recipes/${recipe.id}`);
+    },
   },
 };
 </script>
