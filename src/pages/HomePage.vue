@@ -20,6 +20,7 @@
             v-for="(recipe, index) in displayedRecipesQuery"
             :key="index"
             class="card"
+            @click="handleCardClick(recipe)"
           >
             <img
               img src="@/assets/images/prueba.jpg"
@@ -53,6 +54,7 @@
         v-for="(recipe, index) in displayedRecipesDate"
         :key="index"
         class="card"
+        @click="handleCardClick(recipe)"
       >
         <img
           img src="@/assets/images/prueba.jpg"
@@ -84,6 +86,7 @@
         v-for="(recipe, index) in displayedRecipesRate"
         :key="index"
         class="card"
+        @click="handleCardClick(recipe)"
       >
         <img
           img src="@/assets/images/prueba.jpg"
@@ -394,6 +397,9 @@ export default {
                 console.error("An error occurred while logging in.");
             }
         }
+    },
+    handleCardClick(recipe) {
+      this.$router.push(`/recipes/${recipe.id}`);
     },
   },
   created(){
