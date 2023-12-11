@@ -68,8 +68,7 @@
               class="card"
               @click="handleCardClick(recipe)"
             >
-              <img
-                img src="@/assets/images/prueba.jpg"
+              <img :src="recipe.recipe_image"
                 alt="Recipe Image"
                 class="card-image"
               />

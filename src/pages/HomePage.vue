@@ -22,8 +22,7 @@
             class="card"
             @click="handleCardClick(recipe)"
           >
-            <img
-              img src="@/assets/images/prueba.jpg"
+            <img :src="recipe.recipe_image"
               alt="Recipe Image"
               class="card-image"
             />
@@ -56,8 +55,7 @@
         class="card"
         @click="handleCardClick(recipe)"
       >
-        <img
-          img src="@/assets/images/prueba.jpg"
+        <img :src="recipe.recipe_image"
           alt="Recipe Image"
           class="card-image"
         />
@@ -88,8 +86,7 @@
         class="card"
         @click="handleCardClick(recipe)"
       >
-        <img
-          img src="@/assets/images/prueba.jpg"
+        <img :src="recipe.recipe_image"
           alt="Recipe Image"
           class="card-image"
         />
@@ -399,7 +396,7 @@ export default {
         }
     },
     handleCardClick(recipe) {
-      this.$router.push(`/recipes/${recipe.id}`);
+      this.$router.push(`/recipe/${recipe.id}`);
     },
   },
   created(){

@@ -119,6 +119,7 @@ export default {
     data() {
         return {
             username: "",
+            recipe_image: "",
             recipeName: "",
             selectedIngredients: "",
             instructions: "",
@@ -215,6 +216,7 @@ export default {
                     preparationTime: this.preparationTime,
                     servings: this.servings,
                     username_id: this.username,
+                    recipe_image: this.recipe_image,
                 })
                 .then((response) => {
                     if (response.status === 200) {

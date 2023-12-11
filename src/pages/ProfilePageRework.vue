@@ -4,7 +4,7 @@
             <div class="profileImageInfoContainer">
                 <div class="profileImageContainer">
                     <div class="squareImageWrapper">
-                        <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
+                        <img :src="this.profileInfo.profile_image" alt="Recipe Image">
                     </div>
                 </div>
                 <div class="profileInfoContainer">
@@ -72,7 +72,7 @@
                                     :to="'/recipes/' + recipe.id"
                             >
                                 <div class="profileCardImage">
-                                    <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
+                                    <img :src="recipe.recipe_image" alt="Recipe Image">
                                 </div>
                                 <div class="profileCardTitle">
                                     <h4>{{ recipe.title }}</h4>
@@ -99,7 +99,7 @@
                                     :to="'/recipes/' + recipe.id"
                             >
                                 <div class="profileCardImage">
-                                    <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
+                                    <img :src="recipe.recipe_image" alt="Recipe Image">
                                 </div>
                                 <div class="profileCardTitle">
                                     <h4>{{ recipe.title }}</h4>
