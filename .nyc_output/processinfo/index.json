@@ -1,0 +1,1 @@
+{"processes":{"0aba24b0-bf0f-4fae-9a1b-bad6566b0180":{"parent":null,"children":["93b2d9aa-51bd-4fc2-81a3-f45b3063cf25"]},"93b2d9aa-51bd-4fc2-81a3-f45b3063cf25":{"parent":"0aba24b0-bf0f-4fae-9a1b-bad6566b0180","children":[]}},"files":{"C:\\Users\\ivanm\\Desktop\\Universidad\\RecipeSharingFrontend\\cypress.config.js":["93b2d9aa-51bd-4fc2-81a3-f45b3063cf25"]},"externalIds":{}}
