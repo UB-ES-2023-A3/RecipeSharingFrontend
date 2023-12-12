@@ -91,12 +91,26 @@
 
                 <!-- Upload Image Field -->
                 <div class="form-group">
-                    <label for="image">Upload Image:</label>
-                    <input type="file" id="image" accept="image/*" @change="handleImageUpload" ref="fileInput">
-                    <div v-if="recipe_image" class="image-container">
-                        <img :src="recipe_image" alt="Recipe Image" style="max-width: 100%; max-height: 100%;"/>
+                    <label for="image_label" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Upload Image:</label>
+                    <div style="display: flex; align-items: center;">
+                        <label for="image" style="background-color: #7f9ccb;
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                        border: 1px ridge black;
+                        font-size: 0.8rem;
+                        height: auto;
+                        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                        width: 85px;">Choose Image</label>
+                        <input type="file" id="image" accept="image/*" @change="handleImageUpload" ref="fileInput" style="display: none;">
+                    </div>
+                    <div v-if="recipe_image" class="image-container" style="padding: 2px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                        <div v-if="recipe_image" style="padding-top: 2px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                            File Name: {{ file_name }} | Image Size: {{ formatBytes(imageSize) }}
+                        </div>
+                        <img :src="recipe_image" alt="Recipe Image" style="padding-top: 3px; max-width: 100%; max-height: 100%; padding-bottom: 2px;"/>
                         <button @click="removeImage" class="remove-button">Remove Image</button>
                     </div>
+                    <div v-if="imageSizeError">Image size exceeds the allowed limit.</div>
                 </div>
                 <!-- Error Message Display -->
                 <div class="error-message" v-if="showErrorMessage">
@@ -154,6 +168,11 @@ export default {
             allergensList: allergensData,
             recipeTypes: typesData,
             preparationTimeOptions: prepTimeData,
+
+            imageSizeError: false,
+            maxSizeInBytes: 1024 * 1024,
+            imageSize: 0,
+            file_name: "",
         };
     },
     computed: {
@@ -209,49 +228,78 @@ export default {
             this.preparationTime = parseInt(value);
         },
         addRecipe() {
-            this.checkForm();
+            if (this.recipe_image) {
+                if (this.isBase64ImageTooLarge(this.recipe_image, this.maxSizeInBytes) === false) {
+                    console.log("Entra");
+                    this.checkForm();
 
-            if (this.showErrorMessage) {
-                return;
+                    if (this.showErrorMessage) {
+                        return;
+                    }
+            
+                    axios
+                        .post("/addRecipe/", {
+                            name: this.recipeName,
+                            ingredients: this.allSelectedIngredients,
+                            instructions: this.instructions,
+                            type: this.selectedRecipeType,
+                            allergens: this.allSelectedAllergens,
+                            preparationTime: this.preparationTime,
+                            servings: this.servings,
+                            username_id: this.username,
+                            recipe_image: this.recipe_image,
+                        })
+                        .then((response) => {
+                            if (response.status === 200) {
+                                console.log("Recipe added");
+                                alert("Recipe added.");
+                                this.$router.push("/");
+                            }
+                        })
+                        .catch((error) => {
+                            alert(error.response);
+                        });
+                }else{
+                    alert("Image size exceeds the allowed limit.")
+                    return;
+                }
             }
 
-            axios
-                .post("/addRecipe/", {
-                    name: this.recipeName,
-                    ingredients: this.allSelectedIngredients,
-                    instructions: this.instructions,
-                    type: this.selectedRecipeType,
-                    allergens: this.allSelectedAllergens,
-                    preparationTime: this.preparationTime,
-                    servings: this.servings,
-                    username_id: this.username,
-                    recipe_image: this.recipe_image,
-                })
-                .then((response) => {
-                    if (response.status === 200) {
-                        console.log("Recipe added");
-                        alert("Recipe added.");
-                        this.$router.push("/");
-                    }
-                })
-                .catch((error) => {
-                    alert(error.response);
-                });
         },
         handleImageUpload(event) {
             const file = event.target.files[0];
+
+            if (file) {
+                this.file_name = file.name;
+            }
             const reader = new FileReader();
 
             reader.onload = (e) => {
                 this.recipe_image = e.target.result;
             };
-            
+            this.imageSize = file.size;
             reader.readAsDataURL(file);
-            console.log(this.recipe_image);
         },
         removeImage() {
             this.recipe_image = null;
             this.$refs.fileInput.value = null;
+        },isBase64ImageTooLarge(base64String, maxSizeInBytes) {
+            // Remove data URI prefix
+            const base64WithoutPrefix = base64String.split(',')[1];
+            const bytes = atob(base64WithoutPrefix).length;
+
+            return bytes > maxSizeInBytes;
+        },
+        formatBytes(bytes, decimals = 2) {
+            if (bytes === 0) return '0 Bytes';
+
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
         },
     },
     created() {
@@ -284,18 +332,22 @@ input {
 }
 
 .remove-button {
-  position: absolute;
+  position: bottom;
   top: 5px;
   right: 5px;
   background-color: red;
   color: white;
-  border: none;
+  border: 1px solid black;
   padding: 5px;
   cursor: pointer;
 }
 
 .image-container {
   position: relative;
+}
+
+.file-name {
+  margin-left: 10px;
 }
 
 </style>

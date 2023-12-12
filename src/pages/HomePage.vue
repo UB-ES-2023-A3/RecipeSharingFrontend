@@ -396,7 +396,7 @@ export default {
         }
     },
     handleCardClick(recipe) {
-      this.$router.push(`/recipe/${recipe.id}`);
+      this.$router.push(`/recipes/${recipe.id}/`);
     },
   },
   created(){
