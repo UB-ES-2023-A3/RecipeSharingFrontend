@@ -89,6 +89,15 @@
                     <input type="number" id="servings" v-model="servings" class="full-width-dropdown" min="1" max="10">
                 </div>
 
+                <!-- Upload Image Field -->
+                <div class="form-group">
+                    <label for="image">Upload Image:</label>
+                    <input type="file" id="image" accept="image/*" @change="handleImageUpload" ref="fileInput">
+                    <div v-if="recipe_image" class="image-container">
+                        <img :src="recipe_image" alt="Recipe Image" style="max-width: 100%; max-height: 100%;"/>
+                        <button @click="removeImage" class="remove-button">Remove Image</button>
+                    </div>
+                </div>
                 <!-- Error Message Display -->
                 <div class="error-message" v-if="showErrorMessage">
                     {{ errorMessage }}
@@ -228,7 +237,22 @@ export default {
                 .catch((error) => {
                     alert(error.response);
                 });
-        }
+        },
+        handleImageUpload(event) {
+            const file = event.target.files[0];
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                this.recipe_image = e.target.result;
+            };
+            
+            reader.readAsDataURL(file);
+            console.log(this.recipe_image);
+        },
+        removeImage() {
+            this.recipe_image = null;
+            this.$refs.fileInput.value = null;
+        },
     },
     created() {
         this.username = localStorage.getItem('username');
@@ -257,6 +281,21 @@ export default {
 
 input {
     margin-top: 10px;
+}
+
+.remove-button {
+  position: absolute;
+  top: 5px;
+  right: 5px;
+  background-color: red;
+  color: white;
+  border: none;
+  padding: 5px;
+  cursor: pointer;
+}
+
+.image-container {
+  position: relative;
 }
 
 </style>
