@@ -46,7 +46,7 @@
           </div>
         </div>
         <div v-else>
-          <p>No hay ingredientes disponibles.</p>
+          <p>There is no available types.</p>
         </div>
       </div>
     </div>
