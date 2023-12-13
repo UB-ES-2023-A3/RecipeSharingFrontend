@@ -33,7 +33,7 @@
             </div>
           </div>
           <div class="floatingContainer" v-if="selectedIngredients.length > 0">
-            <h2>Selected Ingredients</h2>
+            <h2>Selected Allergens</h2>
             <div class="selected-ingredients-list">
               <div v-for="selectedIngrediente in selectedIngredients" :key="selectedIngrediente">
                 <span class="selected-item">
