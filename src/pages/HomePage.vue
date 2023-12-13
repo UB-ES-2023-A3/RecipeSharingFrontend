@@ -399,7 +399,14 @@ export default {
         }
     },
     handleCardClick(recipe) {
-      this.$router.push(`/recipes/${recipe.id}/`);
+      if(this.logged){
+          this.$router.push(`/recipes/${recipe.id}/`);
+      }
+      else{
+          alert("Log in to see the recipes")
+          this.$router.push('/loginRegister');
+      }
+
     },
   },
   created(){
