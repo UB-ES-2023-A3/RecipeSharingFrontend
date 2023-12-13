@@ -372,8 +372,8 @@ a:hover {
 
 button {
     border-radius: 20px;
-    border: 1px solid #FF4B2B;
-    background-color: #FF4B2B;
+    border: 1px solid #ffffff;
+    background-color: #83d3fc;
     color: #FFFFFF;
     font-size: 12px;
     font-weight: bold;
@@ -402,7 +402,7 @@ form {
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 0 5vh;
+    padding: 5vh;
     height: 100%;
     text-align: center;
 }
@@ -505,9 +505,9 @@ input {
 }
 
 .overlay {
-    background: #FF416C;
-    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
-    background: linear-gradient(to right, #FF4B2B, #FF416C);
+    background: #83d3fc;
+    background: -webkit-linear-gradient(to right, #83d3fc, #135e85);
+    background: linear-gradient(to right,  #135e85,#83d3fc );
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
