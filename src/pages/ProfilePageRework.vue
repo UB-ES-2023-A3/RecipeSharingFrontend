@@ -378,7 +378,7 @@ export default {
                         if (info.profile_image) {
                             this.profile_image = info.profile_image;
                         } else {
-                            const response = require('@/assets/images/DefaultUser.jpg')
+                            this.profile_image = require('@/assets/images/DefaultUser.jpg')
                         }
 
                         this.profile_image = info.profile_image;
