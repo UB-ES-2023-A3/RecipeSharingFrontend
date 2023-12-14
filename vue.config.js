@@ -1,3 +1,5 @@
+const Dotenv = require('dotenv-webpack')
+
 module.exports = {
     publicPath: 'https://recipesharingfrontend.onrender.com',//'http://localhost:8080',
     //outputDir: '../static/dist',
@@ -8,6 +10,9 @@ module.exports = {
             devMiddleware: {
                 writeToDisk: true
             }
-        }
+        },
+        plugins: [
+            new Dotenv()
+        ]
     }
 }

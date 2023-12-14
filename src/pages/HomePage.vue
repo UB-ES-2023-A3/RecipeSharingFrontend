@@ -126,7 +126,7 @@ import AllergensDropdown from "@/components/AppDropdownAllergens.vue";
 import TimePrepDropdown from "@/components/AppDropdowntime.vue";
 import TypesDropdown from "@/components/AppDropdownTypes.vue";
 import ServingsDropdown from "@/components/AppDropdownServings.vue";
-
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 
 
@@ -176,7 +176,7 @@ export default {
   methods: {
     async searchRecipe() {
       try {
-            let endpoint = '/recipes/filters/';
+            let endpoint = URL_BACKEND + '/recipes/filters/';
             endpoint += `title=${this.searchText}`
             const response = await axios.get(endpoint);
             console.log(response)
@@ -207,7 +207,7 @@ export default {
     },
     async getRecipesByRate() {
         try {
-            const response = await axios.get("recipes/filters/rate/");
+            const response = await axios.get(URL_BACKEND + "/recipes/filters/rate/");
             if (response.status === 200) {
                 const recipes = response.data;
                 // Puedes manejar las recetas de 'rate' de manera específica aquí
@@ -220,7 +220,7 @@ export default {
     },
       async getRecipesByRecent() {
         try {
-            const response = await axios.get("recipes/filters/recent/");
+            const response = await axios.get(URL_BACKEND + "/recipes/filters/recent/");
             if (response.status === 200) {
                 const recipes = response.data;
                 // Puedes manejar las recetas de 'recent' de manera específica aquí
@@ -276,7 +276,7 @@ export default {
     },
     async handleTypesQuery(optionSelected) {
        try {
-            let endpoint = '/recipes/filters/';
+            let endpoint = URL_BACKEND + '/recipes/filters/';
             endpoint += `recipe_type=${optionSelected}`
             const response = await axios.get(endpoint);
             console.log(response)
@@ -307,7 +307,7 @@ export default {
     },
     async handleAllergensQuery(optionSelected) {
        try {
-            let endpoint = '/recipes/filters/';
+            let endpoint = URL_BACKEND + '/recipes/filters/';
             endpoint += `allergens=${optionSelected}`
             const response = await axios.get(endpoint);
             console.log(response)
@@ -338,7 +338,7 @@ export default {
     },
     async handleTimeQuery(optionSelected) {
        try {
-            let endpoint = '/recipes/filters/';
+            let endpoint = URL_BACKEND + '/recipes/filters/';
             endpoint += `preparation_time=${optionSelected}`
             const response = await axios.get(endpoint);
             console.log(response)
@@ -369,7 +369,7 @@ export default {
     },
     async handleServingsQuery(optionSelected) {
        try {
-            let endpoint = '/recipes/filters/';
+            let endpoint = URL_BACKEND + '/recipes/filters/';
             endpoint += `servings=${optionSelected}`
             const response = await axios.get(endpoint);
             console.log(response)
