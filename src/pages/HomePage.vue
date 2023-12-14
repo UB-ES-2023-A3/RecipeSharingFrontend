@@ -23,7 +23,7 @@
             @click="handleCardClick(recipe)"
           >
             <img
-              img src="@/assets/images/prueba.jpg"
+              :src="recipe.recipe_image ? recipe.recipe_image : require('@/assets/images/default-image.png')"
               alt="Recipe Image"
               class="card-image"
             />
@@ -56,8 +56,8 @@
         class="card"
         @click="handleCardClick(recipe)"
       >
-        <img
-          img src="@/assets/images/prueba.jpg"
+       <img
+          :src="recipe.recipe_image ? recipe.recipe_image : require('@/assets/images/default-image.png')"
           alt="Recipe Image"
           class="card-image"
         />
@@ -89,7 +89,7 @@
         @click="handleCardClick(recipe)"
       >
         <img
-          img src="@/assets/images/prueba.jpg"
+          :src="recipe.recipe_image ? recipe.recipe_image : require('@/assets/images/default-image.png')"
           alt="Recipe Image"
           class="card-image"
         />
@@ -399,7 +399,14 @@ export default {
         }
     },
     handleCardClick(recipe) {
-      this.$router.push(`/recipes/${recipe.id}`);
+      if(this.logged){
+          this.$router.push(`/recipes/${recipe.id}/`);
+      }
+      else{
+          alert("Log in to see the recipes")
+          this.$router.push('/loginRegister');
+      }
+
     },
   },
   created(){

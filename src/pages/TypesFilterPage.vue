@@ -33,7 +33,7 @@
             </div>
           </div>
           <div class="floatingContainer" v-if="selectedIngredients.length > 0">
-            <h2>Selected Ingredients</h2>
+            <h2>Selected Types</h2>
             <div class="selected-ingredients-list">
               <div v-for="selectedIngrediente in selectedIngredients" :key="selectedIngrediente">
                 <span class="selected-item">
@@ -46,7 +46,7 @@
           </div>
         </div>
         <div v-else>
-          <p>No hay ingredientes disponibles.</p>
+          <p>There is no available types.</p>
         </div>
       </div>
     </div>
@@ -68,8 +68,7 @@
               class="card"
               @click="handleCardClick(recipe)"
             >
-              <img
-                img src="@/assets/images/prueba.jpg"
+              <img :src="recipe.recipe_image"
                 alt="Recipe Image"
                 class="card-image"
               />

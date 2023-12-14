@@ -46,7 +46,7 @@
           </div>
         </div>
         <div v-else>
-          <p>No hay ingredientes disponibles.</p>
+          <p>There is no available ingredients.</p>
         </div>
       </div>
     </div>
@@ -68,8 +68,7 @@
               class="card"
               @click="handleCardClick(recipe)"
             >
-              <img
-                img src="@/assets/images/prueba.jpg"
+              <img :src="recipe.recipe_image"
                 alt="Recipe Image"
                 class="card-image"
               />

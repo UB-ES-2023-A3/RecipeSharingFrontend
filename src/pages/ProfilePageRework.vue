@@ -4,7 +4,7 @@
             <div class="profileImageInfoContainer">
                 <div class="profileImageContainer">
                     <div class="squareImageWrapper">
-                        <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
+                        <img :src="this.profileInfo.profile_image" alt="Recipe Image">
                     </div>
                 </div>
                 <div class="profileInfoContainer">
@@ -15,7 +15,8 @@
                         <h3> {{ this.profileInfo.email }}</h3>
                     </div>
                     <div class="profileFollowingFollowersContainer">
-                        <div class="profileFollowingContainer" @click="showFollowingPopup">
+                        <div class="profileFollowingContainer" @click="showFollowingPopup"
+                             v-if="this.profileInfo.list_following_users">
                             <h3> Following: {{ Object.keys(this.profileInfo.list_following_users).length }} </h3>
                         </div>
                         <div v-if="showPopupFollowing" class="overlay" @click="closeFollowingPopup">
@@ -32,7 +33,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="profileFollowersContainer" @click="showFollowersPopup">
+                        <div class="profileFollowersContainer" @click="showFollowersPopup"
+                             v-if="this.profileInfo.list_follower_users">
                             <h3> Followers: {{ Object.keys(this.profileInfo.list_follower_users).length }}</h3>
                         </div>
                         <div v-if="showPopupFollower" class="overlay" @click="closeFollowersPopup">
@@ -72,7 +74,7 @@
                                     :to="'/recipes/' + recipe.id"
                             >
                                 <div class="profileCardImage">
-                                    <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
+                                    <img :src="recipe.recipe_image" alt="Recipe Image">
                                 </div>
                                 <div class="profileCardTitle">
                                     <h4>{{ recipe.title }}</h4>
@@ -99,7 +101,7 @@
                                     :to="'/recipes/' + recipe.id"
                             >
                                 <div class="profileCardImage">
-                                    <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
+                                    <img :src="recipe.recipe_image" alt="Recipe Image">
                                 </div>
                                 <div class="profileCardTitle">
                                     <h4>{{ recipe.title }}</h4>
@@ -477,7 +479,7 @@ export default {
 }
 
 .followersPopup {
-position: fixed;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -505,7 +507,7 @@ position: fixed;
 
 
 .followingPopup {
-position: fixed;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
