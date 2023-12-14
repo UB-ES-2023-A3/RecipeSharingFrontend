@@ -65,7 +65,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content" style="background-color: white;">
                             <div class="modal-header">
-                                <h2 class="modal-title">Edit Profile</h2>
+                                <h2 class="modal-title">Edit Profile Information</h2>
                             </div>
                             <!-- Modal Body -->
                             <div class="modal-body">
