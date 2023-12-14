@@ -6,7 +6,7 @@
         <div id="content">
             <router-view :logged="logged" :username="username" @login-success="onLoginSuccess"
                          @username-success="onUsernameSuccess" @email-success="onEmailSuccess"
-                         @password-sucess="onPasswordSuccess"/>
+                         @password-sucess="onPasswordSuccess" @profile_image-success="onProfile_imageSuccess"/>
         </div>
     </div>
 </template>
@@ -24,6 +24,7 @@ export default {
             username: localStorage.getItem('username'),
             email: localStorage.getItem('email'),
             password: localStorage.getItem('password'),
+            profile_image: localStorage.getItem('profile_image'),
         };
     },
     methods: {
@@ -42,6 +43,10 @@ export default {
         onPasswordSuccess(password) {
             this.password = password;
             localStorage.setItem('password', password);
+        },
+        onProfile_imageSuccess(profile_image) {
+            this.profile_image = profile_image;
+            localStorage.setItem('profile_image', profile_image);
         },
     },
 };
