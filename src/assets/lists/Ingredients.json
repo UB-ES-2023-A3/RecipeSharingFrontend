@@ -34,7 +34,7 @@
   {
     "groupName": "Vegetables",
     "options": [
-      "Artichoke",
+      "Artichokes",
       "Asparagus",
       "Beetroot",
       "Bok Choy",
@@ -55,12 +55,12 @@
       "Green Onions",
       "Kale",
       "Lettuce",
-      "Onion",
-      "Potato",
+      "Green Onions",
+      "Potatoes",
       "Spinach",
       "Sweet Potatoes",
       "Tomatillo",
-      "Tomato",
+      "Tomatoes",
       "Watercress",
       "Zucchini"
     ]
@@ -81,23 +81,23 @@
     "options": [
       "Baguette",
       "Barley",
-      "Bread",
+      "White Bread",
       "Brown Rice",
       "Corn Flakes",
       "Oats",
       "Pizza Dough",
       "Quinoa",
       "White Bread",
-      "White Rice"
+      "Brown Rice"
     ]
   },
   {
     "groupName": "Dairy Products",
     "options": [
       "Brie Cheese",
-      "Butter",
+      "Peanut Butter",
       "Cottage Cheese",
-      "Cream",
+      "Sour Cream",
       "Feta Cheese",
       "Goat Cheese",
       "Gouda Cheese",
@@ -133,7 +133,7 @@
   {
     "groupName": "Eggs and Egg Products",
     "options": [
-      "Egg",
+      "Eggs",
       "Eggplant"
     ]
   },
@@ -199,9 +199,8 @@
       "Chocolate",
       "Flour",
       "Maple Syrup",
-      "Sugar",
-      "Vanilla",
       "Icing Sugar",
+      "Vanilla",
       "Nutmeg",
       "Yeast"
     ]
