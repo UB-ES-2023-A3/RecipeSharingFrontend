@@ -28,12 +28,13 @@ export default {
         username: String,
         email: String,
         password: String,
+        profile_image: String,
     },
     data() {
         return {
             isMenuOpen: false, // Controls the visibility of the user menu
             name: "AppHeaderUserButton",
-            userImage: require("../assets/images/DefaultUser.jpg"), // User image path
+            userImage: require("../assets/images/DefaultUser.jpg"),
         };
     },
     methods: {
@@ -61,13 +62,15 @@ export default {
         },
         goToLogin() {
             this.$router.push('/loginRegister'); // Navigate to the login page
+            this.closeMenu();
         },
         goToProfile() {
-            this.$router.push('/profile');
+            this.$router.push(`/profiles/${this.username}`);
+            this.closeMenu();
         },
         async logout() {
             try {
-                let response = await axios.post('/loginRegister/', {
+                let response = await axios.post('/login/', {
                     username: "Logout",
                     email: this.email,
                     password: this.password,
@@ -79,6 +82,7 @@ export default {
 
                 if (response.status === 200) {
                     // Successful login, redirect the user or perform other necessary actions
+                    this.closeMenu();
                 }
             } catch (error) {
                 if (error.response) {
@@ -89,6 +93,7 @@ export default {
                         localStorage.setItem('username', null);
                         localStorage.setItem('email', null);
                         localStorage.setItem('password', null);
+                        localStorage.setItem('profile_image', null);
                         window.location.reload();
                     } else if (error.response.status === 500) {
                         alert("An error occurred while logging in.");
@@ -125,7 +130,7 @@ export default {
 }
 
 .user-menu {
-    position: absolute;
+    position: fixed;
     top: 60px;
     right: 0;
     background-color: #fff;
@@ -133,6 +138,7 @@ export default {
     border-radius: 4px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     width: 100px;
+    z-index: 9999; /* Ajusta el z-index para que esté por encima de todo */
 }
 
 ul {

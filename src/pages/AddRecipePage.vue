@@ -1,12 +1,12 @@
 <template>
-    <div class="mainContainer" style="color: black">
-        <div class="form-background">
-            <div class="mainTitle" style="color: #ff5733">
+    <div class="addMainContainer">
+        <div class="addFormBackground">
+            <div class="addTitle">
                 <h1>Add Recipe</h1>
             </div>
-            <form @submit.prevent="addRecipe" class="form">
+            <form @submit.prevent="addRecipe" class="addForm">
                 <!-- Recipe Name Field -->
-                <div class="form-group">
+                <div class="addFormGroup">
                     <label for="recipeName">Name of the recipe:</label>
                     <!-- AppTextField component for recipe name -->
                     <AppTextField
@@ -17,7 +17,7 @@
                 </div>
 
                 <!-- Ingredients Field -->
-                <div class="form-group">
+                <div class="addFormGroup">
                     <label for="ingredients">Ingredients:</label>
                     <!-- DropdownSelect component for selecting ingredients -->
                     <DropdownSelect
@@ -31,7 +31,7 @@
                 </div>
 
                 <!-- Instructions Field -->
-                <div class="form-group">
+                <div class="addFormGroup">
                     <label for="instructions">Instructions:</label>
                     <!-- TextArea component for providing recipe instructions -->
                     <TextArea
@@ -42,7 +42,7 @@
                 </div>
 
                 <!-- Recipe Type Field -->
-                <div class="form-group">
+                <div class="addFormGroup">
                     <label for="recipeType">Type of recipe:</label>
                     <!-- DropdownSelect component for selecting the recipe type -->
                     <DropdownSelect
@@ -56,7 +56,7 @@
                 </div>
 
                 <!-- Allergens Field -->
-                <div class="form-group">
+                <div class="addFormGroup">
                     <label for="allergens">Allergens:</label>
                     <!-- DropdownSelect component for selecting allergens -->
                     <DropdownSelect
@@ -70,7 +70,7 @@
                 </div>
 
                 <!-- Preparation Time Field -->
-                <div class="form-group">
+                <div class="addFormGroup">
                     <label for="preparationTime">Preparation time:</label>
                     <!-- DropdownSelect component for selecting preparation time -->
                     <DropdownSelect
@@ -84,19 +84,50 @@
                 </div>
 
                 <!-- Servings Field -->
-                <div class="form-group">
+                <div class="addFormGroup">
                     <label for="servings">Servings:</label>
-                    <input type="number" id="servings" v-model="servings" class="full-width-dropdown" min="1" max="10">
+                    <input type="number" id="servings" v-model="servings" class="full-width-dropdown" min="1" max="10"
+                           :class="{ 'background': servings && !isNaN(servings) }">
                 </div>
 
+                <!-- Upload Image Field -->
+                <div class="addFormGroup">
+                    <label for="image_label"
+                           style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Upload
+                        Image:</label>
+                    <div style="display: flex; align-items: center;">
+                        <label for="image" style="background-color: #83d3fc;;
+                        cursor: pointer;
+                        padding: 5px 10px;
+                        border-radius: 5px;
+                        border: 1px ridge black;
+                        font-size: 0.8rem;
+                        height: auto;
+                        font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                        width: 85px;">Choose Image</label>
+                        <input type="file" id="image" accept="image/*" @change="handleImageUpload" ref="fileInput"
+                               style="display: none;">
+                    </div>
+                    <div v-if="recipe_image" class="image-container"
+                         style="padding: 2px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                        <div v-if="recipe_image"
+                             style="padding-top: 2px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                            File Name: {{ file_name }} | Image Size: {{ formatBytes(imageSize) }}
+                        </div>
+                        <img :src="recipe_image" alt="Recipe Image"
+                             style="padding-top: 3px; max-width: 100%; max-height: 100%; padding-bottom: 2px;"/>
+                        <button @click="removeImage" class="remove-button">Remove Image</button>
+                    </div>
+                    <div v-if="imageSizeError">Image size exceeds the allowed limit.</div>
+                </div>
                 <!-- Error Message Display -->
                 <div class="error-message" v-if="showErrorMessage">
                     {{ errorMessage }}
                 </div>
 
                 <!-- Submit Button -->
-                <div class="secondaryContainer" style="background-color: white">
-                    <button type="submit" class="submit-button">Add Recipe</button>
+                <div class="addSecondaryContainer">
+                    <button type="submit" class="addSubmitButton">Add Recipe</button>
                 </div>
             </form>
         </div>
@@ -119,6 +150,7 @@ export default {
     data() {
         return {
             username: "",
+            recipe_image: "",
             recipeName: "",
             selectedIngredients: "",
             instructions: "",
@@ -144,6 +176,11 @@ export default {
             allergensList: allergensData,
             recipeTypes: typesData,
             preparationTimeOptions: prepTimeData,
+
+            imageSizeError: false,
+            maxSizeInBytes: 1024 * 1024,
+            imageSize: 0,
+            file_name: "",
         };
     },
     computed: {
@@ -199,34 +236,79 @@ export default {
             this.preparationTime = parseInt(value);
         },
         addRecipe() {
-            this.checkForm();
+            if (this.recipe_image) {
+                if (this.isBase64ImageTooLarge(this.recipe_image, this.maxSizeInBytes) === false) {
+                    console.log("Entra");
+                    this.checkForm();
 
-            if (this.showErrorMessage) {
-                return;
+                    if (this.showErrorMessage) {
+                        return;
+                    }
+
+                    axios
+                        .post("/addRecipe/", {
+                            name: this.recipeName,
+                            ingredients: this.allSelectedIngredients,
+                            instructions: this.instructions,
+                            type: this.selectedRecipeType,
+                            allergens: this.allSelectedAllergens,
+                            preparationTime: this.preparationTime,
+                            servings: this.servings,
+                            username_id: this.username,
+                            recipe_image: this.recipe_image,
+                        })
+                        .then((response) => {
+                            if (response.status === 200) {
+                                console.log("Recipe added");
+                                alert("Recipe added.");
+                                this.$router.push("/");
+                            }
+                        })
+                        .catch((error) => {
+                            alert(error.response);
+                        });
+                } else {
+                    alert("Image size exceeds the allowed limit.")
+                    return;
+                }
             }
 
-            axios
-                .post("/addRecipe/", {
-                    name: this.recipeName,
-                    ingredients: this.allSelectedIngredients,
-                    instructions: this.instructions,
-                    type: this.selectedRecipeType,
-                    allergens: this.allSelectedAllergens,
-                    preparationTime: this.preparationTime,
-                    servings: this.servings,
-                    username_id: this.username,
-                })
-                .then((response) => {
-                    if (response.status === 200) {
-                        console.log("Recipe added");
-                        alert("Recipe added.");
-                        this.$router.push("/");
-                    }
-                })
-                .catch((error) => {
-                    alert(error.response);
-                });
-        }
+        },
+        handleImageUpload(event) {
+            const file = event.target.files[0];
+
+            if (file) {
+                this.file_name = file.name;
+            }
+            const reader = new FileReader();
+
+            reader.onload = (e) => {
+                this.recipe_image = e.target.result;
+            };
+            this.imageSize = file.size;
+            reader.readAsDataURL(file);
+        },
+        removeImage() {
+            this.recipe_image = null;
+            this.$refs.fileInput.value = null;
+        }, isBase64ImageTooLarge(base64String, maxSizeInBytes) {
+            // Remove data URI prefix
+            const base64WithoutPrefix = base64String.split(',')[1];
+            const bytes = atob(base64WithoutPrefix).length;
+
+            return bytes > maxSizeInBytes;
+        },
+        formatBytes(bytes, decimals = 2) {
+            if (bytes === 0) return '0 Bytes';
+
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
+        },
     },
     created() {
         this.username = localStorage.getItem('username');
@@ -236,6 +318,91 @@ export default {
 </script>
 
 <style scoped>
+.addMainContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+    padding-top: 60px;
+}
+
+.addFormBackground {
+    background-color: #83d3fc;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    margin: 0 auto 20px;
+}
+
+.addTitle {
+    font-size: 20px;
+    color: #000000;
+    margin: 0;
+    padding-bottom: 2px;
+    display: flex;
+    justify-content: center;
+}
+
+.addForm {
+    width: 400px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+    color: black;
+}
+
+.addFormGroup {
+    margin-bottom: 20px;
+}
+
+input {
+    background-color: #83d3fc;;
+    color: black;
+    padding: 10px;
+    border: 1px solid rgb(204, 204, 204);
+    border-radius: 5px;
+    width: 100%;
+    min-width: 300px;
+    display: block;
+    margin-bottom: 10px;
+}
+
+label {
+    display: block;
+    margin-bottom: 5px;
+}
+
+.background {
+    background-color: #2980b9;
+}
+
+.addSecondaryContainer {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: center;
+    color: white;
+}
+
+.addSubmitButton {
+    background-color: #83d3fc;
+    color: white;
+    padding: 12px 24px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    margin-top: 20px;
+    font-size: 18px;
+}
+
+.addSubmitButton:hover {
+    background-color: #2980b9;
+}
+
 .selected-box h2 {
     font-size: 16px;
     margin-top: 0;
@@ -255,6 +422,25 @@ export default {
 
 input {
     margin-top: 10px;
+}
+
+.remove-button {
+    position: bottom;
+    top: 5px;
+    right: 5px;
+    background-color: red;
+    color: white;
+    border: 1px solid black;
+    padding: 5px;
+    cursor: pointer;
+}
+
+.image-container {
+    position: relative;
+}
+
+.file-name {
+    margin-left: 10px;
 }
 
 </style>

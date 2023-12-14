@@ -1,205 +1,180 @@
-{
-  "A": [
-    "Almond Allergy",
-    "Anchovies Allergy",
-    "Apple Allergy",
-    "Apricot Allergy",
-    "Artichoke Allergy",
-    "Asparagus Allergy",
-    "Avocado Allergy"
-  ],
-  "B": [
-    "Bacon Allergy",
-    "Banana Allergy",
-    "Barley Allergy",
-    "Basil Allergy",
-    "Beef Allergy",
-    "Beetroot Allergy",
-    "Biscuit Allergy",
-    "Blueberries Allergy",
-    "Bok Choy Allergy",
-    "Bread Allergy",
-    "Brie Cheese Allergy",
-    "Broccoli Allergy",
-    "Brown Rice Allergy",
-    "Butter Allergy",
-    "Blackberries Allergy",
-    "Brussels Sprouts Allergy",
-    "Buttermilk Allergy"
-  ],
-  "C": [
-    "Cabbage Allergy",
-    "Cantaloupe Allergy",
-    "Carrot Allergy",
-    "Cauliflower Allergy",
-    "Celery Allergy",
-    "Cheese Allergy",
-    "Chicken Allergy",
-    "Chickpea Allergy",
-    "Chives Allergy",
-    "Chocolate Allergy",
-    "Cilantro Allergy",
-    "Cinnamon Allergy",
-    "Coconut Allergy",
-    "Coffee Allergy",
-    "Corn Allergy",
-    "Corn Flakes Allergy",
-    "Cottage Cheese Allergy",
-    "Cranberry Allergy",
-    "Cream Allergy",
-    "Cucumber Allergy",
-    "Cayenne Pepper Allergy",
-    "Cashew Allergy",
-    "Cheddar Cheese Allergy"
-  ],
-  "D": [
-    "Date Allergy",
-    "Dill Allergy",
-    "Dragon Fruit Allergy"
-  ],
-  "E": [
-    "Eggplant Allergy",
-    "Egg Allergy",
-    "Endive Allergy",
-    "Edamame Allergy",
-    "Escarole Allergy"
-  ],
-  "F": [
-    "Fennel Allergy",
-    "Feta Cheese Allergy",
-    "Fish Allergy",
-    "Flour Allergy",
-    "Fig Allergy"
-  ],
-  "G": [
-    "Garlic Allergy",
-    "Ginger Allergy",
-    "Goat Cheese Allergy",
-    "Grapes Allergy",
-    "Green Beans Allergy",
-    "Green Bell Pepper Allergy",
-    "Green Onions Allergy",
-    "Ground Beef Allergy",
-    "Gouda Cheese Allergy",
-    "Guava Allergy"
-  ],
-  "H": [
-    "Ham Allergy",
-    "Honey Allergy",
-    "Hazelnut Allergy",
-    "Heavy Cream Allergy"
-  ],
-  "I": [
-    "Ice Cream Allergy",
-    "Icing Sugar Allergy",
-    "Italian Herbs Allergy"
-  ],
-  "J": [
-    "Jalapeño Allergy",
-    "Jackfruit Allergy"
-  ],
-  "K": [
-    "Kale Allergy",
-    "Kiwi Allergy",
-    "Ketchup Allergy"
-  ],
-  "L": [
-    "Lamb Allergy",
-    "Lemon Allergy",
-    "Lettuce Allergy",
-    "Lime Allergy",
-    "Lentil Allergy",
-    "Lobster Allergy"
-  ],
-  "M": [
-    "Mango Allergy",
-    "Maple Syrup Allergy",
-    "Mushroom Allergy",
-    "Mint Allergy",
-    "Mozzarella Cheese Allergy"
-  ],
-  "N": [
-    "Nectarine Allergy",
-    "Noodle Allergy",
-    "Nutmeg Allergy"
-  ],
-  "O": [
-    "Oat Allergy",
-    "Olive Oil Allergy",
-    "Onion Allergy",
-    "Orange Allergy",
-    "Oregano Allergy"
-  ],
-  "P": [
-    "Papaya Allergy",
-    "Parmesan Cheese Allergy",
-    "Pasta Allergy",
-    "Peach Allergy",
-    "Peanut Butter Allergy",
-    "Peanut Allergy",
-    "Pear Allergy",
-    "Pea Allergy",
-    "Pecan Allergy",
-    "Pineapple Allergy",
-    "Pizza Dough Allergy",
-    "Plum Allergy",
-    "Pork Allergy",
-    "Potato Allergy",
-    "Pumpkin Allergy",
-    "Quinoa Allergy",
-    "Paprika Allergy",
-    "Pinto Bean Allergy",
-    "Provolone Cheese Allergy"
-  ],
-  "R": [
-    "Raspberry Allergy",
-    "Red Bell Pepper Allergy",
-    "Rice Allergy",
-    "Rosemary Allergy",
-    "Ricotta Cheese Allergy"
-  ],
-  "S": [
-    "Salmon Allergy",
-    "Salt Allergy",
-    "Sausage Allergy",
-    "Shrimp Allergy",
-    "Sour Cream Allergy",
-    "Soy Sauce Allergy",
-    "Spinach Allergy",
-    "Strawberry Allergy",
-    "Sugar Allergy",
-    "Sweet Potato Allergy",
-    "Swiss Cheese Allergy"
-  ],
-  "T": [
-    "Thyme Allergy",
-    "Tomato Allergy",
-    "Turkey Allergy",
-    "Tofu Allergy",
-    "Tomatillo Allergy"
-  ],
-  "V": [
-    "Vanilla Allergy",
-    "Veal Allergy",
-    "Vegetable Broth Allergy",
-    "Vinegar Allergy",
-    "Vermicelli Allergy"
-  ],
-  "W": [
-    "Walnut Allergy",
-    "Watermelon Allergy",
-    "White Bread Allergy",
-    "White Rice Allergy",
-    "Wine Allergy",
-    "Watercress Allergy"
-  ],
-  "Y": [
-    "Yogurt Allergy",
-    "Yam Allergy",
-    "Yeast Allergy"
-  ],
-  "Z": [
-    "Zucchini Allergy",
-    "Ziti Allergy"
-  ]
-}
+[
+  {
+    "groupName": "Tree Nuts",
+    "options": [
+      "Almond",
+      "Hazelnut",
+      "Cashew",
+      "Pecan",
+      "Walnut"
+    ]
+  },
+  {
+    "groupName": "Fish and Seafood",
+    "options": [
+      "Anchovies",
+      "Fish",
+      "Shrimp",
+      "Lobster",
+      "Salmon",
+      "Sausage"
+    ]
+  },
+  {
+    "groupName": "Dairy and Eggs",
+    "options": [
+      "Brie Cheese",
+      "Butter",
+      "Cheese",
+      "Cottage Cheese",
+      "Cream",
+      "Egg",
+      "Goat Cheese",
+      "Gouda Cheese",
+      "Mozzarella Cheese",
+      "Parmesan Cheese",
+      "Provolone Cheese",
+      "Ricotta Cheese",
+      "Swiss Cheese",
+      "Yogurt"
+    ]
+  },
+  {
+    "groupName": "Grains and Cereals",
+    "options": [
+      "Barley",
+      "Biscuit",
+      "Brown Rice",
+      "Corn",
+      "Oat",
+      "Pizza Dough",
+      "Quinoa",
+      "White Bread",
+      "White Rice"
+    ]
+  },
+  {
+    "groupName": "Meat",
+    "options": [
+      "Bacon",
+      "Beef",
+      "Chicken",
+      "Ground Beef",
+      "Ham",
+      "Lamb",
+      "Pork",
+      "Sausage",
+      "Turkey",
+      "Veal"
+    ]
+  },
+  {
+    "groupName": "Fruits",
+    "options": [
+      "Apple",
+      "Apricot",
+      "Avocado",
+      "Banana",
+      "Cantaloupe",
+      "Date",
+      "Dragon Fruit",
+      "Fig",
+      "Grapes",
+      "Kiwi",
+      "Lemon",
+      "Lime",
+      "Mango",
+      "Nectarine",
+      "Papaya",
+      "Peach",
+      "Pear",
+      "Pineapple",
+      "Plum",
+      "Raspberry",
+      "Strawberry",
+      "Watermelon"
+    ]
+  },
+  {
+    "groupName": "Vegetables",
+    "options": [
+      "Artichoke",
+      "Asparagus",
+      "Beetroot",
+      "Bok Choy",
+      "Broccoli",
+      "Brussels Sprouts",
+      "Cabbage",
+      "Carrot",
+      "Cauliflower",
+      "Celery",
+      "Cucumber",
+      "Endive",
+      "Edamame",
+      "Escarole",
+      "Fennel",
+      "Green Beans",
+      "Green Bell Pepper",
+      "Green Onions",
+      "Guava",
+      "Kale",
+      "Spinach",
+      "Sweet Potato",
+      "Tomato",
+      "Tomatillo",
+      "Watercress",
+      "Zucchini"
+    ]
+  },
+  {
+    "groupName": "Herbs and Spices",
+    "options": [
+      "Basil",
+      "Cayenne Pepper",
+      "Cilantro",
+      "Cinnamon",
+      "Italian Herbs",
+      "Dill",
+      "Garlic",
+      "Ginger",
+      "Jalapeño",
+      "Mint",
+      "Oregano",
+      "Paprika",
+      "Rosemary",
+      "Soy Sauce",
+      "Thyme",
+      "Vanilla",
+      "Vinegar"
+    ]
+  },
+  {
+    "groupName": "Nuts and Seeds",
+    "options": [
+      "Peanut"
+    ]
+  },
+  {
+    "groupName": "Sweets and Snacks",
+    "options": [
+      "Chocolate",
+      "Coffee",
+      "Corn",
+      "Corn Flakes",
+      "Ice Cream",
+      "Icing Sugar",
+      "Maple Syrup",
+      "Nutmeg",
+      "Peanut Butter",
+      "Sugar"
+    ]
+  },
+  {
+    "groupName": "Miscellaneous",
+    "options": [
+      "Honey",
+      "Wine",
+      "Yeast"
+    ]
+  }
+]

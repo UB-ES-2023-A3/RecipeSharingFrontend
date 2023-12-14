@@ -2,9 +2,8 @@
   <div>
     <!-- Verifica si recipesToShow está vacío -->
     <div v-if="recipesToShow.length === 0">
-      <div class="mainContainer
-      nts">
-        <h1 class="title-heading">Allergens List A-Z</h1>
+      <div class="mainContainerIngredients">
+        <h1 class="title-heading">Types List A-Z</h1>
         <div class="letrasButtons">
           <a
             v-for="letra in letras"
@@ -34,7 +33,7 @@
             </div>
           </div>
           <div class="floatingContainer" v-if="selectedIngredients.length > 0">
-            <h2>Selected Allergens</h2>
+            <h2>Selected Types</h2>
             <div class="selected-ingredients-list">
               <div v-for="selectedIngrediente in selectedIngredients" :key="selectedIngrediente">
                 <span class="selected-item">
@@ -47,7 +46,7 @@
           </div>
         </div>
         <div v-else>
-          <p>There is no available allergens.</p>
+          <p>There is no available types.</p>
         </div>
       </div>
     </div>
@@ -57,11 +56,11 @@
           <div class="nav-container">
             <router-link to="/" class="nav-link">Homepage</router-link>
             <span style="margin-top: 10px"> >> </span>
-            <router-link to="/recipe/filters/ingredients" class="nav-link" @click="refreshPage">Allergens Filter</router-link>
+            <router-link to="/recipe/filters/ingredients" class="nav-link" @click="refreshPage">Types Filter</router-link>
             <span style="margin-top: 10px"> >> </span>
-            <router-link to="/recipe/filters/allergens" class="nav-link">Search Results</router-link>
+            <router-link to="/recipe/filters/types" class="nav-link">Search Results</router-link>
           </div>
-          <h2 class="section-title">Recipes not containing: {{ selectedIngredients.join(', ') }}</h2>
+          <h2 class="section-title">{{ selectedIngredients.join(', ') }}</h2>
           <div class="card-container">
             <div
               v-for="(recipe, index) in recipesToShow"
@@ -94,7 +93,7 @@
 
 
 <script>
-import ingredientsData from "@/assets/lists/AllergensFilter.json";
+import ingredientsData from "@/assets/lists/TypesFilter.json";
 import axios from "axios";
 
 export default {
@@ -149,7 +148,7 @@ export default {
                     if (this.selectedIngredients.length > 1) {
                         for (let i = 0; i < this.selectedIngredients.length; i++) {
                             if (i == 0) {
-                                endpoint += `allergens=${this.selectedIngredients[i]}+`
+                                endpoint += `recipe_type=${this.selectedIngredients[i]}+`
                             } else if (i == this.selectedIngredients.length - 1) {
                                 endpoint += `${this.selectedIngredients[i]}`
                             } else {
@@ -157,7 +156,7 @@ export default {
                             }
                         }
                     } else {
-                        endpoint += `allergens=${this.selectedIngredients[0]}`
+                        endpoint += `recipe_type=${this.selectedIngredients[0]}`
                     }
             const response = await axios.get(endpoint);
             console.log(response)
@@ -455,11 +454,7 @@ export default {
 }
 
 .nav-link:hover {
-  background-color: #83d3fc
+  background-color: #83d3fc ;
 }
-
-
-
-
 
 </style>

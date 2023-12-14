@@ -1,7 +1,7 @@
 module.exports = {
-    publicPath: 'http://localhost:8080',
-    outputDir: '../static/dist',
-    indexPath: '../../templates/_base_vue.html',
+    publicPath: 'https://recipesharingfrontend.onrender.com',//'http://localhost:8080',
+    //outputDir: '../static/dist',
+    //indexPath: '../../templates/_base_vue.html',
 
     configureWebpack: {
         devServer: {
