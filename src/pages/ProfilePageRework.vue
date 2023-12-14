@@ -8,14 +8,21 @@
                     </div>
                 </div>
                 <div class="profileInfoContainer">
+                    <div class="profileEditButtonContainer" v-if="this.username === this.username_id">
+                        <button class="editButton" @click="openEditDialog">
+                            Edit Profile
+                        </button>
+                    </div>
                     <div class="profileUsernameContainer">
                         <h3> {{ this.profileInfo.username }} </h3>
                     </div>
                     <div class="profileEmailContainer" v-if="this.username === this.username_id">
                         <h3> {{ this.profileInfo.email }}</h3>
                     </div>
+                    
                     <div class="profileFollowingFollowersContainer">
-                        <div class="profileFollowingContainer" @click="showFollowingPopup">
+                        <div class="profileFollowingContainer" @click="showFollowingPopup"
+                             v-if="this.profileInfo.list_following_users">
                             <h3> Following: {{ Object.keys(this.profileInfo.list_following_users).length }} </h3>
                         </div>
                         <div v-if="showPopupFollowing" class="overlay" @click="closeFollowingPopup">
@@ -32,7 +39,8 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="profileFollowersContainer" @click="showFollowersPopup">
+                        <div class="profileFollowersContainer" @click="showFollowersPopup"
+                             v-if="this.profileInfo.list_follower_users">
                             <h3> Followers: {{ Object.keys(this.profileInfo.list_follower_users).length }}</h3>
                         </div>
                         <div v-if="showPopupFollower" class="overlay" @click="closeFollowersPopup">
@@ -44,9 +52,6 @@
                                         </li>
                                     </ul>
                                 </div>
-                                <div class="buttonClose">
-                                    <button class="closeButton" @click="showFollowersPopup">Close</button>
-                                </div>
                             </div>
                         </div>
                     </div>
@@ -55,6 +60,112 @@
                     <button class="followButton" @click="follow">
                         {{ isFollowing ? 'Unfollow' : 'Follow' }}
                     </button>
+                </div>
+                <div v-if="showDialog" class="profile-dialog" style="overflow: auto;">
+                    <div class="modal-dialog">
+                        <div class="modal-content" style="background-color: white;">
+                            <div class="modal-header">
+                                <h2 class="modal-title">Edit Profile</h2>
+                            </div>
+                            <!-- Modal Body -->
+                            <div class="modal-body">
+                                <form class="editForm" action="#" title="Edit Profile">
+                                    <div class="comment">
+                                        <p style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">Current Username:</p>
+                                        <p style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">{{ this.username }}</p>
+                                    </div>
+                                    <input id="editUsernameInput" type="text" placeholder="Username" v-model="this.newUsername" text="this.username"
+                                        @input="this.checkUsername"/>
+                                    <div class="note">
+                                        <p>The username must be between 8 and 16 characters.</p>
+                                    </div>
+                                    <div class="comment">
+                                        <p style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">Current Email:</p>
+                                        <p style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">{{ this.userEmail }}</p>
+                                    </div>
+                                    <input id="editEmailInput" type="email" placeholder="Email" v-model="this.newEmail"
+                                        @input="this.checkEmail"/>
+                                    <div class="note">
+                                        <p>Only the following domains are valid: example.com, yourdomain.com, gmail.com, hotmail.com</p>
+                                    </div>
+                                    <div class="comment">
+                                        <p style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif; font-weight: bold;">Current Password:</p>
+                                        <p style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">{{ this.userPassword }}</p>
+                                    </div>
+                                    <input
+                                            id="editPasswordInput"
+                                            :type="showEditPassword ? 'text' : 'password'"
+                                            placeholder="Password"
+                                            v-model="this.newPassword"
+                                            @input="this.checkPassword"
+                                    />
+                                    <div class="input-group-append">
+                                        <button
+                                                class="btn btn-primary"
+                                                type="button"
+                                                @click="toggleShowEditPassword"
+                                        >
+                                            <span class="fa" :class="showEditPassword ? 'fa-eye' : 'fa-eye-slash'"></span>
+                                        </button>
+                                    </div>
+                                    <div class="note">
+                                        <p>The password must be at least 8 characters long, contain one uppercase letter, one lowercase
+                                            letter, one number, and one symbol.</p>
+                                    </div>
+                                    <input
+                                            id="editPasswordInputConfirm"
+                                            :type="showEditPasswordConfirmation ? 'text' : 'password'"
+                                            placeholder="Password Confirmation"
+                                            v-model="this.newPasswordConfirm"
+                                    />
+                                    <div class="input-group-append">
+                                        <button
+                                                class="btn btn-primary"
+                                                type="button"
+                                                @click="toggleShowEditPasswordConfirmation"
+                                        >
+                                            <span class="fa"
+                                                :class="showEditPasswordConfirmation ? 'fa-eye' : 'fa-eye-slash'"></span>
+                                        </button>
+                                    </div>
+                                    <div class="password-strength">
+                                        <p>Password Strength:</p>
+                                        <div class="password-strength-meter">
+                                            <div class="password-strength-bar" :style="{ width: editPasswordStrength + '%' }"></div>
+                                        </div>
+                                    </div>
+
+                                    <!-- Upload Image Field -->
+                                    <div class="form-group" style="padding-top: 10px;">
+                                        <label for="image_label" style="font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">Upload Image:</label>
+                                        <div style="display: flex; align-items: center; padding-top: 10px;">
+                                            <label for="image" style="background-color: #7f9ccb;
+                                            padding: 5px 10px;
+                                            border-radius: 5px;
+                                            border: 1px ridge black;
+                                            font-size: 0.8rem;
+                                            height: auto;
+                                            font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+                                            width: 85px;">Choose Image</label>
+                                            <input type="file" id="image" accept="image/*" @change="handleImageUpload" ref="fileInput" style="display: none;">
+                                        </div>
+                                        <div v-if="new_profile_image" class="image-container" style="padding: 2px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                            <div v-if="new_profile_image" style="padding-top: 2px; font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">
+                                                File Name: {{ file_name }} | Image Size: {{ formatBytes(imageSize) }}
+                                            </div>
+                                            <img :src="new_profile_image" alt="Recipe Image" style="padding-top: 3px; max-width: 100%; max-height: 100%; padding-bottom: 2px;"/>
+                                            <button @click="removeImage" class="remove-button">Remove Image</button>
+                                        </div>
+                                        <div v-if="imageSizeError">Image size exceeds the allowed limit.</div>
+                                    </div>
+                                    <button @click.prevent="this.editProfile" style="border: 1px solid #2ba3ff; background-color: #2ba3ff;">Edit</button>
+                                    <button @click.prevent="this.closeDialog">Close</button>
+                                    <hr>
+                                    
+                                </form>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             <div class="profileRecipesUsersContainer">
@@ -116,9 +227,6 @@
                     </div>
                 </div>
             </div>
-            <div class="profileButtonContainer">
-                <button @click="closeProfile" class="submit-button close-button">Close</button>
-            </div>
         </div>
     </div>
 </template>
@@ -147,8 +255,28 @@ export default {
             showAllLikedRecipes: false,
             showAllOwnRecipes: false,
             isFollowing: false,
+            profile_image: "",
+
             showPopupFollower: false,
             showPopupFollowing: false,
+            showDialog: false,
+            
+            newUsername: '',
+            newEmail: '',
+            newPassword: '',
+            newPasswordConfirm: '',
+            showPassword: false,
+            editPasswordStrength: 0,
+            showEditPassword: false,
+            showEditPasswordConfirmation: false,
+            userPassword: '',
+            userEmail: '',
+
+            new_profile_image: "",
+            imageSizeError: false,
+            maxSizeInBytes: 1024 * 1024,
+            imageSize: 0,
+            file_name: "",
         };
     },
     computed: {
@@ -164,6 +292,18 @@ export default {
         },
     },
     methods: {
+        usernameChanged() {
+            return this.newUsername !== this.username && this.newUsername.length !== 0;
+        },
+        emailChanged() {
+            return this.newEmail !== this.userEmail && this.newEmail.length !== 0;
+        },
+        passwordChanged() {
+            return this.newPassword !== this.userPassword && this.newPassword.length !== 0;
+        },
+        imageChanged() {
+            return this.profile_image !== this.new_profile_image && this.new_profile_image.length !== 0;
+        },
         closeProfile() {
             this.$router.push(`/`);
         },
@@ -188,6 +328,42 @@ export default {
                     alert(error.response);
                 });
         },
+        editProfile() {
+            axios
+                .post(`/profile/${this.username_id}/`, {
+                    username: this.usernameChanged() ? this.newUsername : this.username_id,
+                    email: this.emailChanged() ? this.newEmail : this.userEmail,
+                    password: this.passwordChanged() ? this.newPassword : this.userPassword,
+                    profile_image: this.imageChanged() ? this.new_profile_image : this.profile_image
+
+                }).then((response) => {
+                if (response.status === 200) {
+                    this.username_id = this.usernameChanged() ? this.newUsername : this.username_id;
+                    this.userEmail = this.emailChanged() ? this.newEmail : this.userEmail;
+                    this.userPassword = this.passwordChanged() ? this.newPassword : this.userPassword;
+                    this.profile_image = this.imageChanged() ? this.new_profile_image : this.profile_image;
+
+                    this.closeDialog();
+                    localStorage.setItem('username', this.username_id);
+                    this.$emit('username-success', this.username_id);
+
+                    localStorage.setItem('email', this.userEmail);
+                    this.$emit('email-success', this.userEmail);
+                    localStorage.setItem('profile_image', this.profile_image);
+                    this.$emit('profile_image-success', this.profile_image);
+
+                    this.$router.push(`/profiles/${this.username_id}/`);
+
+                    this.profileInfo.username = this.username_id;
+                    this.profileInfo.email = this.userEmail;
+                    this.profileInfo.profile_image = this.profile_image;
+                }
+            })
+                .catch((error) => {
+                    console.log(error.response)
+                    alert(error.response);
+                });
+        },
         getUserInformation() {
             // Axios para recibir lla información del usuario
             axios
@@ -196,10 +372,18 @@ export default {
                     if (response.status === 200) {
                         const info = response.data.user;
                         this.profileInfo = info;
+                        this.userEmail = info.email;
                         this.favoriteRecipes = Object.values(this.profileInfo.list_favorite_recipes);
                         this.ownRecipes = Object.values(this.profileInfo.list_own_recipes);
+                        if (info.profile_image) {
+                            this.profile_image = info.profile_image;
+                        } else {
+                            this.profile_image = require('@/assets/images/DefaultUser.jpg')
+                        }
+
+                        this.profile_image = info.profile_image;
                         let following = Object.values(this.profileInfo.list_follower_users);
-                        if (following.indexOf(this.username) != -1) {
+                        if (following.indexOf(this.username_id) != -1) {
                             this.isFollowing = true;
                         } else {
                             this.isFollowing = false;
@@ -220,6 +404,116 @@ export default {
         toggleOwnRecipesView(event) {
             event.preventDefault();
             this.showAllOwnRecipes = !this.showAllOwnRecipes;
+        },
+        openEditDialog() {
+            this.showDialog = true;
+            this.userPassword = localStorage.getItem('password');
+        },
+        closeDialog() {
+            this.showDialog = false;
+            
+        },
+        checkUsername() {
+            const usernameInput = document.getElementById('editUsernameInput');
+
+            if (this.newUsername.length !== 0) {
+                if (this.newUsername.length < 8 || this.newUsername.length > 16) {
+                    usernameInput.style.border = '1px solid red';
+                } else {
+                    usernameInput.style.border = '';
+                }
+            } else {
+                usernameInput.style.border = '';
+            }
+        },
+        checkEmail() {
+            // Check the validity of the entered email
+            const emailRegex = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,4}$/;
+            const emailInput = document.getElementById('editEmailInput');
+
+            if (this.newEmail.length != 0) {
+                if (!emailRegex.test(this.newEmail)) {
+                    emailInput.style.border = '1px solid red';
+                } else {
+                    // Define valid email extensions
+                    const validEmailExtensions = ["example.com", "yourdomain.com", "gmail.com", "hotmail.com"];
+                    // Split the email to get the domain part
+                    const emailParts = this.newEmail.split("@");
+                    const emailExtension = emailParts[1];
+                    // Check if the email extension is valid
+                    if (!validEmailExtensions.includes(emailExtension)) {
+                        emailInput.style.border = '1px solid red';
+                    } else {
+                        emailInput.style.border = '';
+                    }
+                }
+            }
+        },
+        checkPassword() {
+            // Check the validity and strength of the entered password
+            const passwordRegex = /^(?=.*\d)(?=.*[a-z])(?=.*[A-Z])(?=.*[\W_]).{8,}$/;
+            const passwordInput = document.getElementById('editPasswordInput');
+
+            if (this.newPassword.length != 0) {
+                if (!passwordRegex.test(this.newPassword)) {
+                    passwordInput.style.border = '1px solid red';
+                } else {
+                    passwordInput.style.border = '';
+                }
+
+                // Calculate password strength
+                let strength = 0;
+                if (this.newPassword.length >= 8) {
+                    strength++;
+                }
+                if (/[a-z]/.test(this.newPassword) && /[A-Z]/.test(this.newPassword)) {
+                    strength++;
+                }
+                if (/\d/.test(this.newPassword)) {
+                    strength++;
+                }
+                if (/\W|_/.test(this.newPassword)) {
+                    strength++;
+                }
+                this.editPasswordStrength = (strength / 4) * 100;
+            } else {
+                passwordInput.style.border = '';
+            }
+        },
+        toggleShowEditPassword() {
+            this.showEditPassword = !this.showEditPassword;
+        },
+        toggleShowEditPasswordConfirmation() {
+            this.showEditPasswordConfirmation = !this.showEditPasswordConfirmation;
+        },
+        handleImageUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                this.file_name = file.name;
+                const reader = new FileReader();
+                reader.onload = (e) => {
+                    this.new_profile_image = e.target.result;
+                };
+                this.imageSize = file.size;
+                reader.readAsDataURL(file);
+            }
+        },
+        removeImage() {
+            this.new_profile_image = null;
+            this.$refs.fileInput.value = null;
+        },isBase64ImageTooLarge(base64String, maxSizeInBytes) {
+            // Remove data URI prefix
+            const base64WithoutPrefix = base64String.split(',')[1];
+            const bytes = atob(base64WithoutPrefix).length;
+            return bytes > maxSizeInBytes;
+        },
+        formatBytes(bytes, decimals = 2) {
+            if (bytes === 0) return '0 Bytes';
+            const k = 1024;
+            const dm = decimals < 0 ? 0 : decimals;
+            const sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB', 'PB', 'EB', 'ZB', 'YB'];
+            const i = Math.floor(Math.log(bytes) / Math.log(k));
+            return parseFloat((bytes / Math.pow(k, i)).toFixed(dm)) + ' ' + sizes[i];
         },
     },
     created() {
@@ -283,8 +577,7 @@ export default {
 }
 
 .profileUsernameContainer h3 {
-    position: absolute;
-    top: 0%;
+    align-content: space-around;
 }
 
 .profileEmailContainer {
@@ -415,6 +708,22 @@ export default {
     background-color: #2e80ce;
 }
 
+.editButton {
+    background-color: #12afdc;
+    color: white;
+    padding: 8px 15px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+    font-size: 20px;
+}
+
+.editButton:hover {
+    background-color: #2e80ce;
+}
+
 .recipeLikedButton {
     width: 100%;
     text-align: end;
@@ -477,7 +786,7 @@ export default {
 }
 
 .followersPopup {
-position: fixed;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -503,9 +812,8 @@ position: fixed;
     padding-bottom: 5px; /* Espaciado entre los usuarios */
 }
 
-
 .followingPopup {
-position: fixed;
+    position: fixed;
     top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
@@ -574,7 +882,7 @@ position: fixed;
 }
 
 .submit-button {
-    background-color: #41c6ff;
+    background-color: rgb(239, 77, 77);
     color: white;
     padding: 8px 15px;
     border: none;
@@ -659,4 +967,177 @@ position: fixed;
         border-bottom: none; /* Eliminar la línea divisoria entre los usuarios */
     }
 }
+
+.profile-dialog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgb(239, 203, 135);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-dialog {
+  border-radius: 10px;
+  padding: 20px;
+  padding-top: 300px;
+  position: center;
+}
+
+.modal-header {
+  font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+  padding-top: 10px;
+  position: center;
+  text-align: center;
+}
+
+a {
+    color: #FFFFFF;
+    font-size: 14px;
+    text-decoration: none;
+    margin: 1.5vh 0;
+}
+
+a:hover {
+    text-decoration: underline;
+    font-weight: bold;
+}
+
+button {
+    border-radius: 20px;
+    border: 1px solid #FF4B2B;
+    background-color: #FF4B2B;
+    color: #FFFFFF;
+    font-size: 12px;
+    padding-top: 5px;
+    font-weight: bold;
+    padding: 1.2vh 4.5vh;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    transition: transform 80ms ease-in;
+}
+
+button:active {
+    transform: scale(0.95);
+}
+
+button:focus {
+    outline: none;
+}
+
+form {
+    background-color: #FFFFFF;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    padding: 0 5vh;
+    height: 100%;
+    text-align: center;
+}
+
+input {
+    background-color: #eee;
+    border: none;
+    padding: 1.2vh 1.5vh;
+    margin: 0.8vh 0;
+    width: 100%;
+}
+
+@keyframes show {
+    0%, 49.99% {
+        opacity: 0;
+        z-index: 1;
+    }
+
+    50%, 100% {
+        opacity: 1;
+        z-index: 5;
+    }
+}
+
+.overlay {
+    background: #FF416C;
+    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+    background: linear-gradient(to right, #FF4B2B, #FF416C);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: 0 0;
+    color: #FFFFFF;
+    position: relative;
+    left: -100%;
+    height: 100%;
+    width: 200%;
+    transform: translateX(0);
+    transition: transform 0.6s ease-in-out;
+}
+
+.note {
+    color: gray;
+    font-size: 12px;
+    text-align: justify;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.password-strength p {
+    color: gray;
+    text-align: justify;
+    font-weight: normal;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.password-strength {
+    font-weight: bold;
+    width: 100%;
+    margin: 0.8vh 0;
+}
+
+.password-strength-meter {
+    height: 1vh;
+    background-color: #ccc;
+    border-radius: 5px;
+    margin-top: 1vh;
+    overflow: hidden;
+}
+
+.password-strength-bar {
+    height: 100%;
+    background-color: #4CAF50;
+    width: 0;
+    transition: width 0.3s;
+}
+
+.input-group-append {
+    width: 100%;
+    text-align: justify;
+    font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+}
+
+.input-group-append button {
+    padding: 0.2vh 0.3vh;
+}
+
+.input-group-append button .fa {
+    font-size: 14px;
+}
+
+.remove-button {
+  position: bottom;
+  top: 5px;
+  right: 5px;
+  background-color: red;
+  color: white;
+  border: 1px solid black;
+  padding: 5px;
+  cursor: pointer;
+}
+.image-container {
+  position: relative;
+}
+.file-name {
+  margin-left: 10px;
+}
+
 </style>

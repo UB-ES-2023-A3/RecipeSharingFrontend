@@ -2,7 +2,8 @@
   <div>
     <!-- Verifica si recipesToShow está vacío -->
     <div v-if="recipesToShow.length === 0">
-      <div class="mainContainerIngredients">
+      <div class="mainContainer
+      nts">
         <h1 class="title-heading">Allergens List A-Z</h1>
         <div class="letrasButtons">
           <a
@@ -33,7 +34,7 @@
             </div>
           </div>
           <div class="floatingContainer" v-if="selectedIngredients.length > 0">
-            <h2>Selected Ingredients</h2>
+            <h2>Selected Allergens</h2>
             <div class="selected-ingredients-list">
               <div v-for="selectedIngrediente in selectedIngredients" :key="selectedIngrediente">
                 <span class="selected-item">
@@ -46,7 +47,7 @@
           </div>
         </div>
         <div v-else>
-          <p>No hay ingredientes disponibles.</p>
+          <p>There is no available allergens.</p>
         </div>
       </div>
     </div>

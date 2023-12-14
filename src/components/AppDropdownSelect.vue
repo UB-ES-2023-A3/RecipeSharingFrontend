@@ -1,5 +1,5 @@
 <template>
-    <div class="container">
+    <div :class="{'container': true, 'background': selectedOptions.length > 0}">
         <!-- Dropdown select to choose options -->
         <select @change="addSelectedOption" class="full-width-dropdown" v-model="localSelectedValue">
             <option value="" disabled>Select {{ label }}</option>
@@ -58,10 +58,14 @@ export default {
 <style scoped>
 
 .container {
-    background-color: #FCE4A4;
+    background-color: #83d3fc;
     margin: 2px 5px;
     padding: 10px;
     border-radius: 10px;
+}
+
+.background {
+    background-color: #2980b9;
 }
 
 .remove-button {

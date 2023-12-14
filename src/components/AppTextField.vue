@@ -29,7 +29,7 @@ export default {
     computed: {
         inputStyle() {
             return {
-                backgroundColor: this.isSaved ? "#eea94d" : "#FCE4A4",
+                backgroundColor: this.isSaved ? "#2980b9" : "#83d3fc",
                 color: this.isSaved ? "white" : "black",
                 padding: "10px",
                 border: "1px solid #ccc",
