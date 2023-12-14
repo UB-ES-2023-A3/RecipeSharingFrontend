@@ -75,6 +75,7 @@ import '../assets/styles/appStyles.css';
 import AppTextField from "@/components/AppTextField.vue";
 import AppTextFieldPassword from "@/components/AppTextFieldPassword.vue";
 import axios from 'axios';
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 export default {
     name: "RegisterPage",
@@ -155,7 +156,7 @@ export default {
             }
             try {
                 // Send a registration request to the server
-                let response = await axios.post('/register/', {
+                let response = await axios.post(URL_BACKEND + '/register/', {
                     username: this.username,
                     email: this.email,
                     password: this.password,

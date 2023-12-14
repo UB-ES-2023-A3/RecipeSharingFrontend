@@ -1,5 +1,8 @@
+const Dotenv = require('dotenv-webpack')
+const PUBLIC_PATH = process.env.VUE_APP_PUBLIC_PATH
+
 module.exports = {
-    publicPath: 'https://recipesharingfrontend.onrender.com',//'http://localhost:8080',
+    publicPath: PUBLIC_PATH,//'http://localhost:8080',
     //outputDir: '../static/dist',
     //indexPath: '../../templates/_base_vue.html',
 
@@ -8,6 +11,9 @@ module.exports = {
             devMiddleware: {
                 writeToDisk: true
             }
-        }
+        },
+        plugins: [
+            new Dotenv()
+        ]
     }
 }

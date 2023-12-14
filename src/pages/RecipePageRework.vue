@@ -150,6 +150,7 @@
 <script>
 
 import axios from 'axios';
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 export default {
     name: "RecipePageRework",
@@ -207,7 +208,7 @@ export default {
         },
         getRating() {
             // Axios para recibir los ratings
-            axios.get(`getRatings/`)
+            axios.get(URL_BACKEND + `/recipes/getRatings/`)
                 .then((response) => {
                     if (response.status === 200) {
                         const ratings = response.data;
@@ -223,7 +224,7 @@ export default {
         addRating() {
             //axios para postear el rating de una receta
             axios
-                .post("postRatings/", {
+                .post(URL_BACKEND + `/recipes/${this.recipeId}/postRatings/`, {
                     user_id: this.username,
                     recipe_id: this.recipe.id,
                     rating: this.rating,
@@ -243,7 +244,7 @@ export default {
         getRecipeInformation() {
             // Axios para recibir las recetas
             axios
-                .get(`/recipe/${this.recipeId}/`)
+                .get(URL_BACKEND + `/recipe/${this.recipeId}/`)
                 .then((response) => {
                     if (response.status === 200) {
                         this.recipe = response.data.recipe;
@@ -258,7 +259,7 @@ export default {
             // Lógica para agregar o quitar de favoritos
             this.isFavorited = !this.isFavorited;
             axios
-                .post("/recipes/postFavorites/", {
+                .post(URL_BACKEND + "/recipes/postFavorites/", {
                     user_id: this.username,
                     recipe_id: this.recipe.id,
                 })
@@ -279,7 +280,7 @@ export default {
         getUserInformation() {
             // Axios para recibir lla información del usuario
             axios
-                .get(`/profile/${this.username}/`)
+                .get(URL_BACKEND + `/profile/${this.username}/`)
                 .then((response) => {
                     if (response.status === 200) {
                         const info = response.data.user;
@@ -321,7 +322,7 @@ export default {
             };
 
             axios
-                .post("postRatings/", {
+                .post(URL_BACKEND + "/recipes/postRatings/", {
                     user_id: this.username,
                     recipe_id: this.recipeId,
                     comment: comment,

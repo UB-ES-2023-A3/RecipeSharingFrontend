@@ -104,6 +104,7 @@
 
 <script>
 import axios from "axios";
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 export default {
     data() {
@@ -241,7 +242,7 @@ export default {
             }
 
             try {
-                let response = await axios.post('login/', {
+                let response = await axios.post(URL_BACKEND + '/login/', {
                     username: this.loginUsername,
                     email: this.loginEmail,
                     password: this.loginPassword,
@@ -298,7 +299,7 @@ export default {
             }
             try {
                 // Send a registration request to the server
-                let response = await axios.post('register/', {
+                let response = await axios.post(URL_BACKEND + '/register/', {
                     username: this.registerUsername,
                     email: this.registerEmail,
                     password: this.registerPassword,
