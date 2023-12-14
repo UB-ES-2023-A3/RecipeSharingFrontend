@@ -1,13 +1,11 @@
 <template>
     <div id="pages" class="pages-container">
-        <div id="header">
-            <AppHeader :logged="logged" :username="username" :email="email" :password="password"/>
-        </div>
-        <div id="content">
-            <router-view :logged="logged" :username="username" @login-success="onLoginSuccess"
-                         @username-success="onUsernameSuccess" @email-success="onEmailSuccess"
-                         @password-sucess="onPasswordSuccess" @profile_image-success="onProfile_imageSuccess"/>
-        </div>
+        <router-view :logged="logged" :username="username" @login-success="onLoginSuccess"
+                     @username-success="onUsernameSuccess" @email-success="onEmailSuccess"
+                     @password-sucess="onPasswordSuccess"/>
+    </div>
+    <div id="header">
+        <AppHeader :logged="logged" :username="username" :email="email" :password="password"/>
     </div>
 </template>
 
@@ -24,7 +22,6 @@ export default {
             username: localStorage.getItem('username'),
             email: localStorage.getItem('email'),
             password: localStorage.getItem('password'),
-            profile_image: localStorage.getItem('profile_image'),
         };
     },
     methods: {
@@ -44,10 +41,6 @@ export default {
             this.password = password;
             localStorage.setItem('password', password);
         },
-        onProfile_imageSuccess(profile_image) {
-            this.profile_image = profile_image;
-            localStorage.setItem('profile_image', profile_image);
-        },
     },
 };
 </script>
@@ -58,12 +51,6 @@ export default {
     top: 10vh;
     left: 0;
     width: 100%;
-    height: 90%;
-    z-index: 1; /* Asegura que el contenido esté detrás del encabezado */
-}
-
-#header {
-    position: fixed;
-    z-index: 2; /* Asegura que el encabezado esté por encima del contenido */
+    height: 90%
 }
 </style>

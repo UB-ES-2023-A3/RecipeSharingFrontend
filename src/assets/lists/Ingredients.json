@@ -1,228 +1,208 @@
-[
-  {
-    "groupName": "Fruits",
-    "options": [
-      "Apples",
-      "Apricot",
-      "Avocado",
-      "Banana",
-      "Blackberries",
-      "Blueberries",
-      "Cantaloupe",
-      "Cherry",
-      "Cranberries",
-      "Dragon Fruit",
-      "Figs",
-      "Grapes",
-      "Guava",
-      "Kiwi",
-      "Lemon",
-      "Lime",
-      "Mango",
-      "Nectarine",
-      "Orange",
-      "Papaya",
-      "Peach",
-      "Pear",
-      "Pineapple",
-      "Plum",
-      "Raspberry",
-      "Strawberries",
-      "Watermelon"
-    ]
-  },
-  {
-    "groupName": "Vegetables",
-    "options": [
-      "Artichoke",
-      "Asparagus",
-      "Beetroot",
-      "Bok Choy",
-      "Broccoli",
-      "Brussels Sprouts",
-      "Cabbage",
-      "Carrot",
-      "Cauliflower",
-      "Celery",
-      "Corn",
-      "Cucumber",
-      "Endive",
-      "Escarole",
-      "Fennel",
-      "Garlic",
-      "Green Beans",
-      "Green Bell Pepper",
-      "Green Onions",
-      "Kale",
-      "Lettuce",
-      "Onion",
-      "Potato",
-      "Spinach",
-      "Sweet Potatoes",
-      "Tomatillo",
-      "Tomato",
-      "Watercress",
-      "Zucchini"
-    ]
-  },
-  {
-    "groupName": "Nuts and Seeds",
-    "options": [
-      "Almond",
-      "Cashews",
-      "Hazelnuts",
-      "Pecans",
-      "Walnuts",
-      "Peanuts"
-    ]
-  },
-  {
-    "groupName": "Cereals and Bread",
-    "options": [
-      "Baguette",
-      "Barley",
-      "Bread",
-      "Brown Rice",
-      "Corn Flakes",
-      "Oats",
-      "Pizza Dough",
-      "Quinoa",
-      "White Bread",
-      "White Rice"
-    ]
-  },
-  {
-    "groupName": "Dairy Products",
-    "options": [
-      "Brie Cheese",
-      "Butter",
-      "Cottage Cheese",
-      "Cream",
-      "Feta Cheese",
-      "Goat Cheese",
-      "Gouda Cheese",
-      "Mozzarella Cheese",
-      "Parmesan Cheese",
-      "Provolone Cheese",
-      "Ricotta Cheese",
-      "Swiss Cheese",
-      "Yogurt",
-      "Almond Milk"
-    ]
-  },
-  {
-    "groupName": "Meat and Fish",
-    "options": [
-      "Anchovies",
-      "Bacon (Pancetta)",
-      "Beef",
-      "Chicken",
-      "Fish",
-      "Ground Beef",
-      "Ham",
-      "Lamb",
-      "Lobster",
-      "Pork",
-      "Salmon",
-      "Sausage",
-      "Shrimp",
-      "Turkey",
-      "Veal"
-    ]
-  },
-  {
-    "groupName": "Eggs and Egg Products",
-    "options": [
-      "Egg",
-      "Eggplant"
-    ]
-  },
-  {
-    "groupName": "Legumes",
-    "options": [
-      "Chickpeas",
-      "Lentils",
-      "Pinto Beans"
-    ]
-  },
-  {
-    "groupName": "Root Vegetables",
-    "options": [
-      "Beetroot",
-      "Carrot",
-      "Potato",
-      "Sweet Potatoes"
-    ]
-  },
-  {
-    "groupName": "Herbs and Spices",
-    "options": [
-      "Basil",
-      "Cayenne Pepper",
-      "Cilantro",
-      "Cinnamon",
-      "Italian Herbs",
-      "Dill",
-      "Mint",
-      "Oregano",
-      "Paprika",
-      "Rosemary",
-      "Thyme"
-    ]
-  },
-  {
-    "groupName": "Oils and Condiments",
-    "options": [
-      "Olive Oil",
-      "Soy Sauce",
-      "Vinegar"
-    ]
-  },
-  {
-    "groupName": "Dried Fruits",
-    "options": [
-      "Dates"
-    ]
-  },
-  {
-    "groupName": "Beverages",
-    "options": [
-
-      "Coffee",
-      "Wine"
-    ]
-  },
-  {
-    "groupName": "Bakery and Confectionery",
-    "options": [
-      "Biscuits",
-      "Chocolate",
-      "Flour",
-      "Maple Syrup",
-      "Sugar",
-      "Vanilla",
-      "Icing Sugar",
-      "Nutmeg",
-      "Yeast"
-    ]
-  },
-  {
-    "groupName": "Soy Products",
-    "options": [
-      "Tofu",
-      "Soy Sauce"
-    ]
-  },
-  {
-    "groupName": "Others",
-    "options": [
-      "Buttermilk",
-      "Cheese",
-      "Coconut",
-      "Icing Sugar",
-      "Heavy Cream",
-      "Ice Cream",
-      "Honey"
-    ]
-  }
-]
+{
+  "A": [
+    "Almond Milk",
+    "Almonds",
+    "Anchovies",
+    "Artichokes",
+    "Asparagus",
+    "Avocado",
+    "Apples",
+    "Apricots",
+    "Arugula"
+  ],
+  "B": [
+    "Bacon (Pancetta)",
+    "Baguette",
+    "Banana",
+    "Barley",
+    "Basil",
+    "Beef",
+    "Beetroot",
+    "Biscuits",
+    "Blueberries",
+    "Bok Choy",
+    "Bread",
+    "Brie Cheese",
+    "Broccoli",
+    "Brown Rice",
+    "Butter",
+    "Blackberries",
+    "Brussels Sprouts",
+    "Buttermilk"
+  ],
+  "C": [
+    "Cabbage",
+    "Cantaloupe",
+    "Carrot",
+    "Cauliflower",
+    "Celery",
+    "Cheese",
+    "Chicken",
+    "Chickpeas",
+    "Chives",
+    "Chocolate",
+    "Cilantro",
+    "Cinnamon",
+    "Coconut",
+    "Coffee",
+    "Corn",
+    "Corn Flakes",
+    "Cottage Cheese",
+    "Cranberries",
+    "Cream",
+    "Cucumber",
+    "Cayenne Pepper",
+    "Cashews",
+    "Cheddar Cheese"
+  ],
+  "D": [
+    "Dates",
+    "Dill",
+    "Dragon Fruit"
+  ],
+  "E": [
+    "Eggplant",
+    "Eggs",
+    "Endive",
+    "Edamame",
+    "Escarole"
+  ],
+  "F": [
+    "Fennel",
+    "Feta Cheese",
+    "Fish",
+    "Flour",
+    "Figs"
+  ],
+  "G": [
+    "Garlic",
+    "Ginger",
+    "Goat Cheese",
+    "Grapes",
+    "Green Beans",
+    "Green Bell Pepper",
+    "Green Onions",
+    "Ground Beef",
+    "Gouda Cheese",
+    "Guava"
+  ],
+  "H": [
+    "Ham",
+    "Honey",
+    "Hazelnuts",
+    "Heavy Cream"
+  ],
+  "I": [
+    "Ice Cream",
+    "Icing Sugar",
+    "Italian Herbs"
+  ],
+  "J": [
+    "Jalapeño",
+    "Jackfruit"
+  ],
+  "K": [
+    "Kale",
+    "Kiwi",
+    "Ketchup"
+  ],
+  "L": [
+    "Lamb",
+    "Lemon",
+    "Lettuce",
+    "Lime",
+    "Lentils",
+    "Lobster"
+  ],
+  "M": [
+    "Mango",
+    "Maple Syrup",
+    "Mushrooms",
+    "Mint",
+    "Mozzarella Cheese"
+  ],
+  "N": [
+    "Nectarine",
+    "Noodles",
+    "Nutmeg"
+  ],
+  "O": [
+    "Oats",
+    "Olive Oil",
+    "Onion",
+    "Orange",
+    "Oregano"
+  ],
+  "P": [
+    "Papaya",
+    "Parmesan Cheese",
+    "Pasta",
+    "Peach",
+    "Peanut Butter",
+    "Peanuts",
+    "Pear",
+    "Peas",
+    "Pecans",
+    "Pineapple",
+    "Pizza Dough",
+    "Plum",
+    "Pork",
+    "Potatoes",
+    "Pumpkin",
+    "Quinoa",
+    "Paprika",
+    "Pinto Beans",
+    "Provolone Cheese"
+  ],
+  "R": [
+    "Raspberry",
+    "Red Bell Pepper",
+    "Rice",
+    "Rosemary",
+    "Ricotta Cheese"
+  ],
+  "S": [
+    "Salmon",
+    "Salt",
+    "Sausage",
+    "Shrimp",
+    "Sour Cream",
+    "Soy Sauce",
+    "Spinach",
+    "Strawberries",
+    "Sugar",
+    "Sweet Potatoes",
+    "Swiss Cheese"
+  ],
+  "T": [
+    "Thyme",
+    "Tomatoes",
+    "Turkey",
+    "Tofu",
+    "Tomatillo"
+  ],
+  "V": [
+    "Vanilla",
+    "Veal",
+    "Vegetable Broth",
+    "Vinegar",
+    "Vermicelli"
+  ],
+  "W": [
+    "Walnuts",
+    "Watermelon",
+    "White Bread",
+    "White Rice",
+    "Wine",
+    "Watercress"
+  ],
+  "Y": [
+    "Yogurt",
+    "Yams",
+    "Yeast"
+  ],
+  "Z": [
+    "Zucchini",
+    "Ziti"
+  ]
+}

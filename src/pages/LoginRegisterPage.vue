@@ -257,15 +257,10 @@ export default {
                     this.logged = true; // Set the logged flag to true
                     localStorage.setItem('logged', this.logged); // Store the logged status in local storage
                     localStorage.setItem('username', this.loginUsername);
-                    localStorage.setItem('password', this.loginPassword);
-                    localStorage.setItem('email', this.loginEmail);
-                    localStorage.setItem('profile_image', response.data.profile_image);
                     this.$emit('login-success', this.logged); // Emit a custom event indicating login success
                     this.$emit('username-success', this.loginUsername);
                     this.$emit('email-success', this.loginEmail);
                     this.$emit('password-success', this.loginPassword);
-                    this.$emit('profile_image-success', response.data.profile_image);
-                    console.log(this.logged);
                     this.$router.push('/'); // Redirect to the home page
                 }
             } catch (error) {
@@ -377,8 +372,8 @@ a:hover {
 
 button {
     border-radius: 20px;
-    border: 1px solid #ffffff;
-    background-color: #83d3fc;
+    border: 1px solid #FF4B2B;
+    background-color: #FF4B2B;
     color: #FFFFFF;
     font-size: 12px;
     font-weight: bold;
@@ -407,7 +402,7 @@ form {
     display: flex;
     align-items: center;
     flex-direction: column;
-    padding: 5vh;
+    padding: 0 5vh;
     height: 100%;
     text-align: center;
 }
@@ -510,9 +505,9 @@ input {
 }
 
 .overlay {
-    background: #83d3fc;
-    background: -webkit-linear-gradient(to right, #83d3fc, #135e85);
-    background: linear-gradient(to right,  #135e85,#83d3fc );
+    background: #FF416C;
+    background: -webkit-linear-gradient(to right, #FF4B2B, #FF416C);
+    background: linear-gradient(to right, #FF4B2B, #FF416C);
     background-repeat: no-repeat;
     background-size: cover;
     background-position: 0 0;
