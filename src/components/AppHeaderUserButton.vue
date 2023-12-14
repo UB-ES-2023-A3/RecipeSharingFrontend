@@ -28,12 +28,13 @@ export default {
         username: String,
         email: String,
         password: String,
+        profile_image: String,
     },
     data() {
         return {
             isMenuOpen: false, // Controls the visibility of the user menu
             name: "AppHeaderUserButton",
-            userImage: require("../assets/images/DefaultUser.jpg"), // User image path
+            userImage: require("../assets/images/DefaultUser.jpg"),
         };
     },
     methods: {
@@ -92,6 +93,7 @@ export default {
                         localStorage.setItem('username', null);
                         localStorage.setItem('email', null);
                         localStorage.setItem('password', null);
+                        localStorage.setItem('profile_image', null);
                         window.location.reload();
                     } else if (error.response.status === 500) {
                         alert("An error occurred while logging in.");
