@@ -1,7 +1,7 @@
 const Dotenv = require('dotenv-webpack')
 
 module.exports = {
-    publicPath: 'https://recipesharingfrontend.onrender.com',//'http://localhost:8080',
+    publicPath: 'https://chefsnook.onrender.com',//'http://localhost:8080',
     //outputDir: '../static/dist',
     //indexPath: '../../templates/_base_vue.html',
 
