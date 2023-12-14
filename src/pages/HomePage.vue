@@ -208,7 +208,7 @@ export default {
     },
     async getRecipesByRate() {
         try {
-            const response = await axios.get(URL_BACKEND + "recipes/filters/rate/");
+            const response = await axios.get(URL_BACKEND + "/recipes/filters/rate/");
             if (response.status === 200) {
                 const recipes = response.data;
                 // Puedes manejar las recetas de 'rate' de manera específica aquí
