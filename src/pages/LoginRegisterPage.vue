@@ -104,6 +104,7 @@
 
 <script>
 import axios from "axios";
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 export default {
     data() {
@@ -241,7 +242,7 @@ export default {
             }
 
             try {
-                let response = await axios.post('login/', {
+                let response = await axios.post(URL_BACKEND + '/login/', {
                     username: this.loginUsername,
                     email: this.loginEmail,
                     password: this.loginPassword,
@@ -257,10 +258,15 @@ export default {
                     this.logged = true; // Set the logged flag to true
                     localStorage.setItem('logged', this.logged); // Store the logged status in local storage
                     localStorage.setItem('username', this.loginUsername);
+                    localStorage.setItem('password', this.loginPassword);
+                    localStorage.setItem('email', this.loginEmail);
+                    localStorage.setItem('profile_image', response.data.profile_image);
                     this.$emit('login-success', this.logged); // Emit a custom event indicating login success
                     this.$emit('username-success', this.loginUsername);
                     this.$emit('email-success', this.loginEmail);
                     this.$emit('password-success', this.loginPassword);
+                    this.$emit('profile_image-success', response.data.profile_image);
+                    console.log(this.logged);
                     this.$router.push('/'); // Redirect to the home page
                 }
             } catch (error) {
@@ -293,7 +299,7 @@ export default {
             }
             try {
                 // Send a registration request to the server
-                let response = await axios.post('register/', {
+                let response = await axios.post(URL_BACKEND + '/register/', {
                     username: this.registerUsername,
                     email: this.registerEmail,
                     password: this.registerPassword,

@@ -53,6 +53,7 @@
 import '../assets/styles/appStyles.css';
 import axios from 'axios';
 import AppCardCarousel from '@/components/AppCardCarousel.vue';
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 export default {
     name: "HomePage.vue",
@@ -77,7 +78,7 @@ export default {
         getUserInformation() {
             // Axios para recibir lla información del usuario
             axios
-                .get(`user/${this.username}/`)
+                .get(URL_BACKEND + `user/${this.username}/`)
                 .then((response) => {
                     if (response.status === 200) {
                         const info = response.data.user;
