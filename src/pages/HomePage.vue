@@ -108,8 +108,8 @@
       </div>
     </div>
     <div class="button-view-more-container">
-      <button @click="toggleRecipesRateView" v-if="recipesByDate.length > 6" class="view-more-button">
-        {{ showAllRecipesDate ? "View Less" : "View More" }}
+      <button id="viewmore" @click="toggleRecipesRateView" v-if="recipesByDate.length > 6" class="view-more-button">
+        {{ showAllRecipesRate ? "View Less" : "View More" }}
       </button>
     </div>
     <div v-if="logged" class="homeFloatingButton" @click="redirectToRecipePage">
