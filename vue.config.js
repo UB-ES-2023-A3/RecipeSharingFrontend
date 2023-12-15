@@ -1,5 +1,6 @@
 const Dotenv = require('dotenv-webpack')
 const PUBLIC_PATH = process.env.VUE_APP_PUBLIC_PATH
+const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 module.exports = {
     publicPath: PUBLIC_PATH,//'http://localhost:8080',
@@ -11,10 +12,7 @@ module.exports = {
             devMiddleware: {
                 writeToDisk: true
             },
-            proxy: PUBLIC_PATH
-        },
-        prodServer:{
-            proxy: PUBLIC_PATH
+            proxy: URL_BACKEND
         },
         plugins: [
             new Dotenv()
