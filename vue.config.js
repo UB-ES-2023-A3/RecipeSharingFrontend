@@ -10,7 +10,8 @@ module.exports = {
         devServer: {
             devMiddleware: {
                 writeToDisk: true
-            }
+            },
+            proxy: PUBLIC_PATH
         },
         plugins: [
             new Dotenv()
