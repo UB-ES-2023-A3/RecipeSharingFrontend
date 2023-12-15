@@ -65,7 +65,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content" style="background-color: white;">
                             <div class="modal-header">
-                                <h2 class="modal-title">Edit Profile</h2>
+                                <h2 class="modal-title">Edit Profile Information</h2>
                             </div>
                             <!-- Modal Body -->
                             <div class="modal-body">
@@ -234,6 +234,7 @@
 <script>
 
 import axios from 'axios';
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 export default {
     name: "HomePage.vue",
@@ -315,7 +316,7 @@ export default {
         },
         follow() {
             axios
-                .post(`/profile/${this.username_id}/`, {
+                .post(URL_BACKEND + `/profile/${this.username_id}/`, {
                     user: this.username
                 }).then((response) => {
                 if (response.status === 200) {
@@ -330,7 +331,7 @@ export default {
         },
         editProfile() {
             axios
-                .post(`/profile/${this.username_id}/`, {
+                .post(URL_BACKEND + `/profile/${this.username_id}/`, {
                     username: this.usernameChanged() ? this.newUsername : this.username_id,
                     email: this.emailChanged() ? this.newEmail : this.userEmail,
                     password: this.passwordChanged() ? this.newPassword : this.userPassword,
@@ -367,7 +368,7 @@ export default {
         getUserInformation() {
             // Axios para recibir lla información del usuario
             axios
-                .get(`/profile/${this.username_id}/`)
+                .get(URL_BACKEND + `/profile/${this.username_id}/`)
                 .then((response) => {
                     if (response.status === 200) {
                         const info = response.data.user;

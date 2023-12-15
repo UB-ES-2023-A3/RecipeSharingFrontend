@@ -95,6 +95,7 @@
 <script>
 import ingredientsData from "@/assets/lists/IngredientsFilter.json";
 import axios from "axios";
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 export default {
   data() {
@@ -144,7 +145,7 @@ export default {
     },
     async applyFilters() {
         try {
-            let endpoint = '/recipes/filters/';
+            let endpoint = URL_BACKEND + '/recipes/filters/';
                     if (this.selectedIngredients.length > 1) {
                         for (let i = 0; i < this.selectedIngredients.length; i++) {
                             if (i == 0) {

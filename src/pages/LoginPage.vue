@@ -38,7 +38,8 @@
 import '../assets/styles/appStyles.css';
 import AppTextField from "@/components/AppTextField.vue";
 import axios from 'axios';
-import AppTextFieldPassword from "@/components/AppTextFieldPassword.vue"
+import AppTextFieldPassword from "@/components/AppTextFieldPassword.vue";
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 export default {
     name: "LoginPage",
@@ -72,7 +73,7 @@ export default {
             }
 
             try {
-                let response = await axios.post('login/', {
+                let response = await axios.post(URL_BACKEND + '/login/', {
                     username: this.username,
                     email: this.email,
                     password: this.password,
