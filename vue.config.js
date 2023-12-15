@@ -13,6 +13,9 @@ module.exports = {
             },
             proxy: PUBLIC_PATH
         },
+        prodServer:{
+            proxy: PUBLIC_PATH
+        },
         plugins: [
             new Dotenv()
         ]
