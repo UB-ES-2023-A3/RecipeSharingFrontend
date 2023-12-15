@@ -31,6 +31,7 @@
 
 <script>
 import axios from 'axios';
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 export default {
     props: {
@@ -70,7 +71,7 @@ export default {
             };
 
             axios
-                .post("postRatings/", {
+                .post(URL_BACKEND + "/postRatings/", {
                     user_id: this.username,
                     recipe_id: this.recipe_id,
                     comment: comment,
