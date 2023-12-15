@@ -14,7 +14,10 @@
             </div>
             <div class="recipeUserRatingContainer">
                 <div class="recipeUserImageContainer">
-                    <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
+                    <img
+                        :src="getUserProfileImage()"
+                        alt="Profile Image"
+                    />
                 </div>
                 <div class="recipeUserRatingInfoContainer">
                     <div class="recipeRatingCommentsContainer">
@@ -55,7 +58,10 @@
                 </div>
             </div>
             <div class="recipeImageContainer">
-                <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
+                <img
+                :src="recipe.recipe_image ? recipe.recipe_image : require('@/assets/images/default-image.png')"
+                alt="Recipe Image"
+                />
             </div>
             <div class="recipeTableContainer">
                 <div class="recipeTableFirstRowContainer">
@@ -150,6 +156,7 @@
 <script>
 
 import axios from 'axios';
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 export default {
     name: "RecipePageRework",
@@ -207,7 +214,7 @@ export default {
         },
         getRating() {
             // Axios para recibir los ratings
-            axios.get(`getRatings/`)
+            axios.get(URL_BACKEND + `/recipes/getRatings/`)
                 .then((response) => {
                     if (response.status === 200) {
                         const ratings = response.data;
@@ -223,7 +230,7 @@ export default {
         addRating() {
             //axios para postear el rating de una receta
             axios
-                .post("postRatings/", {
+                .post(URL_BACKEND + `/recipes/${this.recipeId}/postRatings/`, {
                     user_id: this.username,
                     recipe_id: this.recipe.id,
                     rating: this.rating,
@@ -243,7 +250,7 @@ export default {
         getRecipeInformation() {
             // Axios para recibir las recetas
             axios
-                .get(`/recipe/${this.recipeId}/`)
+                .get(URL_BACKEND + `/recipe/${this.recipeId}/`)
                 .then((response) => {
                     if (response.status === 200) {
                         this.recipe = response.data.recipe;
@@ -258,7 +265,7 @@ export default {
             // Lógica para agregar o quitar de favoritos
             this.isFavorited = !this.isFavorited;
             axios
-                .post("/recipes/postFavorites/", {
+                .post(URL_BACKEND + "/recipes/postFavorites/", {
                     user_id: this.username,
                     recipe_id: this.recipe.id,
                 })
@@ -279,12 +286,11 @@ export default {
         getUserInformation() {
             // Axios para recibir lla información del usuario
             axios
-                .get(`/profile/${this.username}/`)
+                .get(URL_BACKEND + `/profile/${this.username}/`)
                 .then((response) => {
                     if (response.status === 200) {
                         const info = response.data.user;
                         this.profileInfo = info;
-                        console.log(response.data.user)
                         this.checkFavorite()
                     }
                 })
@@ -321,7 +327,7 @@ export default {
             };
 
             axios
-                .post("postRatings/", {
+                .post(URL_BACKEND + "/recipes/postRatings/", {
                     user_id: this.username,
                     recipe_id: this.recipeId,
                     comment: comment,
@@ -342,6 +348,10 @@ export default {
         },
         checkComment() {
             return this.newComment == '';
+        },
+        getUserProfileImage() {
+            this.getUserInformation();
+            return this.profileInfo.profile_image ? this.profileInfo.profile_image : require('@/assets/images/default-image.png');
         },
     },
     async created() {

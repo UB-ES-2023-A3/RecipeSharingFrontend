@@ -65,7 +65,7 @@
                     <div class="modal-dialog">
                         <div class="modal-content" style="background-color: white;">
                             <div class="modal-header">
-                                <h2 class="modal-title">Edit Profile</h2>
+                                <h2 class="modal-title">Edit Profile Information</h2>
                             </div>
                             <!-- Modal Body -->
                             <div class="modal-body">
@@ -168,7 +168,7 @@
                     </div>
                 </div>
             </div>
-            <div class="profileRecipesUsersContainer">
+            <div class="profileRecipesUsersContainer" v-if="showDialog === false">
 
                 <div class="profileRecipesContainer">
                     <div class="profileOwnRecipesContainer">
@@ -234,10 +234,16 @@
 <script>
 
 import axios from 'axios';
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 export default {
     name: "HomePage.vue",
 
+    beforeRouteUpdate(next) {
+        // Reload the page when the route updates
+        window.location.reload();
+        next();
+    },
     props: {
         logged: Boolean,
         username: String,
@@ -315,7 +321,7 @@ export default {
         },
         follow() {
             axios
-                .post(`/profile/${this.username_id}/`, {
+                .post(URL_BACKEND + `/profile/${this.username_id}/`, {
                     user: this.username
                 }).then((response) => {
                 if (response.status === 200) {
@@ -330,7 +336,7 @@ export default {
         },
         editProfile() {
             axios
-                .post(`/profile/${this.username_id}/`, {
+                .post(URL_BACKEND + `/profile/${this.username_id}/`, {
                     username: this.usernameChanged() ? this.newUsername : this.username_id,
                     email: this.emailChanged() ? this.newEmail : this.userEmail,
                     password: this.passwordChanged() ? this.newPassword : this.userPassword,
@@ -349,14 +355,24 @@ export default {
 
                     localStorage.setItem('email', this.userEmail);
                     this.$emit('email-success', this.userEmail);
+
                     localStorage.setItem('profile_image', this.profile_image);
                     this.$emit('profile_image-success', this.profile_image);
+
+                    localStorage.setItem('password', this.userPassword);
+                    this.$emit('password-success', this.userPassword);
 
                     this.$router.push(`/profiles/${this.username_id}/`);
 
                     this.profileInfo.username = this.username_id;
                     this.profileInfo.email = this.userEmail;
                     this.profileInfo.profile_image = this.profile_image;
+
+                    this.newEmail = '';
+                    this.newUsername = '';
+                    this.newPassword = '';
+                    this.newPasswordConfirm = '';
+                    this.new_profile_image = '';
                 }
             })
                 .catch((error) => {
@@ -367,11 +383,14 @@ export default {
         getUserInformation() {
             // Axios para recibir lla información del usuario
             axios
-                .get(`/profile/${this.username_id}/`)
+                .get(URL_BACKEND + `/profile/${this.username_id}/`)
                 .then((response) => {
                     if (response.status === 200) {
+                        console.log("entra aquí")
                         const info = response.data.user;
+                        console.log(info)
                         this.profileInfo = info;
+                        console.log(info)
                         this.userEmail = info.email;
                         this.favoriteRecipes = Object.values(this.profileInfo.list_favorite_recipes);
                         this.ownRecipes = Object.values(this.profileInfo.list_own_recipes);
@@ -388,8 +407,7 @@ export default {
                         } else {
                             this.isFollowing = false;
                         }
-                        console.log(response.data.user)
-
+                        console.log("entra")
                     }
                 })
                 .catch((error) => {

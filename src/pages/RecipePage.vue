@@ -92,6 +92,7 @@
 import axios from 'axios';
 import '../assets/styles/appStyles.css'
 import AppComments from '@/components/AppComments.vue';
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 export default {
     data() {
@@ -137,7 +138,7 @@ export default {
         },
         getRating() {
             // Axios para recibir los ratings
-            axios.get(`recipes/getratings/${this.recipe_id}/`)
+            axios.get(URL_BACKEND + `recipes/getratings/${this.recipe_id}/`)
                 .then((response) => {
                     if (response.status === 200) {
                         const ratings = response.data;
@@ -153,7 +154,7 @@ export default {
         addRating() {
             //axios para postear el rating de una receta
             axios
-                .post("recipesPostRatings/", {
+                .post(URL_BACKEND + "/recipes/PostRatings/", {
                     user_id: this.username, 
                     recipe_id: this.recipe.id,
                     rating: this.rating,
@@ -173,7 +174,7 @@ export default {
         getRecipeInformation() {
             // Axios para recibir las recetas
             axios
-                .get(`recipe/${this.recipe_id}/`)
+                .get(URL_BACKEND + `recipe/${this.recipe_id}/`)
                 .then((response) => {
                     if (response.status === 200) {
                         const info = response.data.recipe;
@@ -189,7 +190,7 @@ export default {
             // Lógica para agregar o quitar de favoritos
             this.isFavorited = !this.isFavorited;
             axios
-                .post("recipesAddFavorites/", {
+                .post(URL_BACKEND + "/recipes/AddFavorites/", {
                     user_id: this.username,
                     recipe_id: this.recipe.id,
                 })
@@ -209,7 +210,7 @@ export default {
         getUserInformation() {
             // Axios para recibir lla información del usuario
             axios
-                .get(`user/${this.username}/`)
+                .get(URL_BACKEND + `/user/${this.username}/`)
                 .then((response) => {
                     if (response.status === 200) {
                         const info = response.data.user;

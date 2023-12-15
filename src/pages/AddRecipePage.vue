@@ -144,6 +144,7 @@ import ingredientsData from "@/assets/lists/Ingredients.json";
 import allergensData from "@/assets/lists/Allergens.json";
 import typesData from "@/assets/lists/Types.json";
 import prepTimeData from "@/assets/lists/prepTime.json";
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 export default {
     components: {AppTextField, DropdownSelect, TextArea},
@@ -246,7 +247,7 @@ export default {
                     }
 
                     axios
-                        .post("/addRecipe/", {
+                        .post(URL_BACKEND + "/addRecipe/", {
                             name: this.recipeName,
                             ingredients: this.allSelectedIngredients,
                             instructions: this.instructions,
