@@ -168,7 +168,7 @@
                     </div>
                 </div>
             </div>
-            <div class="profileRecipesUsersContainer">
+            <div class="profileRecipesUsersContainer" v-if="showDialog === false">
 
                 <div class="profileRecipesContainer">
                     <div class="profileOwnRecipesContainer">
@@ -239,6 +239,11 @@ export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 export default {
     name: "HomePage.vue",
 
+    beforeRouteUpdate(next) {
+        // Reload the page when the route updates
+        window.location.reload();
+        next();
+    },
     props: {
         logged: Boolean,
         username: String,
@@ -350,14 +355,24 @@ export default {
 
                     localStorage.setItem('email', this.userEmail);
                     this.$emit('email-success', this.userEmail);
+
                     localStorage.setItem('profile_image', this.profile_image);
                     this.$emit('profile_image-success', this.profile_image);
+
+                    localStorage.setItem('password', this.userPassword);
+                    this.$emit('password-success', this.userPassword);
 
                     this.$router.push(`/profiles/${this.username_id}/`);
 
                     this.profileInfo.username = this.username_id;
                     this.profileInfo.email = this.userEmail;
                     this.profileInfo.profile_image = this.profile_image;
+
+                    this.newEmail = '';
+                    this.newUsername = '';
+                    this.newPassword = '';
+                    this.newPasswordConfirm = '';
+                    this.new_profile_image = '';
                 }
             })
                 .catch((error) => {
@@ -371,8 +386,11 @@ export default {
                 .get(URL_BACKEND + `/profile/${this.username_id}/`)
                 .then((response) => {
                     if (response.status === 200) {
+                        console.log("entra aquí")
                         const info = response.data.user;
+                        console.log(info)
                         this.profileInfo = info;
+                        console.log(info)
                         this.userEmail = info.email;
                         this.favoriteRecipes = Object.values(this.profileInfo.list_favorite_recipes);
                         this.ownRecipes = Object.values(this.profileInfo.list_own_recipes);
@@ -389,8 +407,7 @@ export default {
                         } else {
                             this.isFollowing = false;
                         }
-                        console.log(response.data.user)
-
+                        console.log("entra")
                     }
                 })
                 .catch((error) => {

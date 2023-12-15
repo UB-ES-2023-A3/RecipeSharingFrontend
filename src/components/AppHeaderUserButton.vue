@@ -21,6 +21,7 @@
 <script>
 
 import axios from "axios";
+export const URL_BACKEND = process.env.VUE_APP_URL_BACKEND
 
 export default {
     props: {
@@ -70,7 +71,7 @@ export default {
         },
         async logout() {
             try {
-                let response = await axios.post('/login/', {
+                let response = await axios.post(URL_BACKEND + '/login/', {
                     username: "Logout",
                     email: this.email,
                     password: this.password,
