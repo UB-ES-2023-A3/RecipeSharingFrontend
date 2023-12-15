@@ -386,7 +386,6 @@ export default {
                 .get(URL_BACKEND + `/profile/${this.username_id}/`)
                 .then((response) => {
                     if (response.status === 200) {
-                        console.log("entra aquí")
                         const info = response.data.user;
                         console.log(info)
                         this.profileInfo = info;
@@ -407,7 +406,6 @@ export default {
                         } else {
                             this.isFollowing = false;
                         }
-                        console.log("entra")
                     }
                 })
                 .catch((error) => {
