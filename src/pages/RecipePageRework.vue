@@ -14,7 +14,10 @@
             </div>
             <div class="recipeUserRatingContainer">
                 <div class="recipeUserImageContainer">
-                    <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
+                    <img
+                        :src="getUserProfileImage()"
+                        alt="Profile Image"
+                    />
                 </div>
                 <div class="recipeUserRatingInfoContainer">
                     <div class="recipeRatingCommentsContainer">
@@ -55,7 +58,10 @@
                 </div>
             </div>
             <div class="recipeImageContainer">
-                <img src="../assets/images/loginRegisterBG.jpg" alt="Recipe Image">
+                <img
+                :src="recipe.recipe_image ? recipe.recipe_image : require('@/assets/images/default-image.png')"
+                alt="Recipe Image"
+                />
             </div>
             <div class="recipeTableContainer">
                 <div class="recipeTableFirstRowContainer">
@@ -284,7 +290,6 @@ export default {
                     if (response.status === 200) {
                         const info = response.data.user;
                         this.profileInfo = info;
-                        console.log(response.data.user)
                         this.checkFavorite()
                     }
                 })
@@ -342,6 +347,10 @@ export default {
         },
         checkComment() {
             return this.newComment == '';
+        },
+        getUserProfileImage() {
+            this.getUserInformation();
+            return this.profileInfo.profile_image ? this.profileInfo.profile_image : require('@/assets/images/default-image.png');
         },
     },
     async created() {
