@@ -1,9 +1,9 @@
 describe('Banner Click Tests', () => {
     beforeEach(() => {
-        cy.visit('https://recipesharingfrontend.onrender.com')
+        cy.visit('https://chefsnook.onrender.com')
         cy.contains("Allergens").dblclick()
         cy.contains("More Options").click()
-        cy.url().should('eq', 'https://recipesharingfrontend.onrender.com/recipe/filters/allergens');
+        cy.url().should('eq', 'https://chefsnook.onrender.com/recipe/filters/allergens');
     })
 
     it("Home Page User Image Pop-Up is Correct", () => {
@@ -17,10 +17,10 @@ describe('Banner Click Tests', () => {
 
 describe('Letters Click Tests', () => {
     beforeEach(() => {
-        cy.visit('https://recipesharingfrontend.onrender.com')
+        cy.visit('https://chefsnook.onrender.com')
         cy.contains("Allergens").dblclick()
         cy.contains("More Options").click()
-        cy.url().should('eq', 'https://recipesharingfrontend.onrender.com/recipe/filters/allergens');
+        cy.url().should('eq', 'https://chefsnook.onrender.com/recipe/filters/allergens');
     })
 
     it("Letter is marked correctly", () => {

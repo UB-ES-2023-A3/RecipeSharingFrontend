@@ -1,6 +1,6 @@
 describe('Render Tests', () => {
   beforeEach(() => {
-    cy.visit('https://recipesharingfrontend.onrender.com');
+    cy.visit('https://chefsnook.onrender.com');
   })
   
   it("Main page renders the banner", () => {

@@ -1,7 +1,7 @@
 
 describe('Banner Click Tests', () => {
     beforeEach(() => {
-        cy.visit('https://recipesharingfrontend.onrender.com');
+        cy.visit('https://chefsnook.onrender.com');
     })
 
     it("Home Page User Image Pop-Up is Correct", () => {
@@ -15,7 +15,7 @@ describe('Banner Click Tests', () => {
 
 describe("Dropdown Click Tests", () => {
     beforeEach(() => {
-        cy.visit('https://recipesharingfrontend.onrender.com');
+        cy.visit('https://chefsnook.onrender.com');
     })
 
     it("Home Page Log In click is Correct", () => {

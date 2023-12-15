@@ -1,9 +1,9 @@
 describe('Render Tests', () => {
     beforeEach(() => {
-        cy.visit('https://recipesharingfrontend.onrender.com')
+        cy.visit('https://chefsnook.onrender.com')
         cy.contains("Ingredients").dblclick()
         cy.contains("More Options").click()
-        cy.url().should('eq', 'https://recipesharingfrontend.onrender.com/recipe/filters/ingredients');
+        cy.url().should('eq', 'https://chefsnook.onrender.com/recipe/filters/ingredients');
     })
     
     it("Page renders the banner", () => {
